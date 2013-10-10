@@ -1,0 +1,4248 @@
+From: "Saved by Windows Internet Explorer 8"
+Subject: Text compression info, kana tables
+Date: Thu, 2 Sep 2010 03:13:07 -0400
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_00C2_01CB4A4C.C3BF1180"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.1.7600.16543
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.sixfortyfive.com/forum/index.php?topic=4.0
+
+=EF=BB=BF<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" =
+"http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML xmlns=3D"http://www.w3.org/1999/xhtml"><HEAD><TITLE>Text =
+compression info, kana tables</TITLE>
+<META content=3D"text/html; charset=3DUTF-8" http-equiv=3DContent-Type>
+<META name=3Ddescription content=3D"Text compression info, kana tables">
+<META name=3Dkeywords=20
+content=3D"PHP, MySQL, bulletin, board, free, open, source, smf, simple, =
+machines, forum">
+<SCRIPT language=3DJavaScript type=3Dtext/javascript=20
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/script.js?fin11">=
+</SCRIPT>
+
+<SCRIPT language=3DJavaScript type=3Dtext/javascript><!-- // --><![CDATA[=0A=
+		var smf_theme_url =3D =
+"http://www.sixfortyfive.com/forum/Themes/default";=0A=
+		var smf_images_url =3D =
+"http://www.sixfortyfive.com/forum/Themes/default/images";=0A=
+		var smf_scripturl =3D "http://www.sixfortyfive.com/forum/index.php";=0A=
+		var smf_iso_case_folding =3D false;=0A=
+		var smf_charset =3D "UTF-8";=0A=
+	// ]]></SCRIPT>
+<LINK rel=3Dstylesheet type=3Dtext/css=20
+href=3D"http://www.sixfortyfive.com/forum/Themes/default/style.css?fin11"=
+><LINK=20
+rel=3Dstylesheet type=3Dtext/css=20
+href=3D"http://www.sixfortyfive.com/forum/Themes/default/print.css?fin11"=
+=20
+media=3Dprint><LINK rel=3Dhelp=20
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dhelp"=20
+target=3D_blank><LINK rel=3Dsearch=20
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dsearch"><LIN=
+K=20
+rel=3Dcontents =
+href=3D"http://www.sixfortyfive.com/forum/index.php"><LINK rel=3Dprev=20
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.0;prev_next=
+=3Dprev"><LINK=20
+rel=3Dnext=20
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.0;prev_next=
+=3Dnext"><LINK=20
+rel=3Dindex =
+href=3D"http://www.sixfortyfive.com/forum/index.php?board=3D1.0">
+<SCRIPT language=3DJavaScript type=3Dtext/javascript><!-- // --><![CDATA[=0A=
+		var current_header =3D false;=0A=
+=0A=
+		function shrinkHeader(mode)=0A=
+		{=0A=
+			smf_setThemeOption("collapse_header", mode ? 1 : 0, null, =
+"fbf6f392195a7d8ff3c068c7f661a1df");=0A=
+			document.getElementById("upshrink").src =3D smf_images_url + (mode ? =
+"/upshrink2.gif" : "/upshrink.gif");=0A=
+=0A=
+			document.getElementById("upshrinkHeader").style.display =3D mode ? =
+"none" : "";=0A=
+			document.getElementById("upshrinkHeader2").style.display =3D mode ? =
+"none" : "";=0A=
+=0A=
+			current_header =3D mode;=0A=
+		}=0A=
+	// ]]></SCRIPT>
+
+<SCRIPT language=3DJavaScript type=3Dtext/javascript><!-- // --><![CDATA[=0A=
+			var current_header_ic =3D false;=0A=
+=0A=
+			function shrinkHeaderIC(mode)=0A=
+			{=0A=
+				smf_setThemeOption("collapse_header_ic", mode ? 1 : 0, null, =
+"fbf6f392195a7d8ff3c068c7f661a1df");=0A=
+				document.getElementById("upshrink_ic").src =3D smf_images_url + =
+(mode ? "/expand.gif" : "/collapse.gif");=0A=
+=0A=
+				document.getElementById("upshrinkHeaderIC").style.display =3D mode ? =
+"none" : "";=0A=
+=0A=
+				current_header_ic =3D mode;=0A=
+			}=0A=
+		// ]]></SCRIPT>
+
+<META name=3DGENERATOR content=3D"MSHTML 8.00.7600.16625"></HEAD>
+<BODY>
+<DIV class=3Dtborder>
+<TABLE border=3D0 cellSpacing=3D0 cellPadding=3D0 width=3D"100%">
+  <TBODY>
+  <TR>
+    <TD class=3Dcatbg height=3D32><SPAN=20
+      style=3D"FONT-FAMILY: Verdana, sans-serif; FONT-SIZE: =
+140%">Sixfortyfive</SPAN>=20
+    </TD>
+    <TD class=3Dcatbg align=3Dright><IMG style=3D"MARGIN: 2px" alt=3D""=20
+      =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/smflogo.gi=
+f">=20
+    </TD></TR></TBODY></TABLE>
+<TABLE border=3D0 cellSpacing=3D0 cellPadding=3D0 width=3D"100%">
+  <TBODY>
+  <TR>
+    <TD class=3Dtitlebg2 height=3D32><SPAN style=3D"FONT-SIZE: =
+130%">Hello=20
+      <B>FaustWolf</B></SPAN> </TD>
+    <TD class=3Dtitlebg2 height=3D32 align=3Dright><SPAN =
+class=3Dsmalltext>September=20
+      02, 2010, 02:13:00 AM</SPAN> <A=20
+      onclick=3D"shrinkHeader(!current_header); return false;"=20
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.0#"><IMG=20
+      style=3D"MARGIN: 0px 1ex" id=3Dupshrink title=3D"Shrink or expand =
+the header."=20
+      alt=3D* align=3Dbottom=20
+      =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/upshrink.g=
+if"></A>=20
+    </TD></TR>
+  <TR id=3DupshrinkHeader>
+    <TD vAlign=3Dtop colSpan=3D2>
+      <TABLE style=3D"MARGIN-TOP: 1px" class=3Dbordercolor border=3D0 =
+cellSpacing=3D1=20
+      cellPadding=3D8 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD class=3Dwindowbg vAlign=3Dcenter><IMG class=3Davatar =
+border=3D0 alt=3D""=20
+            =
+src=3D"http://img355.imageshack.us/img355/2685/drystcoloriq6.gif"=20
+            width=3D65 height=3D65></TD>
+          <TD class=3Dwindowbg2 vAlign=3Dtop width=3D"100%" =
+colSpan=3D2><SPAN=20
+            class=3Dmiddletext><A=20
+            =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dunread">Show=
+=20
+            unread posts since last visit.</A> <BR><A=20
+            =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dunreadreplie=
+s">Show=20
+            new replies to your posts.</A><BR>Total time logged in: 1 =
+days, 42=20
+            =
+minutes.<BR></SPAN></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<TABLE id=3DupshrinkHeader2 border=3D0 cellSpacing=3D0 cellPadding=3D4 =
+width=3D"100%">
+  <TBODY>
+  <TR>
+    <TD class=3Dtitlebg2 vAlign=3Dtop noWrap align=3Dright>
+      <FORM style=3D"MARGIN: 0px" accept-charset=3DUTF-8 method=3Dpost=20
+      =
+action=3Dhttp://www.sixfortyfive.com/forum/index.php?action=3Dsearch2><A =
+
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dsearch;advan=
+ced"><IMG=20
+      style=3D"MARGIN: 0px 1ex" alt=3D"" align=3Dmiddle=20
+      =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/filter.gif=
+"></A>=20
+      <INPUT style=3D"WIDTH: 190px" name=3Dsearch>&nbsp; <INPUT =
+style=3D"WIDTH: 11ex" value=3DSearch type=3Dsubmit name=3Dsubmit> <INPUT =
+
+      value=3D0 type=3Dhidden name=3Dadvanced> <INPUT value=3D4 =
+type=3Dhidden name=3Dtopic>=20
+      </FORM></TD></TR></TBODY></TABLE></DIV>
+<TABLE style=3D"MARGIN-LEFT: 10px" border=3D0 cellSpacing=3D0 =
+cellPadding=3D0>
+  <TBODY>
+  <TR>
+    <TD class=3Dmaintab_first>&nbsp;</TD>
+    <TD class=3Dmaintab_active_first>&nbsp;</TD>
+    <TD class=3Dmaintab_active_back vAlign=3Dtop><A=20
+      href=3D"http://www.sixfortyfive.com/forum/index.php">Home</A> =
+</TD>
+    <TD class=3Dmaintab_active_last>&nbsp;</TD>
+    <TD class=3Dmaintab_back vAlign=3Dtop><A=20
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dhelp">Help</=
+A>=20
+</TD>
+    <TD class=3Dmaintab_back vAlign=3Dtop><A=20
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dsearch">Sear=
+ch</A>=20
+    </TD>
+    <TD class=3Dmaintab_back vAlign=3Dtop><A=20
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile">Pro=
+file</A>=20
+    </TD>
+    <TD class=3Dmaintab_back vAlign=3Dtop><A=20
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm">My =
+Messages=20
+      </A></TD>
+    <TD class=3Dmaintab_back vAlign=3Dtop><A=20
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dmlist">Membe=
+rs</A>=20
+    </TD>
+    <TD class=3Dmaintab_back vAlign=3Dtop><A=20
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dlogout;sesc=3D=
+fbf6f392195a7d8ff3c068c7f661a1df">Logout</A>=20
+    </TD>
+    <TD class=3Dmaintab_last>&nbsp;</TD></TR></TBODY></TABLE>
+<DIV=20
+style=3D"PADDING-BOTTOM: 2ex; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; =
+PADDING-TOP: 1ex"=20
+id=3Dbodyarea><A name=3Dtop></A><A name=3Dmsg4></A>
+<DIV>
+<DIV style=3D"MARGIN-TOP: 2ex; MARGIN-BOTTOM: 2ex; FONT-SIZE: smaller"=20
+class=3Dnav><B><A class=3Dnav=20
+href=3D"http://www.sixfortyfive.com/forum/index.php">Sixfortyfive</A></B>=
+&nbsp;&gt;&nbsp;<B><A=20
+class=3Dnav=20
+href=3D"http://www.sixfortyfive.com/forum/index.php#1">General</A></B>&nb=
+sp;&gt;&nbsp;<B><A=20
+class=3Dnav =
+href=3D"http://www.sixfortyfive.com/forum/index.php?board=3D1.0">Dragon=20
+Force II Translation</A></B>&nbsp;&gt;&nbsp;<B><A class=3Dnav=20
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.0">Text =
+compression=20
+info, kana tables</A></B></DIV></DIV>
+<TABLE border=3D0 cellSpacing=3D0 cellPadding=3D0 width=3D"100%">
+  <TBODY>
+  <TR>
+    <TD style=3D"PADDING-BOTTOM: 4px" class=3Dmiddletext =
+vAlign=3Dbottom>Pages:=20
+      [<B>1</B>] </TD>
+    <TD style=3D"PADDING-RIGHT: 1ex" align=3Dright>
+      <DIV style=3D"MARGIN-BOTTOM: 2px" class=3Dnav><A=20
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.0;prev_next=
+=3Dprev#new">=C2=AB=20
+      previous</A> <A=20
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.0;prev_next=
+=3Dnext#new">next=20
+      =C2=BB</A></DIV>
+      <TABLE cellSpacing=3D0 cellPadding=3D0>
+        <TBODY>
+        <TR>
+          <TD class=3Dmirrortab_first>&nbsp;</TD>
+          <TD class=3Dmirrortab_back><A=20
+            =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;topic=3D=
+4.0;num_replies=3D8">Reply</A>=20
+            &nbsp;|&nbsp; <A=20
+            onclick=3D"return confirm('Are you sure you wish to enable =
+notification of new replies for this topic?');"=20
+            =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dnotify;sa=3D=
+on;topic=3D4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df">Notify</A>=20
+            &nbsp;|&nbsp; <A=20
+            =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dmarkasread;s=
+a=3Dtopic;t=3D311;topic=3D4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df">Ma=
+rk=20
+            unread</A> &nbsp;|&nbsp; <A=20
+            =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dsendtopic;to=
+pic=3D4.0">Send=20
+            this topic</A> &nbsp;|&nbsp; <A=20
+            =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprintpage;to=
+pic=3D4.0"=20
+            target=3D_blank>Print</A></TD>
+          <TD=20
+class=3Dmirrortab_last>&nbsp;</TD></TR></TBODY></TABLE></TD></TR></TBODY>=
+</TABLE>
+<TABLE style=3D"BORDER-BOTTOM-WIDTH: 0px" class=3Dtborder border=3D0 =
+cellSpacing=3D0=20
+cellPadding=3D3 width=3D"100%">
+  <TBODY>
+  <TR class=3Dcatbg3>
+    <TD style=3D"PADDING-LEFT: 6px" vAlign=3Dcenter width=3D"2%"><IMG =
+alt=3D""=20
+      align=3Dbottom=20
+      =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/topic/norm=
+al_post.gif">=20
+    </TD>
+    <TD width=3D"13%">Author</TD>
+    <TD style=3D"PADDING-LEFT: 6px" id=3Dtop_subject vAlign=3Dcenter=20
+      width=3D"85%">Topic: Text compression info, kana tables =
+&nbsp;(Read 53=20
+      times) </TD></TR></TBODY></TABLE>
+<FORM style=3D"MARGIN: 0px" id=3DquickModForm accept-charset=3DUTF-8=20
+onsubmit=3D"return in_edit_mode =3D=3D 1 ? =
+modify_save('fbf6f392195a7d8ff3c068c7f661a1df') : confirm('Are you sure =
+you want to do this?');"=20
+method=3Dpost name=3DquickModForm=20
+action=3Dhttp://www.sixfortyfive.com/forum/index.php?action=3Dquickmod2;t=
+opic=3D4.0>
+<TABLE class=3Dbordercolor border=3D0 cellSpacing=3D0 cellPadding=3D0 =
+width=3D"100%">
+  <TBODY>
+  <TR>
+    <TD=20
+    style=3D"PADDING-BOTTOM: 0px; PADDING-LEFT: 1px; PADDING-RIGHT: 1px; =
+PADDING-TOP: 1px">
+      <TABLE border=3D0 cellSpacing=3D0 cellPadding=3D3 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD class=3Dwindowbg>
+            <TABLE style=3D"TABLE-LAYOUT: fixed" cellSpacing=3D0 =
+cellPadding=3D5=20
+            width=3D"100%">
+              <TBODY>
+              <TR>
+                <TD style=3D"OVERFLOW: hidden" vAlign=3Dtop rowSpan=3D2=20
+                  width=3D"16%"><B><A title=3D"View the profile of =
+Sixfortyfive"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+1">Sixfortyfive</A></B>=20
+
+                  <DIV class=3Dsmalltext>Administrator<BR><BR><BR><A=20
+                  title=3D"Personal Message (Offline)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D1"><IMG=20
+                  style=3D"MARGIN-TOP: 2px" border=3D0 alt=3DOffline=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/useroff.gi=
+f"></A><SPAN=20
+                  class=3Dsmalltext> Offline</SPAN><BR><BR>Posts: =
+62<BR><BR><BR><A=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+1"><IMG=20
+                  title=3D"View Profile" border=3D0 alt=3D"View Profile" =
+
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/prof=
+ile_sm.gif"></A>=20
+                  <A title=3D"Personal Message (Offline)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D1"><IMG=20
+                  border=3D0 alt=3D"Personal Message (Offline)"=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/im_off.gif=
+"></A>=20
+                  </DIV></TD>
+                <TD height=3D"100%" vAlign=3Dtop width=3D"85%">
+                  <TABLE border=3D0 width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=3Dcenter><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg4#msg4">=
+<IMG=20
+                        border=3D0 alt=3D""=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/post/xx.gi=
+f"></A></TD>
+                      <TD vAlign=3Dcenter>
+                        <DIV style=3D"FONT-WEIGHT: bold" =
+id=3Dsubject_4><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg4#msg4">=
+Text=20
+                        compression info, kana tables</A> </DIV>
+                        <DIV class=3Dsmalltext>=C2=AB <B>on:</B> =
+September 03, 2009,=20
+                        06:13:15 AM =C2=BB</DIV></TD>
+                      <TD style=3D"FONT-SIZE: smaller" height=3D20 =
+vAlign=3Dbottom=20
+                      align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;quote=3D=
+4;topic=3D4.0;num_replies=3D8;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><I=
+MG=20
+                        alt=3D"Reply with quote" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/qu=
+ote.gif"><B>Quote</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;msg=3D4=
+;topic=3D4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Modify message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/mo=
+dify.gif"><B>Modify</B></A>=20
+                        <A onclick=3D"return confirm('Remove this =
+message?');"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Ddeletemsg;to=
+pic=3D4.0;msg=3D4;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Remove message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/de=
+lete.gif"><B>Remove</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dsplittopics;=
+topic=3D4.0;at=3D4"><IMG=20
+                        alt=3D"Split Topic" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/sp=
+lit.gif"><B>Split=20
+                        Topic</B></A> </TD></TR></TBODY></TABLE>
+                  <HR class=3Dhrcolor SIZE=3D1 width=3D"100%">
+
+                  <DIV id=3Dmsg_4 class=3Dpost>Some text in DF2 has been =
+found to=20
+                  follow a dictionary scheme that uses this =
+table:<BR><BR><IMG=20
+                  border=3D0 alt=3D""=20
+                  =
+src=3D"http://www.sixfortyfive.com/df2/font_table.png"><BR><BR>Most=20
+                  of the XXX_MAIN.BIN files seem to have a kana index =
+like this=20
+                  that is referenced by other files. For example, the=20
+                  START_##.EVE files appear to reference the kana index =
+in=20
+                  NAI_MAIN.BIN. It's a pretty straightforward table that =
+
+                  effectively allows the use of double-byte full-width =
+kana with=20
+                  only one byte, and rows B through D even conform to =
+the=20
+                  Shift-JIS standard for single-byte half-width =
+katakana. This=20
+                  results in compressed text that is occasionally =
+legible even=20
+                  without having a proper table file on =
+hand.<BR><BR><IMG=20
+                  border=3D0 alt=3D""=20
+                  =
+src=3D"http://www.sixfortyfive.com/df2/start_04.png"><BR><BR>Notice=20
+                  the way that "Kaede-sama" is written here. The =
+katakana KA and=20
+                  E are half-width characters, while the DE and kanji =
+are=20
+                  full-width. Only KA and E are stored in the table =
+pictured=20
+                  above (as it lacks most of the diacritic characters =
+like DE).=20
+                  The game refers to the index in NAI_MAIN and replaces =
+the=20
+                  half-width katakana with its corresponding full-width=20
+                  character that is stored at that index.<BR><BR>I'd say =
+that=20
+                  when it comes time for replacing this compressed text =
+that=20
+                  it'd be best to just overwrite it with uncompressed =
+text and=20
+                  prevent the game from ever calling the dictionary =
+routine at=20
+                  all, but I don't really know jack about ASM. If the=20
+                  compression routine is called in START_04.EVE (and I'm =
+not=20
+                  sure if it is or not), then it is likely to occur =
+before=20
+                  offset 0x148, which is where the cutscene script =
+appears to=20
+                  start.</DIV><IMG style=3D"DISPLAY: none; CURSOR: =
+pointer"=20
+                  id=3Dmodify_button_4=20
+                  onclick=3D"modify_msg('4', =
+'fbf6f392195a7d8ff3c068c7f661a1df')"=20
+                  alt=3D"" align=3Dright=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/modi=
+fy_inline.gif">=20
+                </TD></TR>
+              <TR>
+                <TD class=3Dsmalltext vAlign=3Dbottom width=3D"85%">
+                  <TABLE style=3D"TABLE-LAYOUT: fixed" border=3D0 =
+width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD class=3Dsmalltext width=3D"100%" =
+colSpan=3D2></TD></TR>
+                    <TR>
+                      <TD id=3Dmodified_4 class=3Dsmalltext =
+vAlign=3Dbottom></TD>
+                      <TD class=3Dsmalltext vAlign=3Dbottom =
+align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dreporttm;top=
+ic=3D4.0;msg=3D4">Report=20
+                        to moderator</A> &nbsp; <IMG border=3D0 alt=3D"" =
+
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/ip.gif">=20
+                        <A class=3Dhelp onclick=3D"return =
+reqWin(this.href);"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dhelpadmin;he=
+lp=3Dsee_member_ip">Logged</A>=20
+                      =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></T=
+ABLE></TD></TR>
+  <TR>
+    <TD=20
+    style=3D"PADDING-BOTTOM: 0px; PADDING-LEFT: 1px; PADDING-RIGHT: 1px; =
+PADDING-TOP: 1px"><A=20
+      name=3Dmsg15></A>
+      <TABLE border=3D0 cellSpacing=3D0 cellPadding=3D3 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD class=3Dwindowbg2>
+            <TABLE style=3D"TABLE-LAYOUT: fixed" cellSpacing=3D0 =
+cellPadding=3D5=20
+            width=3D"100%">
+              <TBODY>
+              <TR>
+                <TD style=3D"OVERFLOW: hidden" vAlign=3Dtop rowSpan=3D2=20
+                  width=3D"16%"><B><A title=3D"View the profile of =
+FaustWolf"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+2">FaustWolf</A></B>=20
+
+                  <DIV class=3Dsmalltext>DF2 Staff<BR><BR><BR><A=20
+                  title=3D"Personal Message (Online)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D2"><IMG=20
+                  style=3D"MARGIN-TOP: 2px" border=3D0 alt=3DOnline=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/useron.gif=
+"></A><SPAN=20
+                  class=3Dsmalltext> Online</SPAN><BR><BR>Posts: =
+98<BR><BR>
+                  <DIV style=3D"WIDTH: 100%; OVERFLOW: auto"><IMG =
+class=3Davatar=20
+                  border=3D0 alt=3D""=20
+                  =
+src=3D"http://img355.imageshack.us/img355/2685/drystcoloriq6.gif"=20
+                  width=3D65 height=3D65></DIV><BR><BR><A=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+2"><IMG=20
+                  title=3D"View Profile" border=3D0 alt=3D"View Profile" =
+
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/prof=
+ile_sm.gif"></A>=20
+                  <A href=3D"mailto:faustwolf@yahoo.com"><IMG =
+title=3DEmail border=3D0=20
+                  alt=3DEmail=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/email_sm.g=
+if"></A>=20
+                  <A title=3D"Personal Message (Online)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D2"><IMG=20
+                  border=3D0 alt=3D"Personal Message (Online)"=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/im_on.gif"=
+></A>=20
+                  </DIV></TD>
+                <TD height=3D"100%" vAlign=3Dtop width=3D"85%">
+                  <TABLE border=3D0 width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=3Dcenter><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg15#msg15=
+"><IMG=20
+                        border=3D0 alt=3D""=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/post/xx.gi=
+f"></A></TD>
+                      <TD vAlign=3Dcenter>
+                        <DIV style=3D"FONT-WEIGHT: bold" =
+id=3Dsubject_15><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg15#msg15=
+">Re:=20
+                        Text compression info, kana tables</A> </DIV>
+                        <DIV class=3Dsmalltext>=C2=AB <B>Reply #1 =
+on:</B> September 03,=20
+                        2009, 07:12:31 PM =C2=BB</DIV></TD>
+                      <TD style=3D"FONT-SIZE: smaller" height=3D20 =
+vAlign=3Dbottom=20
+                      align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;quote=3D=
+15;topic=3D4.0;num_replies=3D8;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><=
+IMG=20
+                        alt=3D"Reply with quote" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/qu=
+ote.gif"><B>Quote</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;msg=3D1=
+5;topic=3D4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Modify message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/mo=
+dify.gif"><B>Modify</B></A>=20
+                        <A onclick=3D"return confirm('Remove this =
+message?');"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Ddeletemsg;to=
+pic=3D4.0;msg=3D15;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Remove message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/de=
+lete.gif"><B>Remove</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dsplittopics;=
+topic=3D4.0;at=3D15"><IMG=20
+                        alt=3D"Split Topic" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/sp=
+lit.gif"><B>Split=20
+                        Topic</B></A> </TD></TR></TBODY></TABLE>
+                  <HR class=3Dhrcolor SIZE=3D1 width=3D"100%">
+
+                  <DIV id=3Dmsg_15 class=3Dpost>I realize now that I =
+probably should=20
+                  have put the decompression routine description here, =
+but here=20
+                  goes anyway.<BR><BR>The dictionaries should all be =
+0x200=20
+                  (dec512) bytes long, for a total of 0xFF or dec256 =
+entries.=20
+                  The compressed dialogue consists of the =
+following:<BR><BR>1.=20
+                  Special display commands (we should probably make a =
+separate=20
+                  thread to document these sometime)<BR><BR>2. =
+Uncompressed=20
+                  two-byte Shift-JIS values.<BR><BR>3. Compressed =
+one-byte index=20
+                  references into the dictionary the game engine is =
+currently=20
+                  using. So if the reference is 43 in a hex editor, it's =
+telling=20
+                  the game engine to grab whatever's in entry 0x43 in =
+the=20
+                  dictionary and display it.<BR><BR>And that's the way =
+it is!=20
+                  Unless we hit a major snag with more sophisticated =
+text=20
+                  compression later, that is...</DIV><IMG=20
+                  style=3D"DISPLAY: none; CURSOR: pointer" =
+id=3Dmodify_button_15=20
+                  onclick=3D"modify_msg('15', =
+'fbf6f392195a7d8ff3c068c7f661a1df')"=20
+                  alt=3D"" align=3Dright=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/modi=
+fy_inline.gif">=20
+                </TD></TR>
+              <TR>
+                <TD class=3Dsmalltext vAlign=3Dbottom width=3D"85%">
+                  <TABLE style=3D"TABLE-LAYOUT: fixed" border=3D0 =
+width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD class=3Dsmalltext width=3D"100%" =
+colSpan=3D2></TD></TR>
+                    <TR>
+                      <TD id=3Dmodified_15 class=3Dsmalltext =
+vAlign=3Dbottom></TD>
+                      <TD class=3Dsmalltext vAlign=3Dbottom =
+align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dreporttm;top=
+ic=3D4.1;msg=3D15">Report=20
+                        to moderator</A> &nbsp; <IMG border=3D0 alt=3D"" =
+
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/ip.gif">=20
+                        <A class=3Dhelp onclick=3D"return =
+reqWin(this.href);"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dhelpadmin;he=
+lp=3Dsee_member_ip">71.53.58.80</A>=20
+                      =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></T=
+ABLE></TD></TR>
+  <TR>
+    <TD=20
+    style=3D"PADDING-BOTTOM: 0px; PADDING-LEFT: 1px; PADDING-RIGHT: 1px; =
+PADDING-TOP: 1px"><A=20
+      name=3Dmsg17></A>
+      <TABLE border=3D0 cellSpacing=3D0 cellPadding=3D3 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD class=3Dwindowbg>
+            <TABLE style=3D"TABLE-LAYOUT: fixed" cellSpacing=3D0 =
+cellPadding=3D5=20
+            width=3D"100%">
+              <TBODY>
+              <TR>
+                <TD style=3D"OVERFLOW: hidden" vAlign=3Dtop rowSpan=3D2=20
+                  width=3D"16%"><B><A title=3D"View the profile of =
+Sixfortyfive"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+1">Sixfortyfive</A></B>=20
+
+                  <DIV class=3Dsmalltext>Administrator<BR><BR><BR><A=20
+                  title=3D"Personal Message (Offline)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D1"><IMG=20
+                  style=3D"MARGIN-TOP: 2px" border=3D0 alt=3DOffline=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/useroff.gi=
+f"></A><SPAN=20
+                  class=3Dsmalltext> Offline</SPAN><BR><BR>Posts: =
+62<BR><BR><BR><A=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+1"><IMG=20
+                  title=3D"View Profile" border=3D0 alt=3D"View Profile" =
+
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/prof=
+ile_sm.gif"></A>=20
+                  <A title=3D"Personal Message (Offline)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D1"><IMG=20
+                  border=3D0 alt=3D"Personal Message (Offline)"=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/im_off.gif=
+"></A>=20
+                  </DIV></TD>
+                <TD height=3D"100%" vAlign=3Dtop width=3D"85%">
+                  <TABLE border=3D0 width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=3Dcenter><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg17#msg17=
+"><IMG=20
+                        border=3D0 alt=3D""=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/post/xx.gi=
+f"></A></TD>
+                      <TD vAlign=3Dcenter>
+                        <DIV style=3D"FONT-WEIGHT: bold" =
+id=3Dsubject_17><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg17#msg17=
+">Re:=20
+                        Text compression info, kana tables</A> </DIV>
+                        <DIV class=3Dsmalltext>=C2=AB <B>Reply #2 =
+on:</B> September 03,=20
+                        2009, 07:39:47 PM =C2=BB</DIV></TD>
+                      <TD style=3D"FONT-SIZE: smaller" height=3D20 =
+vAlign=3Dbottom=20
+                      align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;quote=3D=
+17;topic=3D4.0;num_replies=3D8;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><=
+IMG=20
+                        alt=3D"Reply with quote" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/qu=
+ote.gif"><B>Quote</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;msg=3D1=
+7;topic=3D4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Modify message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/mo=
+dify.gif"><B>Modify</B></A>=20
+                        <A onclick=3D"return confirm('Remove this =
+message?');"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Ddeletemsg;to=
+pic=3D4.0;msg=3D17;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Remove message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/de=
+lete.gif"><B>Remove</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dsplittopics;=
+topic=3D4.0;at=3D17"><IMG=20
+                        alt=3D"Split Topic" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/sp=
+lit.gif"><B>Split=20
+                        Topic</B></A> </TD></TR></TBODY></TABLE>
+                  <HR class=3Dhrcolor SIZE=3D1 width=3D"100%">
+
+                  <DIV id=3Dmsg_17 class=3Dpost>This table (at least the =
+indexes=20
+                  that are actually used for text) is repeated in the =
+following=20
+                  files:<BR><BR>NAI_MAIN.BIN - 0xBAC<BR>SPE_MAIN.BIN -=20
+                  0xBE0<BR>TA_MAIN.BIN - 0x1DF88<BR><BR>The offsets =
+given are=20
+                  for index 00. Actual text entries don't appear to =
+start until=20
+                  index 40.</DIV><IMG style=3D"DISPLAY: none; CURSOR: =
+pointer"=20
+                  id=3Dmodify_button_17=20
+                  onclick=3D"modify_msg('17', =
+'fbf6f392195a7d8ff3c068c7f661a1df')"=20
+                  alt=3D"" align=3Dright=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/modi=
+fy_inline.gif">=20
+                </TD></TR>
+              <TR>
+                <TD class=3Dsmalltext vAlign=3Dbottom width=3D"85%">
+                  <TABLE style=3D"TABLE-LAYOUT: fixed" border=3D0 =
+width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD class=3Dsmalltext width=3D"100%" =
+colSpan=3D2></TD></TR>
+                    <TR>
+                      <TD id=3Dmodified_17 class=3Dsmalltext =
+vAlign=3Dbottom></TD>
+                      <TD class=3Dsmalltext vAlign=3Dbottom =
+align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dreporttm;top=
+ic=3D4.2;msg=3D17">Report=20
+                        to moderator</A> &nbsp; <IMG border=3D0 alt=3D"" =
+
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/ip.gif">=20
+                        <A class=3Dhelp onclick=3D"return =
+reqWin(this.href);"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dhelpadmin;he=
+lp=3Dsee_member_ip">Logged</A>=20
+                      =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></T=
+ABLE></TD></TR>
+  <TR>
+    <TD=20
+    style=3D"PADDING-BOTTOM: 0px; PADDING-LEFT: 1px; PADDING-RIGHT: 1px; =
+PADDING-TOP: 1px"><A=20
+      name=3Dmsg18></A>
+      <TABLE border=3D0 cellSpacing=3D0 cellPadding=3D3 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD class=3Dwindowbg2>
+            <TABLE style=3D"TABLE-LAYOUT: fixed" cellSpacing=3D0 =
+cellPadding=3D5=20
+            width=3D"100%">
+              <TBODY>
+              <TR>
+                <TD style=3D"OVERFLOW: hidden" vAlign=3Dtop rowSpan=3D2=20
+                  width=3D"16%"><B><A title=3D"View the profile of =
+FaustWolf"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+2">FaustWolf</A></B>=20
+
+                  <DIV class=3Dsmalltext>DF2 Staff<BR><BR><BR><A=20
+                  title=3D"Personal Message (Online)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D2"><IMG=20
+                  style=3D"MARGIN-TOP: 2px" border=3D0 alt=3DOnline=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/useron.gif=
+"></A><SPAN=20
+                  class=3Dsmalltext> Online</SPAN><BR><BR>Posts: =
+98<BR><BR>
+                  <DIV style=3D"WIDTH: 100%; OVERFLOW: auto"><IMG =
+class=3Davatar=20
+                  border=3D0 alt=3D""=20
+                  =
+src=3D"http://img355.imageshack.us/img355/2685/drystcoloriq6.gif"=20
+                  width=3D65 height=3D65></DIV><BR><BR><A=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+2"><IMG=20
+                  title=3D"View Profile" border=3D0 alt=3D"View Profile" =
+
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/prof=
+ile_sm.gif"></A>=20
+                  <A href=3D"mailto:faustwolf@yahoo.com"><IMG =
+title=3DEmail border=3D0=20
+                  alt=3DEmail=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/email_sm.g=
+if"></A>=20
+                  <A title=3D"Personal Message (Online)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D2"><IMG=20
+                  border=3D0 alt=3D"Personal Message (Online)"=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/im_on.gif"=
+></A>=20
+                  </DIV></TD>
+                <TD height=3D"100%" vAlign=3Dtop width=3D"85%">
+                  <TABLE border=3D0 width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=3Dcenter><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg18#msg18=
+"><IMG=20
+                        border=3D0 alt=3D""=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/post/xx.gi=
+f"></A></TD>
+                      <TD vAlign=3Dcenter>
+                        <DIV style=3D"FONT-WEIGHT: bold" =
+id=3Dsubject_18><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg18#msg18=
+">Re:=20
+                        Text compression info, kana tables</A> </DIV>
+                        <DIV class=3Dsmalltext>=C2=AB <B>Reply #3 =
+on:</B> September 03,=20
+                        2009, 08:15:30 PM =C2=BB</DIV></TD>
+                      <TD style=3D"FONT-SIZE: smaller" height=3D20 =
+vAlign=3Dbottom=20
+                      align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;quote=3D=
+18;topic=3D4.0;num_replies=3D8;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><=
+IMG=20
+                        alt=3D"Reply with quote" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/qu=
+ote.gif"><B>Quote</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;msg=3D1=
+8;topic=3D4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Modify message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/mo=
+dify.gif"><B>Modify</B></A>=20
+                        <A onclick=3D"return confirm('Remove this =
+message?');"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Ddeletemsg;to=
+pic=3D4.0;msg=3D18;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Remove message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/de=
+lete.gif"><B>Remove</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dsplittopics;=
+topic=3D4.0;at=3D18"><IMG=20
+                        alt=3D"Split Topic" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/sp=
+lit.gif"><B>Split=20
+                        Topic</B></A> </TD></TR></TBODY></TABLE>
+                  <HR class=3Dhrcolor SIZE=3D1 width=3D"100%">
+
+                  <DIV id=3Dmsg_18 class=3Dpost>Oh, I see now -- I saw =
+some=20
+                  differences in the "empty" slots, but the kana and =
+kanji are=20
+                  all shared between the tables, huh? I'm slightly =
+worried that=20
+                  the "empty" slots in the dictionary are actually =
+two-byte=20
+                  codes the game needs to use for different situations=20
+                  (otherwise I'm not even seeing a justification for =
+multiple=20
+                  identical dictionary tables), but hopefully I'm just =
+paranoid.=20
+                  In any case, with the amount of repetitions in the =
+empty=20
+                  dictionary slots, maybe they're just some kind of junk =
+
+                  data?</DIV><IMG style=3D"DISPLAY: none; CURSOR: =
+pointer"=20
+                  id=3Dmodify_button_18=20
+                  onclick=3D"modify_msg('18', =
+'fbf6f392195a7d8ff3c068c7f661a1df')"=20
+                  alt=3D"" align=3Dright=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/modi=
+fy_inline.gif">=20
+                </TD></TR>
+              <TR>
+                <TD class=3Dsmalltext vAlign=3Dbottom width=3D"85%">
+                  <TABLE style=3D"TABLE-LAYOUT: fixed" border=3D0 =
+width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD class=3Dsmalltext width=3D"100%" =
+colSpan=3D2></TD></TR>
+                    <TR>
+                      <TD id=3Dmodified_18 class=3Dsmalltext =
+vAlign=3Dbottom></TD>
+                      <TD class=3Dsmalltext vAlign=3Dbottom =
+align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dreporttm;top=
+ic=3D4.3;msg=3D18">Report=20
+                        to moderator</A> &nbsp; <IMG border=3D0 alt=3D"" =
+
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/ip.gif">=20
+                        <A class=3Dhelp onclick=3D"return =
+reqWin(this.href);"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dhelpadmin;he=
+lp=3Dsee_member_ip">71.53.58.80</A>=20
+                      =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></T=
+ABLE></TD></TR>
+  <TR>
+    <TD=20
+    style=3D"PADDING-BOTTOM: 0px; PADDING-LEFT: 1px; PADDING-RIGHT: 1px; =
+PADDING-TOP: 1px"><A=20
+      name=3Dmsg20></A>
+      <TABLE border=3D0 cellSpacing=3D0 cellPadding=3D3 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD class=3Dwindowbg>
+            <TABLE style=3D"TABLE-LAYOUT: fixed" cellSpacing=3D0 =
+cellPadding=3D5=20
+            width=3D"100%">
+              <TBODY>
+              <TR>
+                <TD style=3D"OVERFLOW: hidden" vAlign=3Dtop rowSpan=3D2=20
+                  width=3D"16%"><B><A title=3D"View the profile of =
+Sixfortyfive"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+1">Sixfortyfive</A></B>=20
+
+                  <DIV class=3Dsmalltext>Administrator<BR><BR><BR><A=20
+                  title=3D"Personal Message (Offline)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D1"><IMG=20
+                  style=3D"MARGIN-TOP: 2px" border=3D0 alt=3DOffline=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/useroff.gi=
+f"></A><SPAN=20
+                  class=3Dsmalltext> Offline</SPAN><BR><BR>Posts: =
+62<BR><BR><BR><A=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+1"><IMG=20
+                  title=3D"View Profile" border=3D0 alt=3D"View Profile" =
+
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/prof=
+ile_sm.gif"></A>=20
+                  <A title=3D"Personal Message (Offline)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D1"><IMG=20
+                  border=3D0 alt=3D"Personal Message (Offline)"=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/im_off.gif=
+"></A>=20
+                  </DIV></TD>
+                <TD height=3D"100%" vAlign=3Dtop width=3D"85%">
+                  <TABLE border=3D0 width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=3Dcenter><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg20#msg20=
+"><IMG=20
+                        border=3D0 alt=3D""=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/post/xx.gi=
+f"></A></TD>
+                      <TD vAlign=3Dcenter>
+                        <DIV style=3D"FONT-WEIGHT: bold" =
+id=3Dsubject_20><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg20#msg20=
+">Re:=20
+                        Text compression info, kana tables</A> </DIV>
+                        <DIV class=3Dsmalltext>=C2=AB <B>Reply #4 =
+on:</B> September 03,=20
+                        2009, 08:47:32 PM =C2=BB</DIV></TD>
+                      <TD style=3D"FONT-SIZE: smaller" height=3D20 =
+vAlign=3Dbottom=20
+                      align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;quote=3D=
+20;topic=3D4.0;num_replies=3D8;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><=
+IMG=20
+                        alt=3D"Reply with quote" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/qu=
+ote.gif"><B>Quote</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;msg=3D2=
+0;topic=3D4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Modify message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/mo=
+dify.gif"><B>Modify</B></A>=20
+                        <A onclick=3D"return confirm('Remove this =
+message?');"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Ddeletemsg;to=
+pic=3D4.0;msg=3D20;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Remove message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/de=
+lete.gif"><B>Remove</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dsplittopics;=
+topic=3D4.0;at=3D20"><IMG=20
+                        alt=3D"Split Topic" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/sp=
+lit.gif"><B>Split=20
+                        Topic</B></A> </TD></TR></TBODY></TABLE>
+                  <HR class=3Dhrcolor SIZE=3D1 width=3D"100%">
+
+                  <DIV id=3Dmsg_20 class=3Dpost>Not sure, but I suspect =
+that rows 8,=20
+                  9, and E aren't used at least, as anything beginning =
+with one=20
+                  of those values is interpreted as a two-byte character =
+and not=20
+                  a dictionary entry.<BR><BR>See the red boxes =
+here:<BR><A=20
+                  href=3D"http://en.wikipedia.org/wiki/Shift_JIS"=20
+                  =
+target=3D_blank>http://en.wikipedia.org/wiki/Shift_JIS</A></DIV><IMG=20
+                  style=3D"DISPLAY: none; CURSOR: pointer" =
+id=3Dmodify_button_20=20
+                  onclick=3D"modify_msg('20', =
+'fbf6f392195a7d8ff3c068c7f661a1df')"=20
+                  alt=3D"" align=3Dright=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/modi=
+fy_inline.gif">=20
+                </TD></TR>
+              <TR>
+                <TD class=3Dsmalltext vAlign=3Dbottom width=3D"85%">
+                  <TABLE style=3D"TABLE-LAYOUT: fixed" border=3D0 =
+width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD class=3Dsmalltext width=3D"100%" =
+colSpan=3D2></TD></TR>
+                    <TR>
+                      <TD id=3Dmodified_20 class=3Dsmalltext =
+vAlign=3Dbottom></TD>
+                      <TD class=3Dsmalltext vAlign=3Dbottom =
+align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dreporttm;top=
+ic=3D4.4;msg=3D20">Report=20
+                        to moderator</A> &nbsp; <IMG border=3D0 alt=3D"" =
+
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/ip.gif">=20
+                        <A class=3Dhelp onclick=3D"return =
+reqWin(this.href);"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dhelpadmin;he=
+lp=3Dsee_member_ip">Logged</A>=20
+                      =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></T=
+ABLE></TD></TR>
+  <TR>
+    <TD=20
+    style=3D"PADDING-BOTTOM: 0px; PADDING-LEFT: 1px; PADDING-RIGHT: 1px; =
+PADDING-TOP: 1px"><A=20
+      name=3Dmsg37></A>
+      <TABLE border=3D0 cellSpacing=3D0 cellPadding=3D3 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD class=3Dwindowbg2>
+            <TABLE style=3D"TABLE-LAYOUT: fixed" cellSpacing=3D0 =
+cellPadding=3D5=20
+            width=3D"100%">
+              <TBODY>
+              <TR>
+                <TD style=3D"OVERFLOW: hidden" vAlign=3Dtop rowSpan=3D2=20
+                  width=3D"16%"><B><A title=3D"View the profile of =
+Sixfortyfive"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+1">Sixfortyfive</A></B>=20
+
+                  <DIV class=3Dsmalltext>Administrator<BR><BR><BR><A=20
+                  title=3D"Personal Message (Offline)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D1"><IMG=20
+                  style=3D"MARGIN-TOP: 2px" border=3D0 alt=3DOffline=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/useroff.gi=
+f"></A><SPAN=20
+                  class=3Dsmalltext> Offline</SPAN><BR><BR>Posts: =
+62<BR><BR><BR><A=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+1"><IMG=20
+                  title=3D"View Profile" border=3D0 alt=3D"View Profile" =
+
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/prof=
+ile_sm.gif"></A>=20
+                  <A title=3D"Personal Message (Offline)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D1"><IMG=20
+                  border=3D0 alt=3D"Personal Message (Offline)"=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/im_off.gif=
+"></A>=20
+                  </DIV></TD>
+                <TD height=3D"100%" vAlign=3Dtop width=3D"85%">
+                  <TABLE border=3D0 width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=3Dcenter><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg37#msg37=
+"><IMG=20
+                        border=3D0 alt=3D""=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/post/xx.gi=
+f"></A></TD>
+                      <TD vAlign=3Dcenter>
+                        <DIV style=3D"FONT-WEIGHT: bold" =
+id=3Dsubject_37><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg37#msg37=
+">Re:=20
+                        Text compression info, kana tables</A> </DIV>
+                        <DIV class=3Dsmalltext>=C2=AB <B>Reply #5 =
+on:</B> September 05,=20
+                        2009, 05:00:06 AM =C2=BB</DIV></TD>
+                      <TD style=3D"FONT-SIZE: smaller" height=3D20 =
+vAlign=3Dbottom=20
+                      align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;quote=3D=
+37;topic=3D4.0;num_replies=3D8;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><=
+IMG=20
+                        alt=3D"Reply with quote" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/qu=
+ote.gif"><B>Quote</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;msg=3D3=
+7;topic=3D4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Modify message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/mo=
+dify.gif"><B>Modify</B></A>=20
+                        <A onclick=3D"return confirm('Remove this =
+message?');"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Ddeletemsg;to=
+pic=3D4.0;msg=3D37;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Remove message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/de=
+lete.gif"><B>Remove</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dsplittopics;=
+topic=3D4.0;at=3D37"><IMG=20
+                        alt=3D"Split Topic" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/sp=
+lit.gif"><B>Split=20
+                        Topic</B></A> </TD></TR></TBODY></TABLE>
+                  <HR class=3Dhrcolor SIZE=3D1 width=3D"100%">
+
+                  <DIV id=3Dmsg_37 class=3Dpost>Table files:<BR><BR><A=20
+                  href=3D"http://www.sixfortyfive.com/df2/shiftjis.tbl"=20
+                  =
+target=3D_blank>http://www.sixfortyfive.com/df2/shiftjis.tbl</A>=20
+                  - Shift-JIS standard. You might not need this if your =
+hex=20
+                  editor can display Japanese in the first place.<BR><A=20
+                  href=3D"http://www.sixfortyfive.com/df2/df2.tbl"=20
+                  =
+target=3D_blank>http://www.sixfortyfive.com/df2/df2.tbl</A> -=20
+                  Same as above plus the kana dictionary used in DF2's=20
+                  compressed text.<BR><BR>If you can't seem to get =
+anything but=20
+                  gibberish using the above tables, try these, which =
+convert the=20
+                  Shift-JIS encoding to Unicode (UTF-8):<BR><BR><A=20
+                  =
+href=3D"http://www.sixfortyfive.com/df2/shiftjis-utf8.tbl"=20
+                  =
+target=3D_blank>http://www.sixfortyfive.com/df2/shiftjis-utf8.tbl</A><BR>=
+<A=20
+                  href=3D"http://www.sixfortyfive.com/df2/df2-utf8.tbl"=20
+                  =
+target=3D_blank>http://www.sixfortyfive.com/df2/df2-utf8.tbl</A></DIV><IM=
+G=20
+                  style=3D"DISPLAY: none; CURSOR: pointer" =
+id=3Dmodify_button_37=20
+                  onclick=3D"modify_msg('37', =
+'fbf6f392195a7d8ff3c068c7f661a1df')"=20
+                  alt=3D"" align=3Dright=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/modi=
+fy_inline.gif">=20
+                </TD></TR>
+              <TR>
+                <TD class=3Dsmalltext vAlign=3Dbottom width=3D"85%">
+                  <TABLE style=3D"TABLE-LAYOUT: fixed" border=3D0 =
+width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD class=3Dsmalltext width=3D"100%" =
+colSpan=3D2></TD></TR>
+                    <TR>
+                      <TD id=3Dmodified_37 class=3Dsmalltext =
+vAlign=3Dbottom>=C2=AB=20
+                        <I>Last Edit: September 05, 2009, 06:38:20 AM by =
+
+                        Sixfortyfive</I> =C2=BB </TD>
+                      <TD class=3Dsmalltext vAlign=3Dbottom =
+align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dreporttm;top=
+ic=3D4.5;msg=3D37">Report=20
+                        to moderator</A> &nbsp; <IMG border=3D0 alt=3D"" =
+
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/ip.gif">=20
+                        <A class=3Dhelp onclick=3D"return =
+reqWin(this.href);"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dhelpadmin;he=
+lp=3Dsee_member_ip">Logged</A>=20
+                      =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></T=
+ABLE></TD></TR>
+  <TR>
+    <TD=20
+    style=3D"PADDING-BOTTOM: 0px; PADDING-LEFT: 1px; PADDING-RIGHT: 1px; =
+PADDING-TOP: 1px"><A=20
+      name=3Dmsg99></A>
+      <TABLE border=3D0 cellSpacing=3D0 cellPadding=3D3 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD class=3Dwindowbg>
+            <TABLE style=3D"TABLE-LAYOUT: fixed" cellSpacing=3D0 =
+cellPadding=3D5=20
+            width=3D"100%">
+              <TBODY>
+              <TR>
+                <TD style=3D"OVERFLOW: hidden" vAlign=3Dtop rowSpan=3D2=20
+                  width=3D"16%"><B><A title=3D"View the profile of =
+Sixfortyfive"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+1">Sixfortyfive</A></B>=20
+
+                  <DIV class=3Dsmalltext>Administrator<BR><BR><BR><A=20
+                  title=3D"Personal Message (Offline)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D1"><IMG=20
+                  style=3D"MARGIN-TOP: 2px" border=3D0 alt=3DOffline=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/useroff.gi=
+f"></A><SPAN=20
+                  class=3Dsmalltext> Offline</SPAN><BR><BR>Posts: =
+62<BR><BR><BR><A=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+1"><IMG=20
+                  title=3D"View Profile" border=3D0 alt=3D"View Profile" =
+
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/prof=
+ile_sm.gif"></A>=20
+                  <A title=3D"Personal Message (Offline)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D1"><IMG=20
+                  border=3D0 alt=3D"Personal Message (Offline)"=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/im_off.gif=
+"></A>=20
+                  </DIV></TD>
+                <TD height=3D"100%" vAlign=3Dtop width=3D"85%">
+                  <TABLE border=3D0 width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=3Dcenter><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg99#msg99=
+"><IMG=20
+                        border=3D0 alt=3D""=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/post/xx.gi=
+f"></A></TD>
+                      <TD vAlign=3Dcenter>
+                        <DIV style=3D"FONT-WEIGHT: bold" =
+id=3Dsubject_99><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg99#msg99=
+">Re:=20
+                        Text compression info, kana tables</A> </DIV>
+                        <DIV class=3Dsmalltext>=C2=AB <B>Reply #6 =
+on:</B> September 07,=20
+                        2009, 05:47:13 PM =C2=BB</DIV></TD>
+                      <TD style=3D"FONT-SIZE: smaller" height=3D20 =
+vAlign=3Dbottom=20
+                      align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;quote=3D=
+99;topic=3D4.0;num_replies=3D8;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><=
+IMG=20
+                        alt=3D"Reply with quote" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/qu=
+ote.gif"><B>Quote</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;msg=3D9=
+9;topic=3D4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Modify message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/mo=
+dify.gif"><B>Modify</B></A>=20
+                        <A onclick=3D"return confirm('Remove this =
+message?');"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Ddeletemsg;to=
+pic=3D4.0;msg=3D99;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Remove message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/de=
+lete.gif"><B>Remove</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dsplittopics;=
+topic=3D4.0;at=3D99"><IMG=20
+                        alt=3D"Split Topic" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/sp=
+lit.gif"><B>Split=20
+                        Topic</B></A> </TD></TR></TBODY></TABLE>
+                  <HR class=3Dhrcolor SIZE=3D1 width=3D"100%">
+
+                  <DIV id=3Dmsg_99 class=3Dpost>Bumping this to note =
+that the first=20
+                  4 rows in the table in the first post looks =
+suspiciously like=20
+                  a pointer table. I noticed that a lot of pointers in =
+this file=20
+                  and other _MAIN.BIN files add to hex value 06060000 =
+for some=20
+                  reason. As in, a pointer to offset A722 would be =
+stored as=20
+                  0606A722, a pointer to 12345 would be stored as =
+06072345, and=20
+                  so on.<BR><BR>I'm not sure what the implications of =
+that would=20
+                  be for the text encoding, but I thought I'd make a =
+note of=20
+                  it.</DIV><IMG style=3D"DISPLAY: none; CURSOR: pointer" =
+
+                  id=3Dmodify_button_99=20
+                  onclick=3D"modify_msg('99', =
+'fbf6f392195a7d8ff3c068c7f661a1df')"=20
+                  alt=3D"" align=3Dright=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/modi=
+fy_inline.gif">=20
+                </TD></TR>
+              <TR>
+                <TD class=3Dsmalltext vAlign=3Dbottom width=3D"85%">
+                  <TABLE style=3D"TABLE-LAYOUT: fixed" border=3D0 =
+width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD class=3Dsmalltext width=3D"100%" =
+colSpan=3D2></TD></TR>
+                    <TR>
+                      <TD id=3Dmodified_99 class=3Dsmalltext =
+vAlign=3Dbottom></TD>
+                      <TD class=3Dsmalltext vAlign=3Dbottom =
+align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dreporttm;top=
+ic=3D4.6;msg=3D99">Report=20
+                        to moderator</A> &nbsp; <IMG border=3D0 alt=3D"" =
+
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/ip.gif">=20
+                        <A class=3Dhelp onclick=3D"return =
+reqWin(this.href);"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dhelpadmin;he=
+lp=3Dsee_member_ip">Logged</A>=20
+                      =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></T=
+ABLE></TD></TR>
+  <TR>
+    <TD=20
+    style=3D"PADDING-BOTTOM: 0px; PADDING-LEFT: 1px; PADDING-RIGHT: 1px; =
+PADDING-TOP: 1px"><A=20
+      name=3Dmsg103></A>
+      <TABLE border=3D0 cellSpacing=3D0 cellPadding=3D3 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD class=3Dwindowbg2>
+            <TABLE style=3D"TABLE-LAYOUT: fixed" cellSpacing=3D0 =
+cellPadding=3D5=20
+            width=3D"100%">
+              <TBODY>
+              <TR>
+                <TD style=3D"OVERFLOW: hidden" vAlign=3Dtop rowSpan=3D2=20
+                  width=3D"16%"><B><A title=3D"View the profile of =
+FaustWolf"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+2">FaustWolf</A></B>=20
+
+                  <DIV class=3Dsmalltext>DF2 Staff<BR><BR><BR><A=20
+                  title=3D"Personal Message (Online)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D2"><IMG=20
+                  style=3D"MARGIN-TOP: 2px" border=3D0 alt=3DOnline=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/useron.gif=
+"></A><SPAN=20
+                  class=3Dsmalltext> Online</SPAN><BR><BR>Posts: =
+98<BR><BR>
+                  <DIV style=3D"WIDTH: 100%; OVERFLOW: auto"><IMG =
+class=3Davatar=20
+                  border=3D0 alt=3D""=20
+                  =
+src=3D"http://img355.imageshack.us/img355/2685/drystcoloriq6.gif"=20
+                  width=3D65 height=3D65></DIV><BR><BR><A=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+2"><IMG=20
+                  title=3D"View Profile" border=3D0 alt=3D"View Profile" =
+
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/prof=
+ile_sm.gif"></A>=20
+                  <A href=3D"mailto:faustwolf@yahoo.com"><IMG =
+title=3DEmail border=3D0=20
+                  alt=3DEmail=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/email_sm.g=
+if"></A>=20
+                  <A title=3D"Personal Message (Online)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D2"><IMG=20
+                  border=3D0 alt=3D"Personal Message (Online)"=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/im_on.gif"=
+></A>=20
+                  </DIV></TD>
+                <TD height=3D"100%" vAlign=3Dtop width=3D"85%">
+                  <TABLE border=3D0 width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=3Dcenter><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg103#msg1=
+03"><IMG=20
+                        border=3D0 alt=3D""=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/post/xx.gi=
+f"></A></TD>
+                      <TD vAlign=3Dcenter>
+                        <DIV style=3D"FONT-WEIGHT: bold" =
+id=3Dsubject_103><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg103#msg1=
+03">Re:=20
+                        Text compression info, kana tables</A> </DIV>
+                        <DIV class=3Dsmalltext>=C2=AB <B>Reply #7 =
+on:</B> September 07,=20
+                        2009, 08:37:25 PM =C2=BB</DIV></TD>
+                      <TD style=3D"FONT-SIZE: smaller" height=3D20 =
+vAlign=3Dbottom=20
+                      align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;quote=3D=
+103;topic=3D4.0;num_replies=3D8;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df">=
+<IMG=20
+                        alt=3D"Reply with quote" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/qu=
+ote.gif"><B>Quote</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;msg=3D1=
+03;topic=3D4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Modify message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/mo=
+dify.gif"><B>Modify</B></A>=20
+                        <A onclick=3D"return confirm('Remove this =
+message?');"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Ddeletemsg;to=
+pic=3D4.0;msg=3D103;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Remove message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/de=
+lete.gif"><B>Remove</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dsplittopics;=
+topic=3D4.0;at=3D103"><IMG=20
+                        alt=3D"Split Topic" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/sp=
+lit.gif"><B>Split=20
+                        Topic</B></A> </TD></TR></TBODY></TABLE>
+                  <HR class=3Dhrcolor SIZE=3D1 width=3D"100%">
+
+                  <DIV id=3Dmsg_103 class=3Dpost>I have to wonder if =
+they point to=20
+                  special codes for various actions that happen as text =
+is=20
+                  displayed ("play sound effect," etc). During the text=20
+                  reinsertion phase, it would be best to avoid these I =
+think,=20
+                  but only experimentation will prove this. Just in case =
+these=20
+                  must be left alone and we're not able to disable the=20
+                  decompression routine, are there enough real =
+dictionary=20
+                  characters in the table to cover all the English lower =
+case=20
+                  and capital letters? That would make for a minimum of =
+52 real=20
+                  entries, plus enough for punctuation (period, comma,=20
+                  exclamation, and question mark -- not sure what else =
+would be=20
+                  needed).</DIV><IMG style=3D"DISPLAY: none; CURSOR: =
+pointer"=20
+                  id=3Dmodify_button_103=20
+                  onclick=3D"modify_msg('103', =
+'fbf6f392195a7d8ff3c068c7f661a1df')"=20
+                  alt=3D"" align=3Dright=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/modi=
+fy_inline.gif">=20
+                </TD></TR>
+              <TR>
+                <TD class=3Dsmalltext vAlign=3Dbottom width=3D"85%">
+                  <TABLE style=3D"TABLE-LAYOUT: fixed" border=3D0 =
+width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD class=3Dsmalltext width=3D"100%" =
+colSpan=3D2></TD></TR>
+                    <TR>
+                      <TD id=3Dmodified_103 class=3Dsmalltext =
+vAlign=3Dbottom></TD>
+                      <TD class=3Dsmalltext vAlign=3Dbottom =
+align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dreporttm;top=
+ic=3D4.7;msg=3D103">Report=20
+                        to moderator</A> &nbsp; <IMG border=3D0 alt=3D"" =
+
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/ip.gif">=20
+                        <A class=3Dhelp onclick=3D"return =
+reqWin(this.href);"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dhelpadmin;he=
+lp=3Dsee_member_ip">71.53.58.80</A>=20
+                      =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></T=
+ABLE></TD></TR>
+  <TR>
+    <TD=20
+    style=3D"PADDING-BOTTOM: 0px; PADDING-LEFT: 1px; PADDING-RIGHT: 1px; =
+PADDING-TOP: 1px"><A=20
+      name=3Dmsg105></A>
+      <TABLE border=3D0 cellSpacing=3D0 cellPadding=3D3 width=3D"100%">
+        <TBODY>
+        <TR>
+          <TD class=3Dwindowbg>
+            <TABLE style=3D"TABLE-LAYOUT: fixed" cellSpacing=3D0 =
+cellPadding=3D5=20
+            width=3D"100%">
+              <TBODY>
+              <TR>
+                <TD style=3D"OVERFLOW: hidden" vAlign=3Dtop rowSpan=3D2=20
+                  width=3D"16%"><B><A title=3D"View the profile of =
+Sixfortyfive"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+1">Sixfortyfive</A></B>=20
+
+                  <DIV class=3Dsmalltext>Administrator<BR><BR><BR><A=20
+                  title=3D"Personal Message (Offline)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D1"><IMG=20
+                  style=3D"MARGIN-TOP: 2px" border=3D0 alt=3DOffline=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/useroff.gi=
+f"></A><SPAN=20
+                  class=3Dsmalltext> Offline</SPAN><BR><BR>Posts: =
+62<BR><BR><BR><A=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprofile;u=3D=
+1"><IMG=20
+                  title=3D"View Profile" border=3D0 alt=3D"View Profile" =
+
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/prof=
+ile_sm.gif"></A>=20
+                  <A title=3D"Personal Message (Offline)"=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpm;sa=3Dsend=
+;u=3D1"><IMG=20
+                  border=3D0 alt=3D"Personal Message (Offline)"=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/im_off.gif=
+"></A>=20
+                  </DIV></TD>
+                <TD height=3D"100%" vAlign=3Dtop width=3D"85%">
+                  <TABLE border=3D0 width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=3Dcenter><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg105#msg1=
+05"><IMG=20
+                        border=3D0 alt=3D""=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/post/xx.gi=
+f"></A></TD>
+                      <TD vAlign=3Dcenter>
+                        <DIV style=3D"FONT-WEIGHT: bold" =
+id=3Dsubject_105><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg105#msg1=
+05">Re:=20
+                        Text compression info, kana tables</A> </DIV>
+                        <DIV class=3Dsmalltext>=C2=AB <B>Reply #8 =
+on:</B> September 07,=20
+                        2009, 08:50:35 PM =C2=BB</DIV></TD>
+                      <TD style=3D"FONT-SIZE: smaller" height=3D20 =
+vAlign=3Dbottom=20
+                      align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;quote=3D=
+105;topic=3D4.0;num_replies=3D8;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df">=
+<IMG=20
+                        alt=3D"Reply with quote" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/qu=
+ote.gif"><B>Quote</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;msg=3D1=
+05;topic=3D4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Modify message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/mo=
+dify.gif"><B>Modify</B></A>=20
+                        <A onclick=3D"return confirm('Remove this =
+message?');"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Ddeletemsg;to=
+pic=3D4.0;msg=3D105;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df"><IMG=20
+                        alt=3D"Remove message" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/de=
+lete.gif"><B>Remove</B></A>=20
+                        <A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dsplittopics;=
+topic=3D4.0;at=3D105"><IMG=20
+                        alt=3D"Split Topic" align=3Dmiddle=20
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/buttons/sp=
+lit.gif"><B>Split=20
+                        Topic</B></A> </TD></TR></TBODY></TABLE>
+                  <HR class=3Dhrcolor SIZE=3D1 width=3D"100%">
+
+                  <DIV id=3Dmsg_105 class=3Dpost>
+                  <DIV class=3Dquoteheader><A=20
+                  =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg103#msg1=
+03">Quote=20
+                  from: FaustWolf on September 07, 2009, 08:37:25 =
+PM</A></DIV>
+                  <DIV class=3Dquote>Just in case these must be left =
+alone and=20
+                  we're not able to disable the decompression routine, =
+are there=20
+                  enough real dictionary characters in the table to =
+cover all=20
+                  the English lower case and capital letters?</DIV>Yeah, =
+there's=20
+                  8 rows to work with, and the full ASCII character set =
+only=20
+                  needs 6.</DIV><IMG style=3D"DISPLAY: none; CURSOR: =
+pointer"=20
+                  id=3Dmodify_button_105=20
+                  onclick=3D"modify_msg('105', =
+'fbf6f392195a7d8ff3c068c7f661a1df')"=20
+                  alt=3D"" align=3Dright=20
+                  =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/icons/modi=
+fy_inline.gif">=20
+                </TD></TR>
+              <TR>
+                <TD class=3Dsmalltext vAlign=3Dbottom width=3D"85%">
+                  <TABLE style=3D"TABLE-LAYOUT: fixed" border=3D0 =
+width=3D"100%">
+                    <TBODY>
+                    <TR>
+                      <TD class=3Dsmalltext width=3D"100%" =
+colSpan=3D2></TD></TR>
+                    <TR>
+                      <TD id=3Dmodified_105 class=3Dsmalltext =
+vAlign=3Dbottom></TD>
+                      <TD class=3Dsmalltext vAlign=3Dbottom =
+align=3Dright><A=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dreporttm;top=
+ic=3D4.8;msg=3D105">Report=20
+                        to moderator</A> &nbsp; <IMG border=3D0 alt=3D"" =
+
+                        =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/ip.gif">=20
+                        <A class=3Dhelp onclick=3D"return =
+reqWin(this.href);"=20
+                        =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dhelpadmin;he=
+lp=3Dsee_member_ip">Logged</A>=20
+                      =
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></T=
+ABLE></TD></TR>
+  <TR>
+    <TD=20
+    style=3D"PADDING-BOTTOM: 1px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; =
+PADDING-TOP: 0px"></TD></TR></TBODY></TABLE><A=20
+name=3DlastPost></A>
+<TABLE border=3D0 cellSpacing=3D0 cellPadding=3D0 width=3D"100%">
+  <TBODY>
+  <TR>
+    <TD class=3Dmiddletext>Pages: [<B>1</B>] </TD>
+    <TD style=3D"PADDING-RIGHT: 1ex" align=3Dright>
+      <TABLE cellSpacing=3D0 cellPadding=3D0>
+        <TBODY>
+        <TR>
+          <TD class=3Dmaintab_first>&nbsp;</TD>
+          <TD class=3Dmaintab_back><A=20
+            =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dpost;topic=3D=
+4.0;num_replies=3D8">Reply</A>=20
+            &nbsp;|&nbsp; <A=20
+            onclick=3D"return confirm('Are you sure you wish to enable =
+notification of new replies for this topic?');"=20
+            =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dnotify;sa=3D=
+on;topic=3D4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df">Notify</A>=20
+            &nbsp;|&nbsp; <A=20
+            =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Deditpoll;add=
+;topic=3D4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df">Add=20
+            poll</A> &nbsp;|&nbsp; <A=20
+            =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dsendtopic;to=
+pic=3D4.0">Send=20
+            this topic</A> &nbsp;|&nbsp; <A=20
+            =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dprintpage;to=
+pic=3D4.0"=20
+            target=3D_blank>Print</A></TD>
+          <TD=20
+class=3Dmaintab_last>&nbsp;</TD></TR></TBODY></TABLE></TD></TR></TBODY></=
+TABLE>
+<SCRIPT language=3DJavaScript type=3Dtext/javascript=20
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/xml_topic.js"></S=
+CRIPT>
+
+<SCRIPT language=3DJavaScript type=3Dtext/javascript><!-- // --><![CDATA[=0A=
+	quickReplyCollapsed =3D true;=0A=
+=0A=
+	smf_topic =3D 4;=0A=
+	smf_start =3D 0;=0A=
+	smf_show_modify =3D 1;=0A=
+=0A=
+	// On quick modify, this is what the body will look like.=0A=
+	var smf_template_body_edit =3D '<div id=3D"error_box" style=3D"padding: =
+4px; color: red;"></div><textarea class=3D"editor" name=3D"message" =
+rows=3D"12" style=3D"width: 94%; margin-bottom: =
+10px;">%body%</textarea><br /><input type=3D"hidden" name=3D"sc" =
+value=3D"fbf6f392195a7d8ff3c068c7f661a1df" /><input type=3D"hidden" =
+name=3D"topic" value=3D"4" /><input type=3D"hidden" name=3D"msg" =
+value=3D"%msg_id%" /><div style=3D"text-align: center;"><input =
+type=3D"submit" name=3D"post" value=3D"Save" onclick=3D"return =
+modify_save(\'fbf6f392195a7d8ff3c068c7f661a1df\');" accesskey=3D"s" =
+/>&nbsp;&nbsp;<input type=3D"submit" name=3D"cancel" value=3D"Cancel" =
+onclick=3D"return modify_cancel();" /></div>';=0A=
+=0A=
+	// And this is the replacement for the subject.=0A=
+	var smf_template_subject_edit =3D '<input type=3D"text" =
+name=3D"subject" value=3D"%subject%" size=3D"60" style=3D"width: 99%;"  =
+maxlength=3D"80" />';=0A=
+=0A=
+	// Restore the message to this after editing.=0A=
+	var smf_template_body_normal =3D '%body%';=0A=
+	var smf_template_subject_normal =3D '<a =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.msg%msg_id%=
+#msg%msg_id%">%subject%</a>';=0A=
+	var smf_template_top_subject =3D "Topic: %subject% &nbsp;(Read 53 =
+times)"=0A=
+=0A=
+	if (window.XMLHttpRequest)=0A=
+		showModifyButtons();=0A=
+// ]]></SCRIPT>
+
+<TABLE style=3D"MARGIN-BOTTOM: 1ex" border=3D0 cellSpacing=3D0 =
+cellPadding=3D0=20
+width=3D"100%">
+  <TBODY>
+  <TR>
+    <TD class=3Dnav vAlign=3Dtop align=3Dright><A=20
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.0;prev_next=
+=3Dprev#new">=C2=AB=20
+      previous</A> <A=20
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?topic=3D4.0;prev_next=
+=3Dnext#new">next=20
+      =C2=BB</A></TD></TR></TBODY></TABLE>
+<TABLE style=3D"MARGIN-LEFT: 1ex" border=3D0 cellSpacing=3D0 =
+cellPadding=3D0>
+  <TBODY>
+  <TR>
+    <TD class=3Dmirrortab_first>&nbsp;</TD>
+    <TD class=3Dmirrortab_back><A=20
+      onclick=3D"return confirm('Are you sure you want to remove this =
+topic?');"=20
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dremovetopic2=
+;topic=3D4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df">Remove=20
+      Topic</A> &nbsp;|&nbsp; <A=20
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dlock;topic=3D=
+4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df">Lock=20
+      topic</A> &nbsp;|&nbsp; <A=20
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dsticky;topic=
+=3D4.0;sesc=3Dfbf6f392195a7d8ff3c068c7f661a1df">Set=20
+      topic sticky</A> &nbsp;|&nbsp; <A=20
+      =
+href=3D"http://www.sixfortyfive.com/forum/index.php?action=3Dmergetopics;=
+board=3D1.0;from=3D4">Merge=20
+      Topics</A></TD>
+    <TD class=3Dmirrortab_last>&nbsp;</TD></TR></TBODY></TABLE></FORM>
+<DIV class=3Dtborder>
+<DIV=20
+style=3D"PADDING-BOTTOM: 4px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; =
+PADDING-TOP: 4px"=20
+class=3Dtitlebg2 align=3Dright>
+<FORM=20
+style=3D"PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; PADDING-TOP: 0px"=20
+accept-charset=3DUTF-8 method=3Dget=20
+action=3Dhttp://www.sixfortyfive.com/forum/index.php><SPAN =
+class=3Dsmalltext>Jump=20
+to:</SPAN> <SELECT id=3Djumpto=20
+onchange=3D"if (this.selectedIndex > 0 &amp;&amp; =
+this.options[this.selectedIndex].value) window.location.href =3D =
+smf_scripturl + =
+this.options[this.selectedIndex].value.substr(smf_scripturl.indexOf('?') =
+=3D=3D -1 || this.options[this.selectedIndex].value.substr(0, 1) !=3D =
+'?' ? 0 : 1);"=20
+name=3Djumpto> <OPTION value=3D"">Please select a destination:</OPTION> =
+<OPTION=20
+  disabled value=3D"">-----------------------------</OPTION> <OPTION=20
+  value=3D#1>General</OPTION> <OPTION disabled=20
+  value=3D"">-----------------------------</OPTION> <OPTION selected=20
+  value=3D?board=3D1.0>=3D&gt; Dragon Force II =
+Translation</OPTION></SELECT>&nbsp; <INPUT onclick=3D"if =
+(this.form.jumpto.options[this.form.jumpto.selectedIndex].value) =
+window.location.href =3D 'http://www.sixfortyfive.com/forum/index.php' + =
+this.form.jumpto.options[this.form.jumpto.selectedIndex].value;" =
+value=3Dgo type=3Dbutton>=20
+</FORM></DIV></DIV><BR></DIV>
+<DIV style=3D"TEXT-ALIGN: center; PADDING-BOTTOM: 1ex" id=3Dfooterarea>
+<SCRIPT language=3DJavaScript type=3Dtext/javascript><!-- // --><![CDATA[=0A=
+			function smfFooterHighlight(element, value)=0A=
+			{=0A=
+				element.src =3D smf_images_url + "/" + (value ? "h_" : "") + =
+element.id + ".gif";=0A=
+			}=0A=
+		// ]]></SCRIPT>
+
+<TABLE border=3D0 cellSpacing=3D0 cellPadding=3D3 width=3D"100%" =
+align=3Dcenter>
+  <TBODY>
+  <TR>
+    <TD vAlign=3Dcenter width=3D"28%" align=3Dright><A =
+href=3D"http://www.mysql.com/"=20
+      target=3D_blank><IMG style=3D"MARGIN: 5px 16px" id=3Dpowered-mysql =
+
+      onmouseover=3D"smfFooterHighlight(this, true);"=20
+      onmouseout=3D"smfFooterHighlight(this, false);" alt=3D"Powered by =
+MySQL"=20
+      =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/powered-my=
+sql.gif"=20
+      width=3D54 height=3D20></A> <A href=3D"http://www.php.net/" =
+target=3D_blank><IMG=20
+      style=3D"MARGIN: 5px 16px" id=3Dpowered-php=20
+      onmouseover=3D"smfFooterHighlight(this, true);"=20
+      onmouseout=3D"smfFooterHighlight(this, false);" alt=3D"Powered by =
+PHP"=20
+      =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/powered-ph=
+p.gif"=20
+      width=3D54 height=3D20></A> </TD>
+    <TD style=3D"WHITE-SPACE: nowrap" vAlign=3Dcenter =
+align=3Dmiddle><SPAN=20
+      style=3D"DISPLAY: inline; FONT-FAMILY: Verdana, Arial, sans-serif; =
+VISIBILITY: visible"=20
+      class=3Dsmalltext><A title=3D"Simple Machines Forum"=20
+      href=3D"http://www.simplemachines.org/" target=3D_blank>Powered by =
+SMF=20
+      1.1.10</A> | <A title=3D"Free Forum Software"=20
+      href=3D"http://www.simplemachines.org/about/copyright.php" =
+target=3D_blank>SMF=20
+      =C2=A9 2006-2009, Simple Machines LLC</A> </SPAN></TD>
+    <TD vAlign=3Dcenter width=3D"28%" align=3Dleft><A=20
+      href=3D"http://validator.w3.org/check/referer" =
+target=3D_blank><IMG=20
+      style=3D"MARGIN: 5px 16px" id=3Dvalid-xhtml10=20
+      onmouseover=3D"smfFooterHighlight(this, true);"=20
+      onmouseout=3D"smfFooterHighlight(this, false);" alt=3D"Valid XHTML =
+1.0!"=20
+      =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/valid-xhtm=
+l10.gif"=20
+      width=3D54 height=3D20></A> <A=20
+      href=3D"http://jigsaw.w3.org/css-validator/check/referer" =
+target=3D_blank><IMG=20
+      style=3D"MARGIN: 5px 16px" id=3Dvalid-css=20
+      onmouseover=3D"smfFooterHighlight(this, true);"=20
+      onmouseout=3D"smfFooterHighlight(this, false);" alt=3D"Valid CSS!" =
+
+      =
+src=3D"http://www.sixfortyfive.com/forum/Themes/default/images/valid-css.=
+gif"=20
+      width=3D54 height=3D20></A> </TD></TR></TBODY></TABLE></DIV>
+<DIV style=3D"DISPLAY: none" =
+id=3Dajax_in_progress>Loading...</DIV></BODY></HTML>
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/smflogo.gif
+
+R0lGODlhAgEeAOZEAJatwnqXsrXF1GmJqG2Mqpuxxa2/0Kq8zYylvGuLqWeIp7LD0oehuYSft56z
+x2qKqKW4y6/A0XaUr5WswZ2yxm6Nq4miurHC0n2Zs5SrwbDB0ZKqwI6nvZ+0x6G2yZiuw3mWsbTE
+04uku2iIp32ZtKO3yn+btYCctaS3ynSSrpetwqy+zo+nvoWfuLXF06e6zIGctoaguIKdtnCPrH+a
+tHORrqC1yJCovniVsHKQrW6Oq6i7zLPD04mju6a5y66/0H6atZOqwLbG1M/d6AAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5
+BAEAAEQALAAAAAACAR4AAAf/gESCg4SFhoeIiYqLjI2Oj5CRkpOUlZaXmJmam5ydnp+goaKjpKWm
+p6ipqqusrasYH0Cus7S1towBExFCQi4Bt8DBwqYgQT+8vB4ND8PNzs+TOiIQyLwRGynQ2tvAEgqK
+FRYl1UIhBSTc6eqtIysMhwQMHuRCKDEJ6/n6pghCGviCEjToQM8AhxmYhgzppFBYQ0QPTSmMqC/B
+Al4THsCgEILcgg+/NFHMNLJWyUEnQaVcNwGZAB70bMgYoG1lK5uocGob0EBAgQABClQ7gKBCOp2q
+kJZSOgwHgAu8QgYQsiCDhE0TIz5smFVQV68Lv4IllHUhxLATwY4sa4gtEa5p/1GahVvSrdy4bcW+
+1bsVbqG+e/syJVQBwQFyUoUwNLt3bOC7ctVGdtyY8l+tmCdXpkxXs2DNmzNbJsuYM2O6aC9LXr2Z
+0YgTDujx+hlUiApOJwGD1j2Z92jLFFf6Bl15uPG5pRMFT/6ZtOrWyxtJyKBBtnUBNbDidRy9N3Pk
+assmB156rdvc37mnDyw+/KLu3vM+h9/aEIEeO2QLcMDCuhAKuInlW3fmqecIfaIZKJ9zxa1nk10L
+jjZcfQOWNx4RCtBAgQCy+WABAUQQ5B8Ii+mGIHgMTngWgwrGF6GCBdZ3iF4sUohijQ3WOFIKG+xS
+EAc5DDKVf/V8YqKFKTp447h7SLroJI5HznfhjFPSl+NzT1o5DjkXqBASIdQQKYQJJJ2G4omsJWgl
+eUmSZmZkMR63240pxRjahZgtaSUJLjlwAk2GmCAmLwd8k5CAejaJmo4QMsoiW8vFFeeS0EHYKI7s
+NZmXX5Vi+gIEHyaiwGGDCvEOMIPtoyolgCrSQqm8GMDMLamuausmAxgAKy8IoDrlrcCCIsKuvCwA
+YrDIJsvIDQA06+yz0DqLgbLUVmvttdhmq+22jAQCADs=
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/upshrink.gif
+
+R0lGODlhDQANAIMAADFahEprjFp7lFp7nHOUrYSlvZytvbXG1r3G1r3O3s7W59be597n7+dr7+fv
+9+/39yH5BAMAAA0ALAAAAAANAA0AAAQ60MhJZTMn630E5pyXjGSZeEqqroq3AHAcL24wEHhO0AYz
+FMAgkOFxGI9IRzGZXDKPzqeyIahar4JGBAA7
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://img355.imageshack.us/img355/2685/drystcoloriq6.gif
+
+R0lGODlhZABkAPcAABQLODMYNzksPyQYYDYiXzMqcjUwZD1LNWgXHm0yLUk+XEk1bkg1fkxmPHhH
+PUREc05IdFdNaVZOf2RGRHpQXmVQaGdeamZwVGp+WnducDIqhEQ+jE9FiFZIilVSilxdg11dkkZC
+pFhQqF5eo2JQj2tbhWtemGBduXhlgHNllXBhn3Bwh3x7gnh6n2VtpG1humxuuXNvonttoHh1s3F0
+xH5+x3Ny0nKYXGX/GX6NgJEfM5BHNoRURZpLW5xXQoJhU5hjVoFhZ5hmd5lxYZZ1eLFlU7FzXqVr
+dLVwcuNgWolxgIl0mIh4q6N2noB+0paFe5uffrGEcdeDa4aJlJmAiJePnpeRgZGbnp2anYaJpoKC
+uYuCvJ6FoZ2JvpKVs5+Yspqpp62NmqedmLKEgrOQhqmcpa6ZsaG4gbGgmaapq6itvaWxo621qrKr
+orGluY+KzoeG2omU0pmZzYqI6JCU75iZ5Z+g7KKizKKm3K+l0K6u3rG6zr+wyKCn8amp8q2v97O7
+47+45rK19LO9+L29867Jo8ONidqKhsGfvcCjmsqpntyqnMCnqc6nr8GtucO1stexscW9xsixxcO0
+2NSvwda51t690se/8cPGrMXFvdjRpdjnseLNtubQvcDAzsHOxsPOzs7Bys7GzsLC2c7SxsrU1tbB
+ytbOzt/Nxt7OztPG097G0tDQy9LQ3NjW1N/X0tzQ3s7C4szO7MPI+8rM+sbe987T/NbK99bW59be
+79zQ69Le+9be/9nR+97e99nj3tbi597m797i++fF0OfG3ufO3ufW0uzT3vHYxvLW0efe5+fe7+rQ
+6e/e5+/e7+/e9+/e//fe5/fe7//e5+7oz+vm3vTp1vfs3uHk5Ofn5+fn7+fv5+fv7+/n5+/n7+/v
+7+Ln/+fh+efv/+/n9+/n/+/v9+/v/+/37+/39+/3//fn7/fv7//n7/nv5//v7/fn9/fv9/fv///r
+9//v//v77ff39/f3//f/9/f////39//3////9////wAAAAAAAAAAACH5BAEAADgALAAAAABkAGQA
+AAj+AHEIHEiwYB45gcoJwyUn1iVAvXbNEsSrl7BZfuwIGlVGDBE0mNBkypRqWzdW7drRK1cOHbpz
+9L7Ru6fvW7Zz66q5+laPZ7Wf175hm2KFTRtNSMV8yHLhxo1CKzxBQdqmoNWCnrwEAlcOl5o7tmzJ
+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
+8huwtRsICAAAOw==
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/filter.gif
+
+R0lGODlhDgAOAMQAAAAAAAAAEAgIKRAkDTc5MiMrXWMxEFJrMU9aYEyWElKMTm6MUmOMe2OMrWuG
+3HuU55xjMc5jAM6cY4SEhI+X9IuzzpS13pSt9wAAAKit+rXC/8rO/97j////zPf89AAAACH5BAEA
+ABgALAAAAAAOAA4AAAVVICaO2EQAxESSxaJ5CYKs2OJmlqYgKkk8uFfDQVgBGI5X5UIBGAtAC4ej
+KZIGBeTL4wiQIhAscOMQfDsSw2EAMJ8lEC8NE0HH53S7E2+A7/EYBn94IQA7
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/topic/normal_post.gif
+
+R0lGODlhFAAUANU3AFVVWuLh/tHQ7dPS77++27e209/e+7m41cnI5ayryLGwzePi/7Oyz9nY9c7N
+6r282cPC38fG48TD4MzL6MHA3crJ5qqpxrCwycLB3rW0zd3c+ZqZtp+eu9rZ9svK56Wkwa+uy9DP
+7Nva96emw+Df/KSjwNbV8qGgvbm50t7d+ru617a10qmoxa2syby72J6dutXU8d7e3tjX9Nzb+OTk
+/1dVWv///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAADcALAAAAAAUABQAAAaHwJtw
+SCwaj8ikcnmrOZ9PZc02tVmvNWQVQOt6qceqDbDwdsFGJ2BtCJjRxVrskkE1NO5zNm2DIBwDMjMk
+ZXBEUy4UERMCJiJthkNTDAcEEh4hMB0pkUJTCQoFD36ADZ1NNh8WICsqioynUxwlLC2UlhWxNhsv
+JyOgohi6V8RYWlDIe0zLzENBADs=
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/useroff.gif
+
+R0lGODlhDAALAJECAP///52dnQAAAAAAACH5BAEAAAIALAAAAAAMAAsAAAIWVI5pyQkPn4twUmBp
+jruiKzXiIgZCAQA7
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/icons/profile_sm.gif
+
+R0lGODlhEAAQAOZTAHehqkA/PZW62yweAD0jAzw0H3SavDgjB/DRfTMfBCkhDKbF4T04Koi12anK
+5FYyDYiy2X2qztyjCKC/3/LViOOwJOm+SJ6+3u7KZ+GsHPbkso242/fnvP79+vPZkvz2551rAD88
+NvjrxYSx1zlPVMLP4M6TANabAPrx1+SzLDw0HXOZuzowEpi93jouDZm+3zcoAd6mDu/Ocui6P+a3
+NbbR6azJ5OvCUuzGXZ/C32V/m0BBQUcsBVcwCSocAExVVvv04KC62X+s0HihxoSu19+pFLnN48WK
+AHCTsPTdnUsmBkYqA6fG4lFRUUBAQLTP5/b29v///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5
+BAEAAFMALAAAAAAQABAAAAeNgFOCg4SFhk6IASGGhE5Rj48FjIKOHyJJMiyTTh1AHB4YMxkwjAEo
+GhQ4NEUnA5MMCDcpMSY+k1MqFhUSRyAKtyUPSwQJTUE/jC5GNU9PTDkCECSGPTYOC08tUtvcUoI8
+ExcvAk8jUlDo6N5TShsNREJPBucAUPXrBxFDK0hPOvTp1u3oxi3dvVsEtwUCADs=
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/im_off.gif
+
+R0lGODlhEAAQALMKALPK37HK37jO4SQWA6bC27nQ4r7S5Pn6+gAAANfm8QAAAAAAAAAAAAAAAAAA
+AAAAACH5BAEAAAoALAAAAAAQABAAAAREUClEq0VS0sN7pxlyJGRZGpg2miYarizpqvGZTnA847V8
+i73EDtgbIgzIk0EAClVIBUtmqhgYAIEbdUohaLfcLzi0jQAAOw==
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/post/xx.gif
+
+R0lGODlhFAAUAMQUAKex1Jqjxba5u8bKzb7FyYGIjOPr79Tb3293fVJdgba9waCt0aaxw7K/4q65
+y/r9/1hXV8vY/FxiZvT7/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEA
+ABQALAAAAAAUABQAAAWLICWOZGmWkiRC0GlKwyBBANC6onRMkxxFgAROx+P5gDfU7vEoHm3KycPR
+dEp+UFEBIXXwqFbsrWBAVMFS4xVJIU8QBirTWzysGxAyQsFgTuhFAmsBeXsGfoA8gj+EOQRFiROL
+EQFCIxKPVYGDSZePRZKDli+foYydpKELlKgnEoIUEI04JCortLgnIQA7
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/buttons/quote.gif
+
+R0lGODlhFAAUANU1ANzh7MjN2NDV4NTZ5MzR3MXK1cbL1tfc587S3c/T3szQ28vP2tjc59PX4snO
+2djd6MLG0dHW4cPI09re6dfb5tvf6tPY49Xa5b/Ez9DU377DzsvQ277CzcDEz7vAy7m+ybzAy8/U
+39TY47i9yNne6cjM18HF0La6xcXJ1L3BzNnd6N3h7Li8x9vg69ba5cfM197i7O3t7SgpLQAAAP//
+/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAADUALAAAAAAUABQAAAaWwJpw
+SCwaj8ikEilrOp/NoyxGrVqpMuN0AoB5v95YtjilzFozcHhMnIpmj1kXLNbGMo3LgQRIp+tkMQoJ
+EQMUKjMrf2xDUyULCAIWLg8VFQCAbTESBg4EeBcMDBOZjTEYEAUBg4UDB6VCUyAaJigvkAKSsDVT
+Ix4cHZyeBCG7UycsHymoqgEbxjTR0tPRjI1Q2Eva20lBADs=
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/buttons/modify.gif
+
+R0lGODlhFAAUAMQYAM3JyKO3y4GBgaeDVsTExMCZaG1ucNzc3IqJifv5+b20nOHXvLu2tO3t7bZv
+b7u7u0dHR7a2todQUP/TXu/7/1hXV2xsbN72/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEA
+ABgALAAAAAAUABQAAAWAICaOZGmeaCpWlXpWANC6Y3Vcl0xjNo7rqt6FQvnNXrdhoGg8CQw4SgC3
+bJYEFyizOswdRdhs47K0mM9ocPbRCJgXk3g8kXBYwAb2xYJYwOUTCRF2NQQ4fAoKA4uLCAiEhYcW
+CgWVlRAQEnckFYaSaGklnT4MX0GGpTs1qao1LiEAOw==
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/buttons/delete.gif
+
+R0lGODlhFAAUALMMALu2tIGBgcTExG1ucNzc3O3t7c3JyLu7u1hXV/sHBwQEBP///wAAAAAAAAAA
+AAAAACH5BAEAAAwALAAAAAAUABQAAARnkMlJq704S4T0RYbReRNCLItIMiaqvCPzKlXrJrCs4JR9
+47METxIYoI4vYRI4CSyMx8VSSWuiBoXoMmcdHLKunZDZ9IKl4m11I9BSt7X27QVAJNcl+awumX3k
+C3wrCG2CKyyGhyweEQA7
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/buttons/split.gif
+
+R0lGODlhFAAQAKIHANbW1t3d3ThxqXqbuufn58zMzAAAAAAAACH5BAEAAAcALAAAAAAUABAAAANh
+eDrcLSrKM4i9hMEZK7baxnmEERBBWhSi5Bnwx3JUCccpMY+Xgf6B3YTkAwYArYjPd1oGDAUDbZCD
+Fk6AAnLaCxIAWaHLdgNrxR3U7RhGL07PFDicVAgKjvygbhf4/4AtCQA7
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/df2/font_table.png
+
+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
+TkSuQmCC
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/df2/start_04.png
+
+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
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/icons/modify_inline.gif
+
+R0lGODlhFAAUAMQYAM3JyKO3y4GBgaeDVsTExMCZaG1ucNzc3IqJifv5+b20nOHXvLu2tO3t7bZv
+b7u7u0dHR7a2todQUP/TXu/7/1hXV2xsbN72/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEA
+ABgALAAAAAAUABQAAAWAICaOZGmeaCpWlXpWANC6Y3Vcl0xjNo7rqt6FQvnNXrdhoGg8CQw4SgC3
+bJYEFyizOswdRdhs47K0mM9ocPbRCJgXk3g8kXBYwAb2xYJYwOUTCRF2NQQ4fAoKA4uLCAiEhYcW
+CgWVlRAQEnckFYaSaGklnT4MX0GGpTs1qao1LiEAOw==
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/ip.gif
+
+R0lGODlhEAAQAKIEADMzMwAAAP8zADMKAP///wAAAAAAAAAAACH5BAEAAAQALAAAAAAQABAAQAMx
+SLrcDlAMFZyCQNq96gIExl0hlgWoR4qNOlJpCb5yWD/Qp+FzuLsiEAuYs7heR5oiAQA7
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/useron.gif
+
+R0lGODlhDAALAJECAI3/ZDJRewAAAAAAACH5BAEAAAIALAAAAAAMAAsAAAIWVI5pyQkPn4twUmBp
+jruiKzXiIgZCAQA7
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/email_sm.gif
+
+R0lGODlhEgAQAKIFAK28ysvR1/P3+un1/wQEBAAAAAAAAAAAACH5BAEAAAUALAAAAAASABAAAANM
+WLrc/lCRSWtdROjNdyBSNoxkOUwSIJokoUqCqrHuBw+yULqDXayyFmDkW7lERyLopyOMVLxTb5lx
+kgDDVtHK2lED4LBYTLWYL5FIAgA7
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/im_on.gif
+
+R0lGODlhEAAQANUAAOvz+JqamsnW4IqRlb7S5IySl5WKfeXfweXdu9zSqOvy9unt6Oru7Ofn1uTb
+tt7MjXJfT7jO4SQWA9nIjuLWpsza6OXr8N/OkYCAdJeNf863drOfbrrP4qbC27/T5Y2GeIiLhdrE
+eoiNjPbksrnQ4uHUoN3KiNS/eO7ShLHK37PK3+jp2+bhxsHR4ufl0YOHiYiDeODSm8y0buns5LLA
+0I+BcoqRl/n6+tfm8QAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAADoALAAAAAAQABAAAAZ0QJ0u
+Rywac0Ih8cZsNonJ3A1HpdqugxdSOa3aAGCAZTvsWgGMFStBlnoVi8ZhNGmbBzMXgnI52as4Ig4l
+Dygyf1UgMSYhGhuIVBUGHzAZBW05ApoYLR4EBBFQUUU1HCRGSak6EjQqKWSqqUQdsLGytbZRsUEA
+Ow==
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/powered-mysql.gif
+
+R0lGODlhMwAUALMAAAAAAK6urrOzs7y8vMHBwcXFxcvLy9PT09vb2+Pj4+np6e3t7fHx8fX19fn5
++f7+/iH5BAEAAAAALAAAAAAzABQAAAT+8MlJq704X8C7/2Aojp4EaKiVDIfCpNP5yHC6HAlyIA0s
+0zUUIsFYIAw91C8IYyAcD4cOqlleHNisdhvVtiSOb9V0WSTOCUUaoRiyz47cMKygtpMYa0WNMB8M
+Om0IbwlxgwkNBzgSiQljMxcMDQxpaDgKbXJxZw2JLHY7VBZ6TBoNC5gTUkgbZBYNCQtgaRenCwsN
+DkW4nVAKBE+tkBYHAQM9CQIDshROObFyg0Yvhi+jrhUGAQE8BQPcCC8KOwe5Dol1UgkHDFS5wkAT
+BgPzCAIIAQcDCg/2a4cGFmA5c4DZo3gSDAhQIEBAwHwCWigkUgQHjhwFcRSRJIoCqQk2R8IQqGNg
+XAFv9+QgcjKonKAhDKxV+AgGyjkwC7wNEFBAkrmaDhZQy5LhB4mjSJNyKMW0VAQAADs=
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/powered-php.gif
+
+R0lGODlhMwAUALMAAAAAAJ2dnaOjo6qqqrOzs7u7u8LCwsvLy9TU1Nvb2+Li4uvr6/Hx8fX19fn5
++f7+/iH5BAEAAAAALAAAAAAzABQAAAT+8MlJq704X8C7/2Aojp4EaJhzOc2yKDC8NCp2PqfDODr/
+sI0GI+hYJCa6F+JgaBaeT8MhsWBYbgCHYro8IBIJL6K7NDxaYQN0zY5OGxSsA6E+HAqEwoFgV/CZ
+CAtMbXgChGsGChNYDV4MCQoMVQ1UVlSCg4QGA4YFTWpsBAQJKnJWKBIOCVCbAQKvAwYCAZyGBq6w
+T6KKWA+SNRoLoE+vagMBBQJ5BQGinQTNugYNvQoFYAoLGdZrArF4tNHMeN/My08McmF309tr0ARq
+3gS29AUD8ffIa+kmqggKDBzJIAwKNG/eNg3wRCAWLE7n4lEz8UOHAmArEBhEtmxYt3NN7470QkWh
+0RNOHtkYsNeGAIJSFElWoOPkUJSWBRTFvCGTwgI6NkPh0XNqZ08LFmkGlUIFI46YR5G2gAGmKowh
+TheZIMG1q1cOUcNGjQAAOw==
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/valid-xhtml10.gif
+
+R0lGODlhOQAUALMAAAAAAKCgoK2trbOzs7u7u8PDw8zMzNPT09ra2uDg4OXl5erq6u7u7vT09Pn5
++f///yH5BAEAAAAALAAAAAA5ABQAAAT+cLFJq71Y6s27RgwgMk9pnmhaemy7GYcIkGqtupkLy7Tt
+r4gEIxEUKohF5OdoXOxGj+OqhzhYQdGeg1EIGLwEgeP7DYC9ja41oJg8Z4/DoFQorASDvBhhLhym
+AwEDaYICbAtoBIIMZmttTjFQCwILUYNxYg0CfwMFCV6Ai4phh4l4pzCHkDx0f3wJD3VxBJYODw0N
+t1xeZ4RHiQRqm195ClassbRhBg4DQptRzCiQQ1cSB9dCRdjYxjDGeAQAuQ+TCsHOc+ebDQopOPAc
+eux3wZPBJgZiN/Hx8wZwSihitsyEAkr8qG1AEMxAhwMFKvyDUuKAAHdyjpBAQO8WAl2F6wg02NBJ
+n8MPeUQumEixnMhaBdKJ/AZty4IEMRdS4qJSQphw8wZECvjAwccVt2K+nCTI4LWeDDLytPDz1LCh
+WmqQUzGSgROVNP2wk2fV4ZusPxJC9MmtIQt9Y8+m/dEvxzc3WG/Z2su3r992TAILHkz4yBucdRIr
+Xsy4MbrHkCND3iQjAgA7
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/images/valid-css.gif
+
+R0lGODlhOQAUALMAAAAAAJ6enqioqK+vr7W1tb29vcTExMnJydLS0tzc3OTk5Onp6erq6u/v7/f3
+9////yH5BAEAAAAALAAAAAA5ABQAAAT+kLVJq7146c273wkgNk9pnmhaSuznuokhAqRqq+2rd/Fc
+38BVbrjL9UaPRKKEUJgQUKgj6awRi68j7WEYlAqFlWBAGDsQgQBZiMVqSYmBEyHnyhUDhCNQQBvY
+V4EwMkgOeXZLBGFgSV4PE0JdYwkNB2N3lpOBMQhIdg1lBwx3AmEKfyiVapl4fAcGCmkGr5tkBFsP
+dHRddGcFAwYLeqllCg0KTWWyCwNpAaJEcbYGVrbMa0xyPyaqsJNjrK8GahjStrgPv3rqTwLDqczO
+yfLxy3TGx7bAno1zck2NYK0I80iCEnwMDrJQSIdMsmk+HkyJM9FLly4FRr3iA0hQjl9S+vQRQnfm
+yaMDihg04tixzQKQIRGM3BbEhkdBkqy9qRnkpo6cxnbyvMHAZyCU+IROWcq0qVMHxyYwCEoVoYKq
+VpGNjAGmq9evYMOKHQt2n4gIAAA7
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/style.css?fin11
+
+A:link {
+	COLOR: #476c8e; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #476c8e; TEXT-DECORATION: none
+}
+A:hover {
+	TEXT-DECORATION: underline
+}
+.nav {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+.nav:link {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+.nav:visited {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A.nav:hover {
+	COLOR: #cc3333; TEXT-DECORATION: underline
+}
+TABLE {
+	EMPTY-CELLS: show
+}
+BODY {
+	FONT-FAMILY: verdana, sans-serif; COLOR: #000000; FONT-SIZE: small
+}
+TD {
+	FONT-FAMILY: verdana, sans-serif; COLOR: #000000; FONT-SIZE: small
+}
+TH {
+	FONT-FAMILY: verdana, sans-serif; COLOR: #000000; FONT-SIZE: small
+}
+TR {
+	FONT-FAMILY: verdana, sans-serif; COLOR: #000000; FONT-SIZE: small
+}
+BODY {
+	PADDING-BOTTOM: 4px; BACKGROUND-COLOR: #e5e5e8; MARGIN: 0px; =
+PADDING-LEFT: 30px; PADDING-RIGHT: 30px; PADDING-TOP: 12px
+}
+INPUT {
+	FONT-FAMILY: verdana, sans-serif; COLOR: #000000
+}
+TEXTAREA {
+	FONT-FAMILY: verdana, sans-serif; COLOR: #000000
+}
+BUTTON {
+	FONT-FAMILY: verdana, sans-serif; COLOR: #000000
+}
+INPUT {
+	FONT-SIZE: 90%
+}
+BUTTON {
+	FONT-SIZE: 90%
+}
+TEXTAREA {
+	FONT-FAMILY: verdana, sans-serif; COLOR: #000000; FONT-SIZE: 100%
+}
+INPUT.check {
+=09
+}
+SELECT {
+	FONT-FAMILY: verdana, sans-serif; COLOR: #000000; FONT-SIZE: 90%; =
+FONT-WEIGHT: normal
+}
+HR {
+	BORDER-RIGHT-WIDTH: 0px; BACKGROUND-COLOR: #666666; BORDER-TOP-WIDTH: =
+0px; BORDER-BOTTOM-WIDTH: 0px; HEIGHT: 1px; COLOR: #666666; =
+BORDER-LEFT-WIDTH: 0px
+}
+.hrcolor {
+	BORDER-RIGHT-WIDTH: 0px; BACKGROUND-COLOR: #666666; BORDER-TOP-WIDTH: =
+0px; BORDER-BOTTOM-WIDTH: 0px; HEIGHT: 1px; COLOR: #666666; =
+BORDER-LEFT-WIDTH: 0px
+}
+A IMG {
+	BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: =
+0px; BORDER-LEFT-WIDTH: 0px
+}
+.quote {
+	BORDER-BOTTOM: #000000 1px solid; BORDER-LEFT: #000000 1px solid; =
+PADDING-BOTTOM: 1px; LINE-HEIGHT: 1.4em; BACKGROUND-COLOR: #d7daec; =
+MARGIN: 1px; PADDING-LEFT: 1px; PADDING-RIGHT: 1px; COLOR: #000000; =
+FONT-SIZE: x-small; BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 =
+1px solid; PADDING-TOP: 1px
+}
+.code {
+	BORDER-BOTTOM: #000000 1px solid; BORDER-LEFT: #000000 1px solid; =
+PADDING-BOTTOM: 1px; LINE-HEIGHT: 1.3em; BACKGROUND-COLOR: #dddddd; =
+MARGIN: 1px auto; PADDING-LEFT: 1px; WIDTH: 99%; PADDING-RIGHT: 1px; =
+FONT-FAMILY: "courier new", "times new roman", monospace; WHITE-SPACE: =
+nowrap; COLOR: #000000; MAX-HEIGHT: 24em; FONT-SIZE: x-small; OVERFLOW: =
+auto; BORDER-TOP: #000000 1px solid; BORDER-RIGHT: #000000 1px solid; =
+PADDING-TOP: 1px
+}
+.quoteheader {
+	LINE-HEIGHT: 1.2em; FONT-STYLE: normal; COLOR: #000000; FONT-SIZE: =
+x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+.codeheader {
+	LINE-HEIGHT: 1.2em; FONT-STYLE: normal; COLOR: #000000; FONT-SIZE: =
+x-small; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+.help {
+	CURSOR: help
+}
+.meaction {
+	COLOR: red
+}
+.editor {
+	WIDTH: 96%
+}
+.highlight {
+	BACKGROUND-COLOR: yellow; COLOR: black; FONT-WEIGHT: bold
+}
+.windowbg {
+	BACKGROUND-COLOR: #ecedf3; COLOR: #000000
+}
+#preview_body {
+	BACKGROUND-COLOR: #ecedf3; COLOR: #000000
+}
+.windowbg2 {
+	BACKGROUND-COLOR: #f6f6f6; COLOR: #000000
+}
+.windowbg3 {
+	BACKGROUND-COLOR: #e0e1e8; COLOR: #000000
+}
+.calendar_today {
+	BACKGROUND-COLOR: #ffffff
+}
+.titlebg {
+	BORDER-BOTTOM: #9baebf 1px solid; FONT-STYLE: normal; PADDING-LEFT: =
+10px; PADDING-RIGHT: 10px; BACKGROUND: url(images/titlebg.jpg) #e9f0f6 =
+repeat-x; COLOR: black; BORDER-TOP: #ffffff 1px solid
+}
+TR.titlebg TH {
+	BORDER-BOTTOM: #9baebf 1px solid; FONT-STYLE: normal; PADDING-LEFT: =
+10px; PADDING-RIGHT: 10px; BACKGROUND: url(images/titlebg.jpg) #e9f0f6 =
+repeat-x; COLOR: black; BORDER-TOP: #ffffff 1px solid
+}
+TR.titlebg TD {
+	BORDER-BOTTOM: #9baebf 1px solid; FONT-STYLE: normal; PADDING-LEFT: =
+10px; PADDING-RIGHT: 10px; BACKGROUND: url(images/titlebg.jpg) #e9f0f6 =
+repeat-x; COLOR: black; BORDER-TOP: #ffffff 1px solid
+}
+.titlebg2 {
+	BORDER-BOTTOM: #9baebf 1px solid; FONT-STYLE: normal; PADDING-LEFT: =
+10px; PADDING-RIGHT: 10px; BACKGROUND: url(images/titlebg.jpg) #e9f0f6 =
+repeat-x; COLOR: black; BORDER-TOP: #ffffff 1px solid
+}
+TR.titlebg2 TH {
+	BORDER-BOTTOM: #9baebf 1px solid; FONT-STYLE: normal; PADDING-LEFT: =
+10px; PADDING-RIGHT: 10px; BACKGROUND: url(images/titlebg.jpg) #e9f0f6 =
+repeat-x; COLOR: black; BORDER-TOP: #ffffff 1px solid
+}
+TR.titlebg2 TD {
+	BORDER-BOTTOM: #9baebf 1px solid; FONT-STYLE: normal; PADDING-LEFT: =
+10px; PADDING-RIGHT: 10px; BACKGROUND: url(images/titlebg.jpg) #e9f0f6 =
+repeat-x; COLOR: black; BORDER-TOP: #ffffff 1px solid
+}
+.titlebg {
+	FONT-STYLE: normal; COLOR: black; FONT-WEIGHT: bold
+}
+.titlebg A:link {
+	FONT-STYLE: normal; COLOR: black; FONT-WEIGHT: bold
+}
+.titlebg A:visited {
+	FONT-STYLE: normal; COLOR: black; FONT-WEIGHT: bold
+}
+.titlebg A:hover {
+	COLOR: #404040
+}
+.titlebg2 A:link {
+	FONT-STYLE: normal; COLOR: black; TEXT-DECORATION: underline
+}
+.titlebg2 A:visited {
+	FONT-STYLE: normal; COLOR: black; TEXT-DECORATION: underline
+}
+.titlebg2 A:hover {
+	TEXT-DECORATION: underline
+}
+.catbg {
+	PADDING-LEFT: 10px; PADDING-RIGHT: 10px; BACKGROUND: =
+url(images/catbg.jpg) #88a6c0 repeat-x; COLOR: #ffffff
+}
+TR.catbg TD {
+	PADDING-LEFT: 10px; PADDING-RIGHT: 10px; BACKGROUND: =
+url(images/catbg.jpg) #88a6c0 repeat-x; COLOR: #ffffff
+}
+.catbg3 {
+	PADDING-LEFT: 10px; PADDING-RIGHT: 10px; BACKGROUND: =
+url(images/catbg.jpg) #88a6c0 repeat-x; COLOR: #ffffff
+}
+TR.catbg3 TD {
+	PADDING-LEFT: 10px; PADDING-RIGHT: 10px; BACKGROUND: =
+url(images/catbg.jpg) #88a6c0 repeat-x; COLOR: #ffffff
+}
+.catbg2 {
+	PADDING-LEFT: 10px; PADDING-RIGHT: 10px; BACKGROUND: =
+url(images/catbg2.jpg) #a1bfd9 repeat-x; COLOR: #ffffff
+}
+TR.catbg2 TD {
+	PADDING-LEFT: 10px; PADDING-RIGHT: 10px; BACKGROUND: =
+url(images/catbg2.jpg) #a1bfd9 repeat-x; COLOR: #ffffff
+}
+.catbg {
+	BORDER-BOTTOM: #375576 1px solid
+}
+.catbg2 {
+	BORDER-BOTTOM: #375576 1px solid
+}
+.catbg3 {
+	BORDER-BOTTOM: #375576 1px solid
+}
+.catbg {
+	FONT-WEIGHT: bold
+}
+.catbg2 {
+	FONT-WEIGHT: bold
+}
+.catbg3 {
+	COLOR: white; FONT-SIZE: 95%; TEXT-DECORATION: none
+}
+TR.catbg3 TD {
+	COLOR: white; FONT-SIZE: 95%; TEXT-DECORATION: none
+}
+.catbg3 A:link {
+	COLOR: white; FONT-SIZE: 95%; TEXT-DECORATION: none
+}
+.catbg3 A:visited {
+	COLOR: white; FONT-SIZE: 95%; TEXT-DECORATION: none
+}
+.catbg A:link {
+	COLOR: white; TEXT-DECORATION: none
+}
+.catbg A:visited {
+	COLOR: white; TEXT-DECORATION: none
+}
+.catbg2 A:link {
+	COLOR: white; TEXT-DECORATION: none
+}
+.catbg2 A:visited {
+	COLOR: white; TEXT-DECORATION: none
+}
+.catbg A:hover {
+	COLOR: #e0e0ff
+}
+.catbg2 A:hover {
+	COLOR: #e0e0ff
+}
+.catbg3 A:hover {
+	COLOR: #e0e0ff
+}
+.bordercolor {
+	PADDING-BOTTOM: 0px; BACKGROUND-COLOR: #adadad; PADDING-LEFT: 0px; =
+PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.tborder {
+	BORDER-BOTTOM: #696969 1px solid; BORDER-LEFT: #696969 1px solid; =
+PADDING-BOTTOM: 1px; BACKGROUND-COLOR: #ffffff; PADDING-LEFT: 1px; =
+PADDING-RIGHT: 1px; BORDER-TOP: #696969 1px solid; BORDER-RIGHT: #696969 =
+1px solid; PADDING-TOP: 1px
+}
+.smalltext {
+	FONT-FAMILY: verdana, sans-serif; FONT-SIZE: x-small
+}
+.middletext {
+	FONT-SIZE: 90%
+}
+.normaltext {
+	FONT-SIZE: small
+}
+.largetext {
+	FONT-SIZE: large
+}
+.post {
+	LINE-HEIGHT: 1.3em; WIDTH: 100%; OVERFLOW: auto
+}
+.personalmessage {
+	LINE-HEIGHT: 1.3em; WIDTH: 100%; OVERFLOW: auto
+}
+.signature {
+	PADDING-BOTTOM: 3px; LINE-HEIGHT: 1.3em; WIDTH: 100%; OVERFLOW: auto
+}
+.error {
+	COLOR: red
+}
+.maintab_first {
+	TEXT-TRANSFORM: uppercase; COLOR: white; VERTICAL-ALIGN: top
+}
+.maintab_back {
+	TEXT-TRANSFORM: uppercase; COLOR: white; VERTICAL-ALIGN: top
+}
+.maintab_last {
+	TEXT-TRANSFORM: uppercase; COLOR: white; VERTICAL-ALIGN: top
+}
+.maintab_active_first {
+	TEXT-TRANSFORM: uppercase; COLOR: white; VERTICAL-ALIGN: top
+}
+.maintab_active_back {
+	TEXT-TRANSFORM: uppercase; COLOR: white; VERTICAL-ALIGN: top
+}
+.maintab_active_last {
+	TEXT-TRANSFORM: uppercase; COLOR: white; VERTICAL-ALIGN: top
+}
+.maintab_back {
+	PADDING-BOTTOM: 6px; PADDING-LEFT: 6px; PADDING-RIGHT: 6px; =
+FONT-FAMILY: tahoma, sans-serif; COLOR: white; FONT-SIZE: 9px; =
+VERTICAL-ALIGN: top; TEXT-DECORATION: none; PADDING-TOP: 2px
+}
+.maintab_active_back {
+	PADDING-BOTTOM: 6px; PADDING-LEFT: 6px; PADDING-RIGHT: 6px; =
+FONT-FAMILY: tahoma, sans-serif; COLOR: white; FONT-SIZE: 9px; =
+VERTICAL-ALIGN: top; TEXT-DECORATION: none; PADDING-TOP: 2px
+}
+.maintab_first {
+	WIDTH: 10px; BACKGROUND: url(images/maintab_first.gif) no-repeat left =
+bottom
+}
+.maintab_back {
+	BACKGROUND: url(images/maintab_back.gif) repeat-x left bottom
+}
+.maintab_last {
+	WIDTH: 8px; BACKGROUND: url(images/maintab_last.gif) no-repeat left =
+bottom
+}
+.maintab_active_first {
+	WIDTH: 6px; BACKGROUND: url(images/maintab_active_first.gif) no-repeat =
+left bottom
+}
+.maintab_active_back {
+	BACKGROUND: url(images/maintab_active_back.gif) repeat-x left bottom
+}
+.maintab_active_last {
+	WIDTH: 8px; BACKGROUND: url(images/maintab_active_last.gif) no-repeat =
+left bottom
+}
+.maintab_back A:link {
+	COLOR: white; TEXT-DECORATION: none
+}
+.maintab_back A:visited {
+	COLOR: white; TEXT-DECORATION: none
+}
+.maintab_active_back A:link {
+	COLOR: white; TEXT-DECORATION: none
+}
+.maintab_active_back A:visited {
+	COLOR: white; TEXT-DECORATION: none
+}
+.maintab_back A:hover {
+	COLOR: #e0e0ff; TEXT-DECORATION: none
+}
+.maintab_active_back A:hover {
+	COLOR: #e0e0ff; TEXT-DECORATION: none
+}
+.mirrortab_first {
+	TEXT-TRANSFORM: uppercase; COLOR: white; VERTICAL-ALIGN: top
+}
+.mirrortab_back {
+	TEXT-TRANSFORM: uppercase; COLOR: white; VERTICAL-ALIGN: top
+}
+.mirrortab_last {
+	TEXT-TRANSFORM: uppercase; COLOR: white; VERTICAL-ALIGN: top
+}
+.mirrortab_active_first {
+	TEXT-TRANSFORM: uppercase; COLOR: white; VERTICAL-ALIGN: top
+}
+.mirrortab_active_back {
+	TEXT-TRANSFORM: uppercase; COLOR: white; VERTICAL-ALIGN: top
+}
+.mirrortab_active_last {
+	TEXT-TRANSFORM: uppercase; COLOR: white; VERTICAL-ALIGN: top
+}
+.mirrortab_back {
+	PADDING-BOTTOM: 2px; PADDING-LEFT: 6px; PADDING-RIGHT: 6px; =
+FONT-FAMILY: tahoma, sans-serif; COLOR: white; FONT-SIZE: 9px; =
+VERTICAL-ALIGN: bottom; TEXT-DECORATION: none; PADDING-TOP: 6px
+}
+.mirrortab_active_back {
+	PADDING-BOTTOM: 2px; PADDING-LEFT: 6px; PADDING-RIGHT: 6px; =
+FONT-FAMILY: tahoma, sans-serif; COLOR: white; FONT-SIZE: 9px; =
+VERTICAL-ALIGN: bottom; TEXT-DECORATION: none; PADDING-TOP: 6px
+}
+.mirrortab_first {
+	WIDTH: 10px; BACKGROUND: url(images/mirrortab_first.gif) no-repeat
+}
+.mirrortab_back {
+	BACKGROUND: url(images/mirrortab_back.gif) repeat-x
+}
+.mirrortab_last {
+	WIDTH: 6px; BACKGROUND: url(images/mirrortab_last.gif) no-repeat
+}
+.mirrortab_active_first {
+	WIDTH: 6px; BACKGROUND: url(images/mirrortab_active_first.gif) =
+no-repeat
+}
+.mirrortab_active_back {
+	BACKGROUND: url(images/mirrortab_active_back.gif) repeat-x
+}
+.mirrortab_active_last {
+	WIDTH: 8px; BACKGROUND: url(images/mirrortab_active_last.gif) no-repeat
+}
+.mirrortab_back A:link {
+	COLOR: white; TEXT-DECORATION: none
+}
+.mirrortab_back A:visited {
+	COLOR: white; TEXT-DECORATION: none
+}
+.mirrortab_active_back A:link {
+	COLOR: white; TEXT-DECORATION: none
+}
+.mirrortab_active_back A:visited {
+	COLOR: white; TEXT-DECORATION: none
+}
+.mirrortab_back A:hover {
+	COLOR: #e0e0ff; TEXT-DECORATION: none
+}
+.mirrortab_active_back A:hover {
+	COLOR: #e0e0ff; TEXT-DECORATION: none
+}
+#ajax_in_progress {
+	POSITION: fixed; TEXT-ALIGN: center; PADDING-BOTTOM: 3px; PADDING-LEFT: =
+3px; WIDTH: 100%; PADDING-RIGHT: 3px; BACKGROUND: #32cd32; COLOR: white; =
+FONT-SIZE: 18pt; TOP: 0px; FONT-WEIGHT: bold; PADDING-TOP: 3px; LEFT: =
+0px
+}
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/print.css?fin11
+
+#headerarea {
+	DISPLAY: none
+}
+.tborder {
+	BORDER-BOTTOM-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-TOP-STYLE: =
+none; BORDER-LEFT-STYLE: none
+}
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/script.js?fin11
+
+var smf_formSubmitted =3D false;=0A=
+=0A=
+// Define document.getElementById for Internet Explorer 4.=0A=
+if (typeof(document.getElementById) =3D=3D "undefined")=0A=
+	document.getElementById =3D function (id)=0A=
+	{=0A=
+		// Just return the corresponding index of all.=0A=
+		return document.all[id];=0A=
+	}=0A=
+// Define XMLHttpRequest for IE 5 and above. (don't bother for IE 4 =
+:/.... works in Opera 7.6 and Safari 1.2!)=0A=
+else if (!window.XMLHttpRequest && window.ActiveXObject)=0A=
+	window.XMLHttpRequest =3D function ()=0A=
+	{=0A=
+		return new ActiveXObject(navigator.userAgent.indexOf("MSIE 5") !=3D -1 =
+? "Microsoft.XMLHTTP" : "MSXML2.XMLHTTP");=0A=
+	};=0A=
+=0A=
+// Some older versions of Mozilla don't have this, for some reason.=0A=
+if (typeof(document.forms) =3D=3D "undefined")=0A=
+	document.forms =3D document.getElementsByTagName("form");=0A=
+=0A=
+// Load an XML document using XMLHttpRequest.=0A=
+function getXMLDocument(url, callback)=0A=
+{=0A=
+	if (!window.XMLHttpRequest)=0A=
+		return false;=0A=
+=0A=
+	var myDoc =3D new XMLHttpRequest();=0A=
+	if (typeof(callback) !=3D "undefined")=0A=
+	{=0A=
+		myDoc.onreadystatechange =3D function ()=0A=
+		{=0A=
+			if (myDoc.readyState !=3D 4)=0A=
+				return;=0A=
+=0A=
+			if (myDoc.responseXML !=3D null && myDoc.status =3D=3D 200)=0A=
+				callback(myDoc.responseXML);=0A=
+		};=0A=
+	}=0A=
+	myDoc.open('GET', url, true);=0A=
+	myDoc.send(null);=0A=
+=0A=
+	return true;=0A=
+}=0A=
+=0A=
+// Send a post form to the server using XMLHttpRequest.=0A=
+function sendXMLDocument(url, content, callback)=0A=
+{=0A=
+	if (!window.XMLHttpRequest)=0A=
+		return false;=0A=
+=0A=
+	var sendDoc =3D new window.XMLHttpRequest();=0A=
+	if (typeof(callback) !=3D "undefined")=0A=
+	{=0A=
+		sendDoc.onreadystatechange =3D function ()=0A=
+		{=0A=
+			if (sendDoc.readyState !=3D 4)=0A=
+				return;=0A=
+=0A=
+			if (sendDoc.responseXML !=3D null && sendDoc.status =3D=3D 200)=0A=
+				callback(sendDoc.responseXML);=0A=
+			else=0A=
+				callback(false);=0A=
+		};=0A=
+	}=0A=
+	sendDoc.open('POST', url, true);=0A=
+	if (typeof(sendDoc.setRequestHeader) !=3D "undefined")=0A=
+		sendDoc.setRequestHeader('Content-Type', =
+'application/x-www-form-urlencoded');=0A=
+	sendDoc.send(content);=0A=
+=0A=
+	return true;=0A=
+}=0A=
+=0A=
+function textToEntities(text)=0A=
+{=0A=
+	var entities =3D "";=0A=
+	for (var i =3D 0; i < text.length; i++)=0A=
+	{=0A=
+		if (text.charCodeAt(i) > 127)=0A=
+			entities +=3D "&#" + text.charCodeAt(i) + ";";=0A=
+		else=0A=
+			entities +=3D text.charAt(i);=0A=
+	}=0A=
+=0A=
+	return entities;=0A=
+}=0A=
+=0A=
+// Open a new window.=0A=
+function reqWin(desktopURL, alternateWidth, alternateHeight, =
+noScrollbars)=0A=
+{=0A=
+	if ((alternateWidth && self.screen.availWidth * 0.8 < alternateWidth) =
+|| (alternateHeight && self.screen.availHeight * 0.8 < alternateHeight))=0A=
+	{=0A=
+		noScrollbars =3D false;=0A=
+		alternateWidth =3D Math.min(alternateWidth, self.screen.availWidth * =
+0.8);=0A=
+		alternateHeight =3D Math.min(alternateHeight, self.screen.availHeight =
+* 0.8);=0A=
+	}=0A=
+	else=0A=
+		noScrollbars =3D typeof(noScrollbars) !=3D "undefined" && noScrollbars =
+=3D=3D true;=0A=
+=0A=
+	window.open(desktopURL, 'requested_popup', =
+'toolbar=3Dno,location=3Dno,status=3Dno,menubar=3Dno,scrollbars=3D' + =
+(noScrollbars ? 'no' : 'yes') + ',width=3D' + (alternateWidth ? =
+alternateWidth : 480) + ',height=3D' + (alternateHeight ? =
+alternateHeight : 220) + ',resizable=3Dno');=0A=
+=0A=
+	// Return false so the click won't follow the link ;).=0A=
+	return false;=0A=
+}=0A=
+=0A=
+// Remember the current position.=0A=
+function storeCaret(text)=0A=
+{=0A=
+	// Only bother if it will be useful.=0A=
+	if (typeof(text.createTextRange) !=3D "undefined")=0A=
+		text.caretPos =3D document.selection.createRange().duplicate();=0A=
+}=0A=
+=0A=
+// Replaces the currently selected text with the passed text.=0A=
+function replaceText(text, textarea)=0A=
+{=0A=
+	// Attempt to create a text range (IE).=0A=
+	if (typeof(textarea.caretPos) !=3D "undefined" && =
+textarea.createTextRange)=0A=
+	{=0A=
+		var caretPos =3D textarea.caretPos;=0A=
+=0A=
+		caretPos.text =3D caretPos.text.charAt(caretPos.text.length - 1) =
+=3D=3D ' ' ? text + ' ' : text;=0A=
+		caretPos.select();=0A=
+	}=0A=
+	// Mozilla text range replace.=0A=
+	else if (typeof(textarea.selectionStart) !=3D "undefined")=0A=
+	{=0A=
+		var begin =3D textarea.value.substr(0, textarea.selectionStart);=0A=
+		var end =3D textarea.value.substr(textarea.selectionEnd);=0A=
+		var scrollPos =3D textarea.scrollTop;=0A=
+=0A=
+		textarea.value =3D begin + text + end;=0A=
+=0A=
+		if (textarea.setSelectionRange)=0A=
+		{=0A=
+			textarea.focus();=0A=
+			textarea.setSelectionRange(begin.length + text.length, begin.length + =
+text.length);=0A=
+		}=0A=
+		textarea.scrollTop =3D scrollPos;=0A=
+	}=0A=
+	// Just put it on the end.=0A=
+	else=0A=
+	{=0A=
+		textarea.value +=3D text;=0A=
+		textarea.focus(textarea.value.length - 1);=0A=
+	}=0A=
+}=0A=
+=0A=
+// Surrounds the selected text with text1 and text2.=0A=
+function surroundText(text1, text2, textarea)=0A=
+{=0A=
+	// Can a text range be created?=0A=
+	if (typeof(textarea.caretPos) !=3D "undefined" && =
+textarea.createTextRange)=0A=
+	{=0A=
+		var caretPos =3D textarea.caretPos, temp_length =3D =
+caretPos.text.length;=0A=
+=0A=
+		caretPos.text =3D caretPos.text.charAt(caretPos.text.length - 1) =
+=3D=3D ' ' ? text1 + caretPos.text + text2 + ' ' : text1 + caretPos.text =
++ text2;=0A=
+=0A=
+		if (temp_length =3D=3D 0)=0A=
+		{=0A=
+			caretPos.moveStart("character", -text2.length);=0A=
+			caretPos.moveEnd("character", -text2.length);=0A=
+			caretPos.select();=0A=
+		}=0A=
+		else=0A=
+			textarea.focus(caretPos);=0A=
+	}=0A=
+	// Mozilla text range wrap.=0A=
+	else if (typeof(textarea.selectionStart) !=3D "undefined")=0A=
+	{=0A=
+		var begin =3D textarea.value.substr(0, textarea.selectionStart);=0A=
+		var selection =3D textarea.value.substr(textarea.selectionStart, =
+textarea.selectionEnd - textarea.selectionStart);=0A=
+		var end =3D textarea.value.substr(textarea.selectionEnd);=0A=
+		var newCursorPos =3D textarea.selectionStart;=0A=
+		var scrollPos =3D textarea.scrollTop;=0A=
+=0A=
+		textarea.value =3D begin + text1 + selection + text2 + end;=0A=
+=0A=
+		if (textarea.setSelectionRange)=0A=
+		{=0A=
+			if (selection.length =3D=3D 0)=0A=
+				textarea.setSelectionRange(newCursorPos + text1.length, newCursorPos =
++ text1.length);=0A=
+			else=0A=
+				textarea.setSelectionRange(newCursorPos, newCursorPos + text1.length =
++ selection.length + text2.length);=0A=
+			textarea.focus();=0A=
+		}=0A=
+		textarea.scrollTop =3D scrollPos;=0A=
+	}=0A=
+	// Just put them on the end, then.=0A=
+	else=0A=
+	{=0A=
+		textarea.value +=3D text1 + text2;=0A=
+		textarea.focus(textarea.value.length - 1);=0A=
+	}=0A=
+}=0A=
+=0A=
+// Checks if the passed input's value is nothing.=0A=
+function isEmptyText(theField)=0A=
+{=0A=
+	// Copy the value so changes can be made..=0A=
+	var theValue =3D theField.value;=0A=
+=0A=
+	// Strip whitespace off the left side.=0A=
+	while (theValue.length > 0 && (theValue.charAt(0) =3D=3D ' ' || =
+theValue.charAt(0) =3D=3D '\t'))=0A=
+		theValue =3D theValue.substring(1, theValue.length);=0A=
+	// Strip whitespace off the right side.=0A=
+	while (theValue.length > 0 && (theValue.charAt(theValue.length - 1) =
+=3D=3D ' ' || theValue.charAt(theValue.length - 1) =3D=3D '\t'))=0A=
+		theValue =3D theValue.substring(0, theValue.length - 1);=0A=
+=0A=
+	if (theValue =3D=3D '')=0A=
+		return true;=0A=
+	else=0A=
+		return false;=0A=
+}=0A=
+=0A=
+// Only allow form submission ONCE.=0A=
+function submitonce(theform)=0A=
+{=0A=
+	smf_formSubmitted =3D true;=0A=
+}=0A=
+function submitThisOnce(form)=0A=
+{=0A=
+	// Hateful, hateful fix for Safari 1.3 beta.=0A=
+	if (navigator.userAgent.indexOf('AppleWebKit') !=3D -1)=0A=
+		return !smf_formSubmitted;=0A=
+=0A=
+	if (typeof(form.form) !=3D "undefined")=0A=
+		form =3D form.form;=0A=
+=0A=
+	for (var i =3D 0; i < form.length; i++)=0A=
+		if (typeof(form[i]) !=3D "undefined" && form[i].tagName.toLowerCase() =
+=3D=3D "textarea")=0A=
+			form[i].readOnly =3D true;=0A=
+=0A=
+	return !smf_formSubmitted;=0A=
+}=0A=
+=0A=
+// Set the "inside" HTML of an element.=0A=
+function setInnerHTML(element, toValue)=0A=
+{=0A=
+	// IE has this built in...=0A=
+	if (typeof(element.innerHTML) !=3D 'undefined')=0A=
+		element.innerHTML =3D toValue;=0A=
+	// Otherwise, try createContextualFragment().=0A=
+	else=0A=
+	{=0A=
+		var range =3D document.createRange();=0A=
+		range.selectNodeContents(element);=0A=
+		range.deleteContents();=0A=
+		element.appendChild(range.createContextualFragment(toValue));=0A=
+	}=0A=
+}=0A=
+=0A=
+// Set the "outer" HTML of an element.=0A=
+function setOuterHTML(element, toValue)=0A=
+{=0A=
+	if (typeof(element.outerHTML) !=3D 'undefined')=0A=
+		element.outerHTML =3D toValue;=0A=
+	else=0A=
+	{=0A=
+		var range =3D document.createRange();=0A=
+		range.setStartBefore(element);=0A=
+		=
+element.parentNode.replaceChild(range.createContextualFragment(toValue), =
+element);=0A=
+	}=0A=
+}=0A=
+=0A=
+// Get the inner HTML of an element.=0A=
+function getInnerHTML(element)=0A=
+{=0A=
+	if (typeof(element.innerHTML) !=3D 'undefined')=0A=
+		return element.innerHTML;=0A=
+	else=0A=
+	{=0A=
+		var returnStr =3D '';=0A=
+		for (var i =3D 0; i < element.childNodes.length; i++)=0A=
+			returnStr +=3D getOuterHTML(element.childNodes[i]);=0A=
+=0A=
+		return returnStr;=0A=
+	}=0A=
+}=0A=
+=0A=
+function getOuterHTML(node)=0A=
+{=0A=
+	if (typeof(node.outerHTML) !=3D 'undefined')=0A=
+		return node.outerHTML;=0A=
+=0A=
+	var str =3D '';=0A=
+=0A=
+	switch (node.nodeType)=0A=
+	{=0A=
+	// An element.=0A=
+	case 1:=0A=
+		str +=3D '<' + node.nodeName;=0A=
+=0A=
+		for (var i =3D 0; i < node.attributes.length; i++)=0A=
+		{=0A=
+			if (node.attributes[i].nodeValue !=3D null)=0A=
+				str +=3D ' ' + node.attributes[i].nodeName + '=3D"' + =
+node.attributes[i].nodeValue + '"';=0A=
+		}=0A=
+=0A=
+		if (node.childNodes.length =3D=3D 0 && =
+in_array(node.nodeName.toLowerCase(), ['hr', 'input', 'img', 'link', =
+'meta', 'br']))=0A=
+			str +=3D ' />';=0A=
+		else=0A=
+			str +=3D '>' + getInnerHTML(node) + '</' + node.nodeName + '>';=0A=
+		break;=0A=
+=0A=
+	// 2 is an attribute.=0A=
+=0A=
+	// Just some text..=0A=
+	case 3:=0A=
+		str +=3D node.nodeValue;=0A=
+		break;=0A=
+=0A=
+	// A CDATA section.=0A=
+	case 4:=0A=
+		str +=3D '<![CDATA' + '[' + node.nodeValue + ']' + ']>';=0A=
+		break;=0A=
+=0A=
+	// Entity reference..=0A=
+	case 5:=0A=
+		str +=3D '&' + node.nodeName + ';';=0A=
+		break;=0A=
+=0A=
+	// 6 is an actual entity, 7 is a PI.=0A=
+=0A=
+	// Comment.=0A=
+	case 8:=0A=
+		str +=3D '<!--' + node.nodeValue + '-->';=0A=
+		break;=0A=
+	}=0A=
+=0A=
+	return str;=0A=
+}=0A=
+=0A=
+// Checks for variable in theArray.=0A=
+function in_array(variable, theArray)=0A=
+{=0A=
+	for (var i =3D 0; i < theArray.length; i++)=0A=
+	{=0A=
+		if (theArray[i] =3D=3D variable)=0A=
+			return true;=0A=
+	}=0A=
+	return false;=0A=
+}=0A=
+=0A=
+// Find a specific radio button in its group and select it.=0A=
+function selectRadioByName(radioGroup, name)=0A=
+{=0A=
+	if (typeof(radioGroup.length) =3D=3D "undefined")=0A=
+		return radioGroup.checked =3D true;=0A=
+=0A=
+	for (var i =3D 0; i < radioGroup.length; i++)=0A=
+	{=0A=
+		if (radioGroup[i].value =3D=3D name)=0A=
+			return radioGroup[i].checked =3D true;=0A=
+	}=0A=
+=0A=
+	return false;=0A=
+}=0A=
+=0A=
+// Invert all checkboxes at once by clicking a single checkbox.=0A=
+function invertAll(headerfield, checkform, mask)=0A=
+{=0A=
+	for (var i =3D 0; i < checkform.length; i++)=0A=
+	{=0A=
+		if (typeof(checkform[i].name) =3D=3D "undefined" || (typeof(mask) !=3D =
+"undefined" && checkform[i].name.substr(0, mask.length) !=3D mask))=0A=
+			continue;=0A=
+=0A=
+		if (!checkform[i].disabled)=0A=
+			checkform[i].checked =3D headerfield.checked;=0A=
+	}=0A=
+}=0A=
+=0A=
+// Keep the session alive - always!=0A=
+var lastKeepAliveCheck =3D new Date().getTime();=0A=
+function smf_sessionKeepAlive()=0A=
+{=0A=
+	var curTime =3D new Date().getTime();=0A=
+=0A=
+	// Prevent a Firefox bug from hammering the server.=0A=
+	if (smf_scripturl && curTime - lastKeepAliveCheck > 900000)=0A=
+	{=0A=
+		var tempImage =3D new Image();=0A=
+		tempImage.src =3D smf_scripturl + (smf_scripturl.indexOf("?") =3D=3D =
+-1 ? "?" : "&") + "action=3Dkeepalive;" + curTime;=0A=
+		lastKeepAliveCheck =3D curTime;=0A=
+	}=0A=
+=0A=
+	window.setTimeout("smf_sessionKeepAlive();", 1200000);=0A=
+}=0A=
+window.setTimeout("smf_sessionKeepAlive();", 1200000);=0A=
+=0A=
+// Set a theme option through javascript.=0A=
+function smf_setThemeOption(option, value, theme, cur_session_id)=0A=
+{=0A=
+	// Compatibility.=0A=
+	if (cur_session_id =3D=3D null)=0A=
+		cur_session_id =3D smf_session_id;=0A=
+=0A=
+	var tempImage =3D new Image();=0A=
+	tempImage.src =3D smf_scripturl + (smf_scripturl.indexOf("?") =3D=3D -1 =
+? "?" : "&") + "action=3Djsoption;var=3D" + option + ";val=3D" + value + =
+";sesc=3D" + cur_session_id + (theme =3D=3D null ? "" : "&id=3D" + =
+theme) + ";" + (new Date().getTime());=0A=
+}=0A=
+=0A=
+function smf_avatarResize()=0A=
+{=0A=
+	var possibleAvatars =3D document.getElementsByTagName ? =
+document.getElementsByTagName("img") : document.all.tags("img");=0A=
+=0A=
+	for (var i =3D 0; i < possibleAvatars.length; i++)=0A=
+	{=0A=
+		if (possibleAvatars[i].className !=3D "avatar")=0A=
+			continue;=0A=
+=0A=
+		var tempAvatar =3D new Image();=0A=
+		tempAvatar.src =3D possibleAvatars[i].src;=0A=
+=0A=
+		if (smf_avatarMaxWidth !=3D 0 && tempAvatar.width > smf_avatarMaxWidth)=0A=
+		{=0A=
+			possibleAvatars[i].height =3D (smf_avatarMaxWidth * =
+tempAvatar.height) / tempAvatar.width;=0A=
+			possibleAvatars[i].width =3D smf_avatarMaxWidth;=0A=
+		}=0A=
+		else if (smf_avatarMaxHeight !=3D 0 && tempAvatar.height > =
+smf_avatarMaxHeight)=0A=
+		{=0A=
+			possibleAvatars[i].width =3D (smf_avatarMaxHeight * tempAvatar.width) =
+/ tempAvatar.height;=0A=
+			possibleAvatars[i].height =3D smf_avatarMaxHeight;=0A=
+		}=0A=
+		else=0A=
+		{=0A=
+			possibleAvatars[i].width =3D tempAvatar.width;=0A=
+			possibleAvatars[i].height =3D tempAvatar.height;=0A=
+		}=0A=
+	}=0A=
+=0A=
+	if (typeof(window_oldAvatarOnload) !=3D "undefined" && =
+window_oldAvatarOnload)=0A=
+	{=0A=
+		window_oldAvatarOnload();=0A=
+		window_oldAvatarOnload =3D null;=0A=
+	}=0A=
+}=0A=
+=0A=
+function hashLoginPassword(doForm, cur_session_id)=0A=
+{=0A=
+	// Compatibility.=0A=
+	if (cur_session_id =3D=3D null)=0A=
+		cur_session_id =3D smf_session_id;=0A=
+=0A=
+	if (typeof(hex_sha1) =3D=3D "undefined")=0A=
+		return;=0A=
+	// Are they using an email address?=0A=
+	if (doForm.user.value.indexOf("@") !=3D -1)=0A=
+		return;=0A=
+=0A=
+	// Unless the browser is Opera, the password will not save properly.=0A=
+	if (typeof(window.opera) =3D=3D "undefined")=0A=
+		doForm.passwrd.autocomplete =3D "off";=0A=
+=0A=
+	doForm.hash_passwrd.value =3D =
+hex_sha1(hex_sha1(doForm.user.value.php_to8bit().php_strtolower() + =
+doForm.passwrd.value.php_to8bit()) + cur_session_id);=0A=
+=0A=
+	// It looks nicer to fill it with asterisks, but Firefox will try to =
+save that.=0A=
+	if (navigator.userAgent.indexOf("Firefox/") !=3D -1)=0A=
+		doForm.passwrd.value =3D "";=0A=
+	else=0A=
+		doForm.passwrd.value =3D doForm.passwrd.value.replace(/./g, "*");=0A=
+}=0A=
+=0A=
+function hashAdminPassword(doForm, username, cur_session_id)=0A=
+{=0A=
+	// Compatibility.=0A=
+	if (cur_session_id =3D=3D null)=0A=
+		cur_session_id =3D smf_session_id;=0A=
+=0A=
+	if (typeof(hex_sha1) =3D=3D "undefined")=0A=
+		return;=0A=
+=0A=
+	doForm.admin_hash_pass.value =3D =
+hex_sha1(hex_sha1(username.toLowerCase() + doForm.admin_pass.value) + =
+cur_session_id);=0A=
+	doForm.admin_pass.value =3D doForm.admin_pass.value.replace(/./g, "*");=0A=
+}=0A=
+=0A=
+function ajax_indicator(turn_on)=0A=
+{=0A=
+	var indicator =3D document.getElementById("ajax_in_progress");=0A=
+	if (indicator !=3D null)=0A=
+	{=0A=
+		if (navigator.appName =3D=3D "Microsoft Internet Explorer" && =
+navigator.userAgent.indexOf("MSIE 7") =3D=3D -1)=0A=
+		{=0A=
+			indicator.style.top =3D document.documentElement.scrollTop;=0A=
+		}=0A=
+		indicator.style.display =3D turn_on ? "block" : "none";=0A=
+	}=0A=
+}=0A=
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.sixfortyfive.com/forum/Themes/default/xml_topic.js
+
+var smf_topic, smf_start, smf_show_modify, quickReplyCollapsed, =
+buff_message;=0A=
+var cur_msg_id, cur_msg_div, buff_subject, cur_subject_div, in_edit_mode =
+=3D 0;=0A=
+=0A=
+function doQuote(messageid, cur_session_id)=0A=
+{=0A=
+	if (quickReplyCollapsed)=0A=
+		window.location.href =3D smf_scripturl + "?action=3Dpost;quote=3D" + =
+messageid + ";topic=3D" + smf_topic + "." + smf_start + ";sesc=3D" + =
+cur_session_id;=0A=
+	else=0A=
+	{=0A=
+		if (window.XMLHttpRequest)=0A=
+		{=0A=
+			if (typeof window.ajax_indicator =3D=3D "function")=0A=
+				ajax_indicator(true);=0A=
+			getXMLDocument(smf_scripturl + "?action=3Dquotefast;quote=3D" + =
+messageid + ";sesc=3D" + cur_session_id + ";xml", onDocReceived);=0A=
+		}=0A=
+		else=0A=
+			reqWin(smf_scripturl + "?action=3Dquotefast;quote=3D" + messageid + =
+";sesc=3D" + cur_session_id, 240, 90);=0A=
+=0A=
+		if (navigator.appName =3D=3D "Microsoft Internet Explorer")=0A=
+			window.location.hash =3D "quickreply";=0A=
+		else=0A=
+			window.location.hash =3D "#quickreply";=0A=
+	}=0A=
+}=0A=
+=0A=
+function onDocReceived(XMLDoc)=0A=
+{=0A=
+	var text =3D "";=0A=
+	for (var i =3D 0; i < =
+XMLDoc.getElementsByTagName("quote")[0].childNodes.length; i++)=0A=
+		text +=3D =
+XMLDoc.getElementsByTagName("quote")[0].childNodes[i].nodeValue;=0A=
+=0A=
+	replaceText(text, document.forms.postmodify.message);=0A=
+	if (typeof window.ajax_indicator =3D=3D "function")=0A=
+		ajax_indicator(false);=0A=
+}=0A=
+=0A=
+=0A=
+function modify_msg(msg_id, cur_session_id)=0A=
+{=0A=
+	if (!window.XMLHttpRequest)=0A=
+		return;=0A=
+	if (typeof(window.opera) !=3D "undefined")=0A=
+	{=0A=
+		var test =3D new XMLHttpRequest();=0A=
+		if (typeof(test.setRequestHeader) !=3D "function")=0A=
+			return;=0A=
+	}=0A=
+	if (in_edit_mode =3D=3D 1)=0A=
+		modify_cancel();=0A=
+	in_edit_mode =3D 1;=0A=
+	if (typeof window.ajax_indicator =3D=3D "function")=0A=
+		ajax_indicator(true);=0A=
+	getXMLDocument(smf_scripturl + '?action=3Dquotefast;quote=3D' + msg_id =
++ ';sesc=3D' + cur_session_id + ';modify;xml', onDocReceived_modify);=0A=
+}=0A=
+=0A=
+function onDocReceived_modify(XMLDoc)=0A=
+{=0A=
+	var text =3D "";=0A=
+	var subject =3D "";=0A=
+=0A=
+	// Grab the message ID.=0A=
+	cur_msg_id =3D =
+XMLDoc.getElementsByTagName("message")[0].getAttribute("id");=0A=
+=0A=
+	// Replace the body part.=0A=
+	for (var i =3D 0; i < =
+XMLDoc.getElementsByTagName("message")[0].childNodes.length; i++)=0A=
+		text +=3D =
+XMLDoc.getElementsByTagName("message")[0].childNodes[i].nodeValue;=0A=
+	cur_msg_div =3D document.getElementById(cur_msg_id);=0A=
+	buff_message =3D getInnerHTML(cur_msg_div);=0A=
+=0A=
+	// Actually create the content, with a bodge for dissapearing dollar =
+signs.=0A=
+	text =3D text.replace(/\$/g,"{&dollarfix;$}");=0A=
+	text =3D smf_template_body_edit.replace(/%body%/, =
+text).replace(/%msg_id%/g, cur_msg_id.substr(4));=0A=
+	text =3D text.replace(/\{&dollarfix;\$\}/g,"$");=0A=
+	setInnerHTML(cur_msg_div, text);=0A=
+	=0A=
+	// Replace the subject part.=0A=
+	cur_subject_div =3D document.getElementById('subject_' + =
+cur_msg_id.substr(4));=0A=
+	buff_subject =3D getInnerHTML(cur_subject_div);=0A=
+=0A=
+	subject =3D =
+XMLDoc.getElementsByTagName("subject")[0].childNodes[0].nodeValue;=0A=
+	subject =3D subject.replace(/\$/g,"{&dollarfix;$}");=0A=
+	subject =3D smf_template_subject_edit.replace(/%subject%/, subject);=0A=
+	subject =3D subject.replace(/\{&dollarfix;\$\}/g,"$");=0A=
+	setInnerHTML(cur_subject_div, subject);=0A=
+	if (typeof window.ajax_indicator =3D=3D "function")=0A=
+		ajax_indicator(false);=0A=
+}=0A=
+=0A=
+function modify_cancel()=0A=
+{=0A=
+	// Roll back the HTML to its original state.=0A=
+	setInnerHTML(cur_msg_div, buff_message);=0A=
+	setInnerHTML(cur_subject_div, buff_subject);=0A=
+=0A=
+	// No longer in edit mode, that's right.=0A=
+	in_edit_mode =3D 0;=0A=
+=0A=
+	return false;=0A=
+}=0A=
+=0A=
+function modify_save(cur_session_id)=0A=
+{=0A=
+	if (!in_edit_mode)=0A=
+		return true;=0A=
+=0A=
+	var i, x =3D new Array();=0A=
+	x[x.length] =3D 'subject=3D' + =
+escape(textToEntities(document.forms.quickModForm['subject'].value.replac=
+e(/&#/g, "&#38;#"))).replace(/\+/g, "%2B");=0A=
+	x[x.length] =3D 'message=3D' + =
+escape(textToEntities(document.forms.quickModForm['message'].value.replac=
+e(/&#/g, "&#38;#"))).replace(/\+/g, "%2B");=0A=
+	x[x.length] =3D 'topic=3D' + =
+parseInt(document.forms.quickModForm.elements['topic'].value);=0A=
+	x[x.length] =3D 'msg=3D' + =
+parseInt(document.forms.quickModForm.elements['msg'].value);=0A=
+=0A=
+	if (typeof window.ajax_indicator =3D=3D "function")=0A=
+		ajax_indicator(true);=0A=
+=0A=
+	sendXMLDocument(smf_scripturl + "?action=3Djsmodify;topic=3D" + =
+smf_topic + ";sesc=3D" + cur_session_id + ";xml", x.join("&"), =
+modify_done);=0A=
+=0A=
+	return false;=0A=
+}=0A=
+=0A=
+function modify_done(XMLDoc)=0A=
+{=0A=
+	if (!XMLDoc)=0A=
+	{=0A=
+		modify_cancel();=0A=
+		return;=0A=
+	}=0A=
+=0A=
+	var message =3D =
+XMLDoc.getElementsByTagName("smf")[0].getElementsByTagName("message")[0];=0A=
+	var body =3D message.getElementsByTagName("body")[0];=0A=
+	var error =3D message.getElementsByTagName("error")[0];=0A=
+=0A=
+	if (body)=0A=
+	{=0A=
+		// Show new body.=0A=
+		var bodyText =3D "";=0A=
+		for (i =3D 0; i < body.childNodes.length; i++)=0A=
+			bodyText +=3D body.childNodes[i].nodeValue;=0A=
+=0A=
+		bodyText =3D bodyText.replace(/\$/g,"{&dollarfix;$}");=0A=
+		bodyText =3D smf_template_body_normal.replace(/%body%/, bodyText);=0A=
+		bodyText =3D bodyText.replace(/\{&dollarfix;\$\}/g,"$");=0A=
+		setInnerHTML(cur_msg_div, bodyText);=0A=
+		buff_message =3D bodyText;=0A=
+=0A=
+		// Show new subject.=0A=
+		var subject =3D message.getElementsByTagName("subject")[0];=0A=
+		var subject_text =3D subject.childNodes[0].nodeValue;=0A=
+		subject_text =3D subject_text.replace(/\$/g,"{&dollarfix;$}");=0A=
+		var subject_html =3D smf_template_subject_normal.replace(/%msg_id%/g, =
+cur_msg_id.substr(4)).replace(/%subject%/, subject_text);=0A=
+		subject_html =3D subject_html.replace(/\{&dollarfix;\$\}/g,"$");=0A=
+		setInnerHTML(cur_subject_div, subject_html);=0A=
+		buff_subject =3D subject_html;=0A=
+		=0A=
+		// If this is the first message, also update the topic subject.=0A=
+		if (subject.getAttribute("is_first") =3D=3D 1)=0A=
+		{=0A=
+			var subject_top =3D smf_template_top_subject.replace(/%subject%/, =
+subject_text);=0A=
+			subject_top =3D subject_top.replace(/\{&dollarfix;\$\}/g,"$");=0A=
+			setInnerHTML(document.getElementById("top_subject"), subject_top);=0A=
+		}=0A=
+=0A=
+		// Show this message as "modified on x by y".=0A=
+		if (smf_show_modify)=0A=
+		{=0A=
+			var cur_modify_div =3D document.getElementById('modified_' + =
+cur_msg_id.substr(4));=0A=
+			setInnerHTML(cur_modify_div, =
+message.getElementsByTagName("modified")[0].childNodes[0].nodeValue);=0A=
+		}=0A=
+	}=0A=
+	else if (error)=0A=
+	{=0A=
+		setInnerHTML(document.getElementById("error_box"), =
+error.childNodes[0].nodeValue);=0A=
+		document.forms.quickModForm.message.style.border =3D =
+error.getAttribute("in_body") =3D=3D "1" ? "1px solid red" : "";=0A=
+		document.forms.quickModForm.subject.style.border =3D =
+error.getAttribute("in_subject") =3D=3D "1" ? "1px solid red" : "";=0A=
+	}=0A=
+=0A=
+	if (typeof window.ajax_indicator =3D=3D "function")=0A=
+		ajax_indicator(false);=0A=
+}=0A=
+=0A=
+function showModifyButtons()=0A=
+{=0A=
+	var numImages =3D document.images.length;=0A=
+	for (var i =3D 0; i < numImages; i++)=0A=
+		if (document.images[i].id.substr(0, 14) =3D=3D 'modify_button_')=0A=
+			document.images[i].style.display =3D '';=0A=
+}=0A=
+=0A=
+function expandThumb(thumbID)=0A=
+{=0A=
+	var img =3D document.getElementById('thumb_' + thumbID);=0A=
+	var link =3D document.getElementById('link_' + thumbID);=0A=
+	var tmp =3D img.src;=0A=
+	img.src =3D link.href;=0A=
+	link.href =3D tmp;=0A=
+	img.style.width =3D '';=0A=
+	img.style.height =3D '';=0A=
+	return false;=0A=
+}=0A=
+=0A=
+function swapQuickReply()=0A=
+{=0A=
+	document.getElementById("quickReplyExpand").src =3D smf_images_url + =
+"/" + (quickReplyCollapsed ? "collapse.gif" : "expand.gif");=0A=
+	document.getElementById("quickReplyOptions").style.display =3D =
+quickReplyCollapsed ? "" : "none";=0A=
+=0A=
+	quickReplyCollapsed =3D !quickReplyCollapsed;=0A=
+}=0A=
+
+------=_NextPart_000_00C2_01CB4A4C.C3BF1180--
