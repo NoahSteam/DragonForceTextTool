@@ -296,93 +296,45 @@ struct OriginalStringInfo
 };
 typedef vector<OriginalStringInfo> OSIVector;
 
-//Finds next pointer in a stream of bytes from an .eve file
-bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &endStream, BytesList::iterator &outPointer, int &inOutCurrByte)
+static bool bFirstPointerFound = 0;
+
+struct PointerInfo
 {
-#define INCR_STREAM() ++inStream; ++inOutCurrByte;
+	BytesList::iterator iter;
+	int offset;
+};
+typedef vector<PointerInfo> PointerVector;
+
+//Finds next pointer in a stream of bytes from an .eve file
+bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &endStream, PointerVector &outPointers)//BytesList::iterator &outPointer, int &inOutCurrByte)
+{
+#define INCR_STREAM() ++inStream; ++byteOffset;
 #define INCR_PEEK() ++peek; ++peekBytes;
 
 	//Pointers come in one of the following formats
-	//Type1 = 29 10 00 00 00 PP PP
-	//Type2 = 29 10 01 00 00 PP PP
-	//Type3 = 29 10 00 00 ?? 00 ?? 00 07 PP PP
-	//Type4 = 29 10 00 00 xx 00 PP PP
-	//Type5 = 29 10 nn 00 00 xx xx 9A nn 06 PP PP  where nn is between 00 and 09
-	//Type6 = 2F 10 00 00 00 xx 00 mm 06 PP PP //where mm is: maybe some number
-                                                                
-	static bool b = 0;
+	//Type1 = 29 10 xx 00 00 PP PP xx xx 06 PP PP
+	//Type2 = 29 10 00 00 ?? 00 ?? 00 07 PP PP
+	//Type3 = 2F 10 00 00 00 xx 00 xx 06 97 PP                                                             
+	//Type4 = 2F 10 00 00 00 xx 00 06 PP PP   
+	
+	int byteOffset = 0;
+	PointerInfo newPointer;
+
 	while(inStream != endStream)
 	{
-		//			00 01 02 03 04 05 06 07 08
-		//Type6 =	2F 10 00 00 00 xx 00 mm 06 PP PP //where mm is: maybe some number
-		if( *inStream == 0x2F)
-		{
-			BytesList::iterator peek = inStream;
-			int peekBytes = 0;
-
-			//00->01
-			INCR_PEEK();
-
-			//01
-			if( *peek != (char)0x10 )
-				goto failType6;
-			INCR_PEEK();
-
-			//02
-			if(*peek != 0)
-				goto failType6;
-			INCR_PEEK();
-
-			//03
-			if(*peek != 0)
-				goto failType6;
-			INCR_PEEK();
-
-			//04
-			if(*peek != 0)
-				goto failType6;
-			INCR_PEEK();
-
-			//05
-			INCR_PEEK();
-
-			//06
-			if(*peek != 0)
-				goto failType6;
-			INCR_PEEK();
-
-			//07
-			if(*peek == (char)0x06)
-			{
-				INCR_PEEK();
-				inStream = peek;
-				inOutCurrByte += peekBytes;
-				return true;
-			}
-
-			//07->08
-			INCR_PEEK();
-
-			//08
-			if( *peek != (char)0x06 )
-				goto failType6;
-			//assert( *peek == 0x06 );
-			INCR_PEEK();
-			
-			//09
-			inStream = peek;
-			inOutCurrByte += peekBytes;
-			return true;
-failType6:
-			{}
-		}
+		bool twoF = false;
+		newPointer.offset = 0;
 
 		//Not the beginning of a pointer, so just continue
-		if( *inStream != (char)0x29 )
+		if( *inStream != (char)0x29 && *inStream != (char)0x2F )
 		{
 			INCR_STREAM();
 			continue;
 		}
+		if( *inStream == (char)0x2F )
+			twoF = true;
+
+		//00->01
 		INCR_STREAM();
 
 		//Second byte is not that of a pointer, so just continue
@@ -391,74 +343,113 @@ failType6:
 			INCR_STREAM();
 			continue;
 		}
+		//01->02
 		INCR_STREAM();
-
-		//		  00 01 02 03 04 05 06 07 08 09
-		//Type5 = 29 10 nn 00 00 xx xx 9A nn 06 PP PP  where nn is between 00 and 09
-		if( *inStream >= 0x00 && *inStream <= (char)0x09 )
+			
+		//	00 01 02 03 04 05 06 07 08 09 10
+		//	2F 10 00 00 00 87 00 9B 06 97 00                                                             
+		//	2F 10 00 00 00 87 00 06 97 00   
+		if(twoF && *inStream >= 0x00 && *inStream <= 0x09)
 		{
-			BytesList::iterator peek = inStream;			
+			BytesList::iterator peek = inStream;
 			int peekBytes = 0;
-
+			
 			//02->03
 			INCR_PEEK();
+			if(*peek != 0)
+				goto twoFFail;
 
-			//03
-			if( *peek != 0)
-				goto failType5;
+			//03->04
 			INCR_PEEK();
-
-			//04
-			if( *peek != 0)
-				goto failType5;
+			if(*peek != 0)
+				goto twoFFail;
+			
+			//04->05
 			INCR_PEEK();
+			if(*peek != (char)0x87)
+				goto twoFFail;
 
 			//05->06
 			INCR_PEEK();
+			if(*peek != 0)
+				goto twoFFail;
 
 			//06->07
 			INCR_PEEK();
-
-			//07
-			if( *peek != (char)0x9A)
-				goto failType5;
-			INCR_PEEK();
-
-			//08
-			if( !(*peek >= 0 && *peek <= (char)0x09) )
-				goto failType5;
-			INCR_PEEK();
-
-			//09
-			if( *peek == (char)0x06)
+			if(*peek == 0x06)
 			{
+				//07->08
 				INCR_PEEK();
 
 				inStream = peek;
-				inOutCurrByte += peekBytes;
+				newPointer.iter = inStream;
+				newPointer.offset = peekBytes + byteOffset;
+				outPointers.push_back(newPointer);
 				return true;
 			}
-failType5:
+
+			//07->08
+			INCR_PEEK();
+			if(*peek != (char)0x06)
+				goto twoFFail;
+
+
+			//08->09
+			INCR_PEEK();
+			inStream = peek;
+			newPointer.iter = peek;
+			newPointer.offset = peekBytes + byteOffset;
+			outPointers.push_back(newPointer);
+			return true;
+
+twoFFail:
 			{}
 		}
 
-		//If this is a Type2 pointer
-		if( *inStream == 0x01)
+		//If this is a Type1 pointer
+		//			00 01 02 03 04 05 06 07 08 09 10 11 12
+		//Type1 =	29 10 xx 00 00 PP PP xx xx 06 PP PP
+		//02
+		if( bFirstPointerFound && *inStream >= 0x00 && *inStream <= 0x09)
 		{
+			//02->03
 			INCR_STREAM();
 			if(*inStream != 0)
 				continue;
 
+			//03->04
 			INCR_STREAM();
+			
 			if( *inStream != 0)
 			{
 				INCR_STREAM();
-				if(*inStream != 0)
-					continue;
+			//	if(*inStream != 0)
+				continue;
 			}
+
+			//04->05
 			INCR_STREAM();
-			
-			outPointer = inStream;
+
+			//found the pointer
+			newPointer.iter		= inStream;
+			newPointer.offset	= byteOffset;
+			outPointers.push_back(newPointer);
+
+			BytesList::iterator peek = inStream;
+			int peekBytes = 0;
+			INCR_PEEK(); //5->6
+			INCR_PEEK(); //6->7
+			INCR_PEEK(); //7->8
+			INCR_PEEK(); //8->9
+			if(*peek == 0x06)
+			{
+				INCR_PEEK(); //10->11
+
+				newPointer.iter = peek;
+				newPointer.offset += peekBytes;
+				outPointers.push_back(newPointer);
+			}
+
 			return true;
 		}
 		INCR_STREAM();
@@ -468,26 +459,29 @@ failType5:
 			continue;
 		}
 
-		//Look 7 bytes ahead to see if this is a Type3 pointer
+		//Look 7 bytes ahead to see if this is a Type2 pointer
 		BytesList::iterator peekAheadIterator = inStream;
 		char c = *( ++(++(++(++(++peekAheadIterator)))) );
-		if( !b && c == (char)0x07 )
+		if( !bFirstPointerFound && c == (char)0x07 )
 		{
-			b = true;
-			outPointer = ++peekAheadIterator;
-			inOutCurrByte += 6;
+			bFirstPointerFound = true;
+			newPointer.iter = ++peekAheadIterator;
+			newPointer.offset = 6 + byteOffset;
+			outPointers.push_back(newPointer);
 			return true;
 		}
-
+/*
 		INCR_STREAM();
 		if( *inStream != 0 )
 			continue;
 
 		//We got ourselves a Type1 iterator
 		outPointer = ++inStream;
-		++inOutCurrByte;
-		
+		++inOutCurrByte
+
 		return true;
+*/
+		continue;
 	}
 
 	return false;
@@ -567,6 +561,8 @@ void InsertEnglishText()
 		vector< StringInsertionLocation > stringInsertionPoints;
 		OSIVector			origStringsInfo;
 		OriginalStringInfo	currStringInfo;
+
+		bFirstPointerFound = false;
 
 		while(currByte != EOF)
 		{
@@ -725,23 +721,30 @@ void InsertEnglishText()
 
 		//find all the pointers
 		currByte = 0;
+
 		for( BytesList::iterator bytesIter = fileBytes.begin(); bytesIter != fileBytes.end(); ++bytesIter, ++currByte)
 		{
-			if( GetNextPointer(bytesIter, fileBytes.end(), bytesIter, currByte) == false)
+			PointerVector outPointers;
+
+			if( GetNextPointer(bytesIter, fileBytes.end(), outPointers) == false)
 				break;
 
-			//Little endian byte order for pointers
-			char &secondByte = *bytesIter; ++bytesIter; ++currByte;
-			char &firstByte  = *bytesIter;
-			int address    = (firstByte << 8) | (secondByte & 0xff);
+			for(size_t i = 0; i < outPointers.size(); ++i)
+			{
+				bytesIter		 = outPointers[i].iter;
+				currByte		 += outPointers[i].offset;
 
-			int offset = GetPointerOffset(newStringsInfo, origStringsInfo, address);
-			address += offset;
- 
-			firstByte	= address >> 8;
-			secondByte	= address & 0xff;
-			int k = 0;
-			++k;
+				//Little endian byte order for pointers
+				char &secondByte = *bytesIter; ++bytesIter; ++currByte;
+				char &firstByte  = *bytesIter;
+				int address      = (firstByte << 8) | (secondByte & 0xff);
+
+				int offset = GetPointerOffset(newStringsInfo, origStringsInfo, address);
+				address += offset;
+	 
+				firstByte	= address >> 8;
+				secondByte	= address & 0xff;
+			}			
 		}
 
 		//write out translated file

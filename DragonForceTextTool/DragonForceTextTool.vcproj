@@ -178,6 +178,10 @@
 				RelativePath=".\Source\Main.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\Source\OldPointerSchemes.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
