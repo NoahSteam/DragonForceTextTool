@@ -242,7 +242,7 @@ void DumpJapaneseText()
 					{
 						bStringEndStarted = true;
 					}
-					else if(currByte == endText2 && bStringEndStarted)
+					else if(currByte == endText2)// && bStringEndStarted)
 					{
 						bStringStarted1 = bStringStarted2 = bStringEndStarted = false;
 
@@ -779,7 +779,7 @@ void InsertEnglishText()
 				{
 					bStringEndStarted = true;
 				}
-				else if(currByte == endText2 && bStringEndStarted)
+				else if(currByte == endText2)// && bStringEndStarted)
 				{
 					bStringStarted1 = bStringStarted2 = bStringEndStarted = false;
 					bStringEnded = true;
