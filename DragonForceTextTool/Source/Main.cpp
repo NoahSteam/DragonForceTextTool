@@ -43,7 +43,9 @@ typedef list<char> BytesList;
 //Eve file byte flags
 const unsigned char	IndentChar = 0x20;
 const int startText1	= 0x85;
+const int startText1_b	= 0xBE;
 const int startText2	= 0xA0;
+const int startText2_b	= 0x88;
 const int endText1		= 0x15;
 const int endText2		= 0;
 
@@ -77,6 +79,7 @@ struct OriginalStringInfo
 typedef vector<OriginalStringInfo> OSIVector;
 
 static bool bFirstPointerFound = 0;
+static bool bSpeechFile = 0;
 
 struct PointerInfo
 {
@@ -218,11 +221,11 @@ void DumpJapaneseText()
 					break;
 
 				//See if we are at the start of a string
-				if(!bStringStarted2 && currByte == startText1)
+				if(!bStringStarted2 && (currByte == startText1 || currByte == startText1_b) )
 					bStringStarted1 = true;
 
 				//See if this is the second start flag
-				else if(bStringStarted1 && !bStringStarted2 && currByte == startText2)
+				else if(bStringStarted1 && !bStringStarted2 && (currByte == startText2) )
 				{
 					//The string will start at the next byte
 					bStringStarted2 = true;
@@ -338,11 +341,16 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 #define INCR_PEEK() ++peek; ++peekBytes;
 
 	//Pointers come in one of the following formats
-	//Type1 = 29 10 nn 00 00 PP PP xx xx 06 PP PP
-	//Type2 = 29 10 00 00 ?? 00 ?? 00 07 PP PP
-	//Type3 = 2F 10 00 00 00 xx 00 xx 06 PP PP 06 PP PP
-	//Type4 = 2F 10 00 00 00 xx 00 06 PP PP 07 PP PP 
-	//Type5 = LL 10 xx 00 25 00 PP PP			//LL (29, 2A, 2B) nn between 01 and 09
+	//Type1  = 29 10 xx 00 00 PP PP xx xx 06 PP PP
+	//Type2  = 29 10 00 00 ?? 00 ?? 00 07 PP PP
+	//Type3  = 2F 10 00 00 00 xx 00 xx 06 PP PP 06 PP PP
+	//Type4  = 2F 10 00 00 00 xx 00 06 PP PP 07 PP PP 
+	//Type5  = LL 10 xx 00 25 00 PP PP			//LL (29, 2A, 2B) nn between 01 and 09
+	//Type6  = BA xx xx 00 07 PP PP				//Only in SPEECH files
+	//Type7  = 86 B6 01 01 01 06 PP PP 07 PP PP 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP //Only in SPEECH files
+	//Type8  = 2E 10 00 00 00 PP PP
+	//Type9  = AF 03 07 PP PP  
+	//Type10 = 15 00 06 PP PP
 
 	int byteOffset = 0;
 	PointerInfo newPointer;
@@ -350,16 +358,31 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 
 	while(inStream != endStream)
 	{
-		bool twoF = false;
-		bool twoA = false;
-		bool twoB = false;
+		bool twoF		= false;
+		bool twoA		= false;
+		bool twoB		= false;
+		bool twoE		= false;
+		bool speechBA	= false;
+		bool speech86	= false;
+		bool speechAF	= false;
+		bool oneFive	= false;
 		
 		newPointer.offset	= 0;
 		pointerStart		= inStream;
 
 		//Not the beginning of a pointer, so just continue
 		char c = *inStream;
-		if( !(c == (char)0x29 || c == (char)0x2F || c == (char)0x2A || c == (char)0x2B) )
+		if( !(
+				c == (char)0x29 || 
+				c == (char)0x2F || 
+				c == (char)0x2A || 
+				c == (char)0x2B || 
+				c == (char)0x15 ||
+				(c == (char)0x2E && bSpeechFile) || 
+				(c == (char)0xAF && bSpeechFile) ||
+				(c == (char)0xBA && bSpeechFile) ||
+				(c == (char)0x86 && bSpeechFile)
+			))
 		{
 			INCR_STREAM();
 			continue;
@@ -367,17 +390,273 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 
 		switch(c)
 		{
-			case 0x2F:
+			case (char)0x2F:
 				twoF = true;
 				break;
 
-			case 0x2A:
+			case (char)0x2A:
 				twoA = true;
 				break;
 
-			case 0x2B:
+			case (char)0x2B:
 				twoB = true;
 				break;
+
+			case (char)0xBA:
+				speechBA = true;
+				break;
+
+			case (char)0x86:
+				speech86 = true;
+				break;
+
+			case (char)0x2E:
+				twoE = true;
+				break;
+
+			case (char)0x4AF:
+				speechAF = true;
+				break;
+
+			case (char)0x15:
+				oneFive = true;
+				break;
+		}
+
+		//		  00 01 02 03
+		//Type9 = AF xx 07 PP PP 
+		if(speechAF)
+		{
+			BytesList::iterator peek = inStream;
+			int peekBytes = 0;
+
+			//00->01
+			INCR_PEEK();
+
+			//01->02
+			INCR_PEEK();
+			if( *peek != (char)0x07 )
+			{
+				INCR_STREAM();
+				continue;
+			}
+
+			//02->03
+			INCR_PEEK();
+
+			//found the pointer
+			newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= byteOffset + peekBytes;
+			outPointers.push_back(newPointer);
+			return true;
+
+		}
+
+		//Special pointer only found in SPEECH files
+		//		  00 01 02 03 04 05
+		//Type6 = BA xx xx 00 07 PP PP				//Only in SPEECH files
+		if(speechBA)
+		{
+			//00->01
+			INCR_STREAM();
+
+			//01->02
+			INCR_STREAM();
+
+			//02->03
+			INCR_STREAM();
+			if(*inStream != 0)
+				continue;
+
+			//03->04
+			INCR_STREAM();
+			if( *inStream != (char)0x07 )
+				continue;
+
+			//04->05
+			INCR_STREAM();
+
+			//found the pointer
+			newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= inStream;
+			newPointer.offset		= byteOffset;
+			outPointers.push_back(newPointer);
+			return true;
+		}
+
+		//		  00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+		//Type7 = 86 B6 01 01 01 06 PP PP 07 PP PP 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP //Only in SPEECH files
+		if(speech86)
+		{
+			BytesList::iterator peek = inStream;
+			int peekBytes = 0;
+
+			//00->01
+			INCR_PEEK();
+			if( *peek != (char)0xB6 )
+				goto failSpeech86;
+
+			//01->02
+			INCR_PEEK();
+			if( *peek != (char)0x01 )
+				goto failSpeech86;
+
+			//02->03
+			INCR_PEEK();
+			if( *peek != (char)0x01 )
+				goto failSpeech86;
+
+			//01->04
+			INCR_PEEK();
+			if( *peek != (char)0x01 )
+				goto failSpeech86;
+
+			//04->05
+			INCR_PEEK();
+			if( *peek != (char)0x06 )
+				goto failSpeech86;
+
+			//05->06
+			INCR_PEEK(); //found a pointer
+						
+	/*		newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= byteOffset + peekBytes;
+			outPointers.push_back(newPointer);
+			peekBytes = 0;
+	*/		
+			
+			//06->07
+			INCR_PEEK();
+			
+			//07->08
+			INCR_PEEK();
+			assert(*peek == (char)0x07 );
+
+			//08->09
+			INCR_PEEK(); //found a pointer			
+			newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= peekBytes + byteOffset;// - 1;
+			outPointers.push_back(newPointer);
+			peekBytes = 0;
+
+			//09->10
+			INCR_PEEK();
+
+			//10->11
+			INCR_PEEK();
+			assert(*peek == (char)0x06 );
+
+			//11->12
+			INCR_PEEK(); //found a pointer			
+		/*	newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= peekBytes - 1;
+			outPointers.push_back(newPointer);
+			peekBytes = 0;
+			*/
+
+			//12->13
+			INCR_PEEK();
+
+			//13->14
+			INCR_PEEK();
+			assert(*peek == (char)0x06 );
+
+			//14->15
+			INCR_PEEK(); //found a pointer			
+	/*		newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= peekBytes - 1;
+			outPointers.push_back(newPointer);
+			peekBytes = 0;
+			*/
+		
+			//15->16
+			INCR_PEEK();
+
+			//16->17
+			INCR_PEEK();
+			assert(*peek == (char)0x07 );
+
+			//17->18
+			INCR_PEEK(); //found a pointer			
+			newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= peekBytes - 1;
+			outPointers.push_back(newPointer);
+			peekBytes = 0;
+
+		/*	//18->19
+			INCR_PEEK();
+
+			//19->20
+			INCR_PEEK();
+			assert(*peek == (char)0x06 );
+
+			//20->21
+			INCR_PEEK(); //found a pointer			
+			newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= peekBytes - 1;
+			outPointers.push_back(newPointer);
+			peekBytes = 0;
+
+			//21->22
+			INCR_PEEK();
+
+			//22->23
+			INCR_PEEK();
+			assert(*peek == (char)0x06 );
+
+			//24->25
+			INCR_PEEK(); //found a pointer			
+			newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= peekBytes - 1;
+			outPointers.push_back(newPointer);
+			peekBytes = 0;
+*/
+			return true;
+failSpeech86:
+			{
+				INCR_STREAM();
+				continue;
+			}
+		}
+
+		//		   00 01 02 03
+		//Type10 = 15 00 06 PP PP
+		if(oneFive)
+		{
+			BytesList::iterator peek = inStream;
+			int peekBytes = 0;
+
+			//00->01
+			INCR_PEEK();
+			if( *peek != 0 )
+				goto failOneFive;
+
+			//01->02
+			INCR_PEEK();
+			if( *peek != (char)0x06 )
+				goto failOneFive;
+
+			//Found pointer
+			INCR_PEEK(); 
+			newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= byteOffset + peekBytes;
+			outPointers.push_back(newPointer);
+			return true;
+
+failOneFive:
+			{
+				INCR_STREAM();
+				continue;
+			}
 		}
 
 		//00->01
@@ -392,6 +671,41 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 		//01->02
 		INCR_STREAM();
 			
+		//	      00 01 02 03 04 05 
+		//Type8 = 2E 10 00 00 00 PP PP
+		if(bSpeechFile && twoE)
+		{
+			BytesList::iterator peek = inStream;
+			int peekBytes = 0;
+
+			if(*peek != 0)
+				goto failTwoE;
+
+			//02->03
+			INCR_PEEK();
+			if(*peek != 0)
+				goto failTwoE;
+
+			//02->04
+			INCR_PEEK();
+			if(*peek != 0)
+				goto failTwoE;
+
+			//found a pointer
+			INCR_PEEK(); 
+			newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= byteOffset + peekBytes;
+			outPointers.push_back(newPointer);
+			return true;
+
+failTwoE:
+			{
+				INCR_STREAM();
+				continue;
+			}
+		}
+
 		//			00 01 02 03 04 05 06 07 08 09 10 11 12
 		//Type3 =	2F 10 00 00 00 xx 00 xx 06 PP PP 06 PP PP                                                             
 		//Type4 =	2F 10 00 00 00 xx 00 06 PP PP 07 PP PP  				
@@ -493,58 +807,13 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 twoFFail:
 			{}
 		}
-
-#if 0
-				//			00 01 02 03 04 05 06 07
-		//Type?	=	2F 10 xx 00 00 11 10 PP PP           <--I think FC 00 is a pointer
-		//			2F 10 01 00 00 11 10 FC 00
-		//			2F 10 01 00 00 11 10 FC 00 00 
-		//			2F 10 15 00 00 11 10 C7 00 
-		if(twoF && *inStream >= 0x00 && *inStream <= 0x15)
-		{
-			BytesList::iterator peek = inStream;
-			int peekBytes = 0;
-
-			//2->3
-			INCR_PEEK();
-			if( *peek != 0 )
-				goto failTypeQ;
-
-			//3->4
-			INCR_PEEK();
-			if( *peek != 0 )
-				goto failTypeQ;
-
-			//4->5
-			INCR_PEEK();
-			if( *peek != (char)0x11 )
-				goto failTypeQ;
-
-			//5->6
-			INCR_PEEK();
-			if( *peek != (char)0x10 )
-				goto failTypeQ;
-
-			//6->7
-			INCR_PEEK();
-			
-			newPointer.pointerStart = pointerStart;
-			newPointer.pointer		= peek;
-			newPointer.offset		= peekBytes + byteOffset;
-			outPointers.push_back(newPointer);
-			return true;
-failTypeQ:
-			{}
-		}
-#endif
-
+		
 		//If this is a Type1 pointer
 		//			00 01 02 03 04 05 06 07 08 09 10 11 12
 		//Type1 =	29 10 xx 00 00 PP PP xx xx 06 PP PP
-		//Type5 =	LL 10 xx 00 25 00 PP PP			//LL (29, 2A, 2B) nn between 01 and 09
-		//			29 10 00 00 25 00 6F 
+		//Type5 =	LL 10 xx 00 25 00 PP PP			//LL (29, 2A, 2B) nn between 01 and 09		
 		//02
-		if( bFirstPointerFound && !twoF && (*inStream >= 0x00 && *inStream <= 0x09) )
+		if( bFirstPointerFound && !twoF && (*inStream >= 0x00 && *inStream <= 0xFF) )//0x09) )
 		{
 			//02->03
 			INCR_STREAM();
@@ -733,6 +1002,11 @@ void InsertEnglishText()
 		else
 			bFirstPointerFound = false;
 
+		if( eveFileName.find("SPEECH") == string::npos )
+			bSpeechFile = false;
+		else
+			bSpeechFile = true;
+
 		while(currByte != EOF)
 		{
 			currByte = fgetc(pInEveFile);
@@ -742,12 +1016,12 @@ void InsertEnglishText()
 			++byteCount;
 
 			//See if we are at the start of a string
-			if(!bStringStarted2 && currByte == startText1)
+			if(!bStringStarted2 && (currByte == startText1 || currByte == startText1_b) )
 			{
 				bStringStarted1 = true;
 			}
 			//See if this is the second start flag
-			else if(bStringStarted1 && !bStringStarted2 && currByte == startText2)
+			else if(bStringStarted1 && !bStringStarted2 && (currByte == startText2) )
 			{
 				currStringInfo.numBytes = 0;
 
@@ -781,6 +1055,17 @@ void InsertEnglishText()
 				}
 				else if(currByte == endText2)// && bStringEndStarted)
 				{
+					//if being end marker appeared (0x15), insert that in
+					if(bStringEndStarted)
+					{
+						fileBytes.push_back( (char)endText1 );
+					}
+					else
+					{
+						int k = 0;
+						++k;
+					}
+
 					bStringStarted1 = bStringStarted2 = bStringEndStarted = false;
 					bStringEnded = true;
 
@@ -794,7 +1079,7 @@ void InsertEnglishText()
 
 				if(bStringEnded)
 				{
-					fileBytes.push_back( (char)endText1 );
+					//fileBytes.push_back( (char)endText1 );
 					fileBytes.push_back( 0 );
 				}
 			}
