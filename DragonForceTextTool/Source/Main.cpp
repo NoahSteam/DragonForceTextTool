@@ -78,8 +78,9 @@ struct OriginalStringInfo
 };
 typedef vector<OriginalStringInfo> OSIVector;
 
-static bool bFirstPointerFound = 0;
-static bool bSpeechFile = 0;
+static bool bFirstPointerFound	= false;
+static bool bSpeechFile			= false;
+static bool bFieldXXFile		= false;
 
 struct PointerInfo
 {
@@ -349,9 +350,9 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 	//Type6  = BA xx xx 00 07 PP PP				//Only in SPEECH files
 	//Type7  = 86 B6 01 01 01 06 PP PP 07 PP PP 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP //Only in SPEECH files
 	//Type8  = 2E 10 00 00 00 PP PP
-	//Type9  = AF 03 07 PP PP  
-	//Type10 = 15 00 06 PP PP
-
+	//Type9  = AF 03 07 PP PP 
+	//Type10 = C1 03 00 00 06 PP PP				//Only in FIELD_xx files
+	
 	int byteOffset = 0;
 	PointerInfo newPointer;
 	BytesList::iterator pointerStart;
@@ -365,7 +366,7 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 		bool speechBA	= false;
 		bool speech86	= false;
 		bool speechAF	= false;
-		bool oneFive	= false;
+		bool fieldC1	= false;
 		
 		newPointer.offset	= 0;
 		pointerStart		= inStream;
@@ -381,7 +382,8 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 				(c == (char)0x2E && bSpeechFile) || 
 				(c == (char)0xAF && bSpeechFile) ||
 				(c == (char)0xBA && bSpeechFile) ||
-				(c == (char)0x86 && bSpeechFile)
+				(c == (char)0x86 && bSpeechFile) ||
+				(c == (char)0xC1 && bFieldXXFile)
 			))
 		{
 			INCR_STREAM();
@@ -418,9 +420,53 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 				speechAF = true;
 				break;
 
-			case (char)0x15:
-				oneFive = true;
+			case (char)0xC1:
+				fieldC1 = true;
 				break;
+		}
+
+		//		   00 01 02 03 04 05
+		//Type10 = C1 03 00 00 06 PP PP
+		if(fieldC1)
+		{
+			BytesList::iterator peek = inStream;
+			int peekBytes = 0;
+
+			//00->01
+			INCR_PEEK();
+			if( *peek != (char)0x03 )
+				goto failFieldC1;
+
+			//01->02
+			INCR_PEEK();
+			if( *peek != 0 )
+				goto failFieldC1;
+
+			//02->03
+			INCR_PEEK();
+			if( *peek != 0 )
+				goto failFieldC1;
+
+			//03->04
+			INCR_PEEK();
+			if( *peek != (char)0x06 )
+				goto failFieldC1;
+
+			//04->05
+			INCR_PEEK();
+
+			//found the pointer
+			newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= byteOffset + peekBytes;
+			outPointers.push_back(newPointer);
+			return true;
+
+failFieldC1:
+			{
+				INCR_STREAM();
+				continue;
+			}
 		}
 
 		//		  00 01 02 03
@@ -458,29 +504,38 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 		//Type6 = BA xx xx 00 07 PP PP				//Only in SPEECH files
 		if(speechBA)
 		{
+			BytesList::iterator peek = inStream;
+			int peekBytes = 0;
+
 			//00->01
-			INCR_STREAM();
+			INCR_PEEK();
 
 			//01->02
-			INCR_STREAM();
+			INCR_PEEK();
 
 			//02->03
-			INCR_STREAM();
-			if(*inStream != 0)
+			INCR_PEEK();
+			if(*peek != 0)
+			{
+				INCR_STREAM();
 				continue;
+			}
 
 			//03->04
-			INCR_STREAM();
-			if( *inStream != (char)0x07 )
+			INCR_PEEK();
+			if( *peek != (char)0x07 )
+			{
+				INCR_STREAM();
 				continue;
+			}
 
 			//04->05
-			INCR_STREAM();
+			INCR_PEEK();
 
 			//found the pointer
 			newPointer.pointerStart = pointerStart;
-			newPointer.pointer		= inStream;
-			newPointer.offset		= byteOffset;
+			newPointer.pointer		= peek;
+			newPointer.offset		= byteOffset + peekBytes;
 			outPointers.push_back(newPointer);
 			return true;
 		}
@@ -621,38 +676,6 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 */
 			return true;
 failSpeech86:
-			{
-				INCR_STREAM();
-				continue;
-			}
-		}
-
-		//		   00 01 02 03
-		//Type10 = 15 00 06 PP PP
-		if(oneFive)
-		{
-			BytesList::iterator peek = inStream;
-			int peekBytes = 0;
-
-			//00->01
-			INCR_PEEK();
-			if( *peek != 0 )
-				goto failOneFive;
-
-			//01->02
-			INCR_PEEK();
-			if( *peek != (char)0x06 )
-				goto failOneFive;
-
-			//Found pointer
-			INCR_PEEK(); 
-			newPointer.pointerStart = pointerStart;
-			newPointer.pointer		= peek;
-			newPointer.offset		= byteOffset + peekBytes;
-			outPointers.push_back(newPointer);
-			return true;
-
-failOneFive:
 			{
 				INCR_STREAM();
 				continue;
@@ -938,7 +961,8 @@ void InsertEnglishText()
 	unsigned char translationTable[512];
 	FILE *pIndexFile = NULL;
 	fopen_s(&pIndexFile, "DF2Files\\Misc\\SPE_MAIN.bin", "rb");
-	
+	assert(pIndexFile);
+
 	//Move to the start of the dictionary
 	int result = fseek(pIndexFile, 0xBE0, SEEK_SET);
 	assert(result == 0);
@@ -998,14 +1022,19 @@ void InsertEnglishText()
 
 		//if this is a START_ eve file, then there is a special kind of pointer at the start
 		if( eveFileName.find("START_") == string::npos )
-			bFirstPointerFound = true;
+			bFirstPointerFound = true; //Only need to search for it in START FILES
 		else
-			bFirstPointerFound = false;
+			bFirstPointerFound = false; //For all other files we don't look for it
 
 		if( eveFileName.find("SPEECH") == string::npos )
 			bSpeechFile = false;
 		else
 			bSpeechFile = true;
+
+		if(eveFileName.find("FIELD_") == string::npos)
+			bFieldXXFile = false;
+		else
+			bFieldXXFile = true;
 
 		while(currByte != EOF)
 		{
