@@ -30,6 +30,8 @@
 #include <vector>
 #include <list>
 #include <assert.h>
+#include <time.h>
+#include <direct.h>
 
 using std::string;
 using std::vector;
@@ -54,8 +56,9 @@ const string df2EveJapDumpPath(			"DF2Files\\EveJapaneseText\\");
 const string df2EnglishPath(			"DF2Files\\EveEnglishText\\");
 const string df2EveStringInfoPath(		"DF2Files\\EveStringInfo\\");
 const string df2TranslatedPath(			"DF2Files\\EveTranslated\\");
-const string df2PointerLogPath(			"DF2Files\\EveLog\\PointerFixups\\");
-const string df2TextInsertionLogPath(	"DF2Files\\EveLog\\TextInsertions\\");
+const string df2LogPath(				"DF2Files\\EveLog\\");
+const string df2PointerLogPath(			"PointerFixups\\");
+const string df2TextInsertionLogPath(	"TextInsertions\\");
 
 #define FPUTC_VERIFIED(c, file) if( fputc(c, file) == EOF ) {__debugbreak();}
 #define FGETC_VERIFIED(c, file) c = fgetc(file); if(c == EOF) {__debugbreak();}
@@ -338,8 +341,8 @@ void DumpJapaneseText()
 //Finds next pointer in a stream of bytes from an .eve file
 bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &endStream, PointerVector &outPointers)//BytesList::iterator &outPointer, int &inOutCurrByte)
 {
-#define INCR_STREAM() ++inStream; ++byteOffset;
-#define INCR_PEEK() ++peek; ++peekBytes;
+#define INCR_STREAM() ++inStream; ++byteOffset; if(inStream == endStream) return false; 
+#define INCR_PEEK() ++peek; ++peekBytes; if(peek == endStream) return false; 
 
 	//Pointers come in one of the following formats
 	//Type1  = 29 10 xx 00 00 PP PP xx xx 06 PP PP
@@ -352,7 +355,8 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 	//Type8  = 2E 10 00 00 00 PP PP
 	//Type9  = AF 03 07 PP PP 
 	//Type10 = C1 03 00 00 06 PP PP				//Only in FIELD_xx files
-	
+	//Type11 = ss 06 PP PP						//ss = 0, in FIELD_XX can be 94, C0 
+
 	int byteOffset = 0;
 	PointerInfo newPointer;
 	BytesList::iterator pointerStart;
@@ -367,6 +371,7 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 		bool speech86	= false;
 		bool speechAF	= false;
 		bool fieldC1	= false;
+		bool zero6		= false;
 		
 		newPointer.offset	= 0;
 		pointerStart		= inStream;
@@ -377,12 +382,13 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 				c == (char)0x29 || 
 				c == (char)0x2F || 
 				c == (char)0x2A || 
-				c == (char)0x2B || 
-				c == (char)0x15 ||
+				c == (char)0x2B ||
+				c == (char)0x00 ||
 				(c == (char)0x2E && bSpeechFile) || 
 				(c == (char)0xAF && bSpeechFile) ||
 				(c == (char)0xBA && bSpeechFile) ||
 				(c == (char)0x86 && bSpeechFile) ||
+				( (c == (char)0x94 || c == (char)0xC0 ) && bFieldXXFile ) || 
 				(c == (char)0xC1 && bFieldXXFile)
 			))
 		{
@@ -423,6 +429,39 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 			case (char)0xC1:
 				fieldC1 = true;
 				break;
+
+			case (char)0x94:
+			case (char)0x1E:
+			case (char)0xC0:			
+			case (char)0x00:
+				zero6 = true;
+				break;
+		}
+
+		//			00 01 02
+		//Type11 =  ss 06 PP PP
+		if(zero6)
+		{
+			BytesList::iterator peek = inStream;
+			int peekBytes = 0;
+
+			//00->01
+			INCR_PEEK();
+			if( *peek != (char)0x06 )
+			{
+				INCR_STREAM();
+				continue;
+			}
+
+			//01->02
+			INCR_PEEK();
+
+			//found the pointer
+			newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= byteOffset + peekBytes;
+			outPointers.push_back(newPointer);
+			return true;
 		}
 
 		//		   00 01 02 03 04 05
@@ -979,12 +1018,35 @@ void InsertEnglishText()
 	//Go through all eve files
 	const string eveExtension(".EVE");
 	const string engExtension(".txt");
-	const string logExtension(".txt");
+	const string pointerLogExtension("_PointerLog.txt");
+	const string textLogExtension("_TextLog.txt");
+
+	//create log directories
+	struct tm timeInfo;
+	time_t rawtime;
+	time ( &rawtime );
+	localtime_s(&timeInfo, &rawtime );
+	char dirBuffer[512];
+	sprintf_s(dirBuffer, 512, "%sLogs_%i_%i_%i_%i\\", df2LogPath.c_str(), timeInfo.tm_mday, timeInfo.tm_hour, timeInfo.tm_min, timeInfo.tm_sec);	
+	const string logDir(dirBuffer);
+
+	//base dir
+	int dirCreated = _mkdir(dirBuffer);
+	assert( dirCreated == 0);
+
+	//other dir
+	dirCreated = sprintf_s(dirBuffer, 512, "%s\\%s", logDir.c_str(), df2PointerLogPath.c_str());
+	dirCreated = _mkdir(dirBuffer);
+	assert( dirCreated == 0);
+
+	dirCreated = sprintf_s(dirBuffer, 512, "%s\\%s", logDir.c_str(), df2TextInsertionLogPath.c_str());
+	dirCreated = _mkdir(dirBuffer);
+	assert( dirCreated == 0);
 
 	for(size_t currFile = 0; currFile < eveFiles.size(); ++currFile)
 	{
 		//Open file with translated text, if it doesn't exist, then skip translating the eve file
-		const string engFileName		= df2EnglishPath	+ eveFiles[currFile] + engExtension;
+		const string engFileName		= df2EnglishPath + eveFiles[currFile] + engExtension;
 		FILE *pInEngFile				= NULL;
 		fopen_s(&pInEngFile, engFileName.c_str(), "rb");
 		if(!pInEngFile)
@@ -992,8 +1054,8 @@ void InsertEnglishText()
 
 		const string eveFileName			= df2EveFilesPath	+ eveFiles[currFile] + eveExtension;
 		const string translatedFileName		= df2TranslatedPath + eveFiles[currFile] + eveExtension;
-		const string pointerLogFileName		= df2PointerLogPath + eveFiles[currFile] + logExtension;
-		const string textInsertLogFileName	= df2TextInsertionLogPath + eveFiles[currFile] + logExtension;
+		const string pointerLogFileName		= logDir + df2PointerLogPath + eveFiles[currFile] + pointerLogExtension;
+		const string textInsertLogFileName	= logDir + df2TextInsertionLogPath + eveFiles[currFile] + textLogExtension;
 		FILE *pInEveFile					= NULL;
 		FILE *pOutEveFile					= NULL;
 		FILE *pPointerLogFile				= NULL;
@@ -1089,12 +1151,7 @@ void InsertEnglishText()
 					{
 						fileBytes.push_back( (char)endText1 );
 					}
-					else
-					{
-						int k = 0;
-						++k;
-					}
-
+	
 					bStringStarted1 = bStringStarted2 = bStringEndStarted = false;
 					bStringEnded = true;
 
