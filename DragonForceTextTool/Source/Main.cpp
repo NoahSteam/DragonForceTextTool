@@ -1,27 +1,3 @@
-#if (_WIN32_WINNT >= 0x0400) || (_WIN32_WINDOWS > 0x0400)
-#define WM_MOUSEWHEEL                   0x020A
-#endif
-
-#ifndef WINVER                // Allow use of features specific to Windows 95 and Windows NT 4 or later.
-#define WINVER 0x0501        // Change this to the appropriate value to target Windows 98 and Windows 2000 or later.
-#endif
-
-#ifndef _WIN32_WINNT        // Allow use of features specific to Windows NT 4 or later.
-#define _WIN32_WINNT 0x0501        // Change this to the appropriate value to target Windows 98 and Windows 2000 or later.
-#endif                        
-
-#ifndef _WIN32_WINDOWS        // Allow use of features specific to Windows 98 or later.
-#define _WIN32_WINDOWS 0x0501 // Change this to the appropriate value to target Windows Me or later.
-#endif
-
-#ifndef WINDOWS_LEAN_AND_MEAN
-#define WINDOWS_LEAN_AND_MEAN
-#endif
-
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-
 #include <windows.h>
 #include <windowsx.h>
 
@@ -59,6 +35,7 @@ const string df2TranslatedPath(			"DF2Files\\EveTranslated\\");
 const string df2LogPath(				"DF2Files\\EveLog\\");
 const string df2PointerLogPath(			"PointerFixups\\");
 const string df2TextInsertionLogPath(	"TextInsertions\\");
+const string df2PossiblePointersLogPath("PossiblePointers\\");
 
 #define FPUTC_VERIFIED(c, file) if( fputc(c, file) == EOF ) {__debugbreak();}
 #define FGETC_VERIFIED(c, file) c = fgetc(file); if(c == EOF) {__debugbreak();}
@@ -99,15 +76,16 @@ struct OrigAddressInfo
 					const BytesList::iterator inPointerStart, const BytesList::iterator& inPointer) :	firstByte(inFB), secondByte(inSB), 
 																										newFirstByte(inNFB), newSecondByte(inNSB),
 																										newLoc(inNewLoc),
+																										address( (inNFB << 8) | (inSB & 0xff) ),
 																										origBytes(inOrigBytes),
 																										pointerStart(inPointerStart),
 																										pointer(inPointer){}
-
 	unsigned int		firstByte;
 	unsigned int		secondByte;
 	unsigned int		newFirstByte;
 	unsigned int		newSecondByte;
 	unsigned short		newLoc;
+	unsigned int		address;
 	BytesList::iterator pointerStart;
 	BytesList::iterator pointer;
 	vector<int>			origBytes;
@@ -353,9 +331,13 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 	//Type6  = BA xx xx 00 07 PP PP				//Only in SPEECH files
 	//Type7  = 86 B6 01 01 01 06 PP PP 07 PP PP 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP //Only in SPEECH files
 	//Type8  = 2E 10 00 00 00 PP PP
-	//Type9  = AF 03 07 PP PP 
+	//Type9  = AF xx 07 PP PP					
 	//Type10 = C1 03 00 00 06 PP PP				//Only in FIELD_xx files
 	//Type11 = ss 06 PP PP						//ss = 0, in FIELD_XX can be 94, C0 
+	//Type12 = 02 06 PP PP						//Only in SPEECH files
+
+	//TODO: 2B 10 00 00 PP PP
+	//TODO: 2F 10 xx 00 00 88 PP
 
 	int byteOffset = 0;
 	PointerInfo newPointer;
@@ -372,6 +354,7 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 		bool speechAF	= false;
 		bool fieldC1	= false;
 		bool zero6		= false;
+		bool two6		= false;
 		
 		newPointer.offset	= 0;
 		pointerStart		= inStream;
@@ -384,6 +367,7 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 				c == (char)0x2A || 
 				c == (char)0x2B ||
 				c == (char)0x00 ||
+				(c == (char)0x02 && bSpeechFile) ||
 				(c == (char)0x2E && bSpeechFile) || 
 				(c == (char)0xAF && bSpeechFile) ||
 				(c == (char)0xBA && bSpeechFile) ||
@@ -430,12 +414,43 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 				fieldC1 = true;
 				break;
 
+			case (char)0x02:
+				two6 = true;
+				break;
+
 			case (char)0x94:
 			case (char)0x1E:
 			case (char)0xC0:			
 			case (char)0x00:
 				zero6 = true;
 				break;
+		}
+
+		//Only in SPEECH files
+		//		   00 01 02
+		//Type12 = 02 06 PP PP
+		if(two6)
+		{
+			BytesList::iterator peek = inStream;
+			int peekBytes = 0;
+
+			//00->01
+			INCR_PEEK();
+			if( *peek != (char)0x06 )
+			{
+				INCR_STREAM();
+				continue;
+			}
+
+			//01->02
+			INCR_PEEK();
+
+			//found the pointer
+			newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= byteOffset + peekBytes;
+			outPointers.push_back(newPointer);
+			return true;
 		}
 
 		//			00 01 02
@@ -993,6 +1008,116 @@ int GetPointerOffset(const OSIVector &newStringsInfo, const OSIVector &origStrin
 	return offset;
 }
 
+static vector<int> GFoundAddresses;
+void FindPotentialDuplicatePointers(const OrigAddressInfo &pointerInfo, const BytesList &fileBytes, const vector<OrigAddressInfo> &otherPointers, FILE *pPossiblePointersLogFile)
+{
+#define INCR_BYTE() ++bytesIter; ++currByte;
+
+	if(pointerInfo.firstByte == 0 && pointerInfo.secondByte == 0)
+		return;
+
+	const int address = (pointerInfo.firstByte << 8) | (pointerInfo.secondByte & 0xff);
+	for(size_t i = 0; i < GFoundAddresses.size(); ++i)
+	{
+		if( GFoundAddresses[i] == address )
+			return;
+	}
+
+	int currByte = 0;
+	bool bStringStarted1	= false;
+	bool bStringStarted2	= false;
+	bool bStringEndStarted	= false;
+	for( BytesList::const_iterator bytesIter = fileBytes.begin(); bytesIter != fileBytes.end(); ++bytesIter, ++currByte)
+	{
+		//Skip the passed in pointer
+		if(currByte == pointerInfo.newLoc)
+		{
+			bStringStarted1 = bStringStarted2 = false;
+			INCR_BYTE();
+			continue;
+		}
+
+		//***Make sure we aren't in between a string***
+		const int byteValue = (int) ((unsigned char)*bytesIter);
+
+		//See if we are at the start of a string
+		if(!bStringStarted2 && (byteValue == startText1 || byteValue == startText1_b) )
+		{
+			bStringStarted1 = true;
+		}
+		//See if this is the second start flag
+		else if(bStringStarted1 && !bStringStarted2 && (byteValue == (int)IndentChar) )
+		{
+			bStringStarted2 = true;
+
+			//start of a string so skip
+			continue;
+		}
+		//If we thought a string was going to start but it didn't at this byte, the prev byte wasn't a start flag, so reset flags
+		else if(bStringStarted1 && !bStringStarted2) 
+		{
+			bStringStarted1 = bStringStarted2 = false;
+		}
+
+		//See if we are at the end of a string		
+		if(bStringStarted1 && bStringStarted2)
+		{
+			if(byteValue == endText1)
+			{
+				bStringEndStarted = true;
+			}
+			else if(byteValue == endText2)
+			{
+				bStringStarted1 = bStringStarted2 = false;
+				continue;
+			}
+			else //This byte is part of a string
+			{
+				continue;
+			}
+		}
+		//***Done checking if in middle of a string***
+
+		//First byte found
+		if( *bytesIter == (char)pointerInfo.secondByte )
+		{
+			//Go to next byte
+			INCR_BYTE();
+
+			//Make sure we are not at the end of the file
+			if( bytesIter == fileBytes.end() )
+				break;
+
+			//See if it matches the second byte
+			if( *bytesIter == (char)pointerInfo.firstByte  )
+			{
+				//Make sure this dup hasn't already been found
+				bool bAlreadyFound = false;
+				for(size_t otherPointerIndex = 0; otherPointerIndex < otherPointers.size(); ++otherPointerIndex)
+				{
+					if( otherPointers[otherPointerIndex].newLoc == currByte-1 )
+					{
+						bAlreadyFound = true;
+						break;
+					}
+				}
+
+				//We already know about this dup
+				if(bAlreadyFound)
+					continue;
+
+				//Real duplicate
+				fprintf(pPossiblePointersLogFile, "CurrValue: %.2X %.2X  FixedValue: %.2X %.2X     @%.4X \n", pointerInfo.secondByte, pointerInfo.firstByte, pointerInfo.newSecondByte, pointerInfo.newFirstByte, currByte-1);
+
+				//Store where this duplicate is so we don't print out the same one twice
+				GFoundAddresses.push_back( (pointerInfo.firstByte << 8) | (pointerInfo.secondByte & 0xff) );
+
+				bStringStarted1 = bStringStarted2 = false;
+			}
+		}
+	}
+}
+
 //Inserts English text into an eve file
 void InsertEnglishText()
 {
@@ -1020,6 +1145,7 @@ void InsertEnglishText()
 	const string engExtension(".txt");
 	const string pointerLogExtension("_PointerLog.txt");
 	const string textLogExtension("_TextLog.txt");
+	const string possiblePointersLogExtension("_PossiblePointers.txt");
 
 	//create log directories
 	struct tm timeInfo;
@@ -1043,6 +1169,10 @@ void InsertEnglishText()
 	dirCreated = _mkdir(dirBuffer);
 	assert( dirCreated == 0);
 
+	dirCreated = sprintf_s(dirBuffer, 512, "%s\\%s", logDir.c_str(), df2PossiblePointersLogPath.c_str());
+	dirCreated = _mkdir(dirBuffer);
+	assert( dirCreated == 0);
+
 	for(size_t currFile = 0; currFile < eveFiles.size(); ++currFile)
 	{
 		//Open file with translated text, if it doesn't exist, then skip translating the eve file
@@ -1052,22 +1182,32 @@ void InsertEnglishText()
 		if(!pInEngFile)
 			continue;
 
-		const string eveFileName			= df2EveFilesPath	+ eveFiles[currFile] + eveExtension;
-		const string translatedFileName		= df2TranslatedPath + eveFiles[currFile] + eveExtension;
-		const string pointerLogFileName		= logDir + df2PointerLogPath + eveFiles[currFile] + pointerLogExtension;
-		const string textInsertLogFileName	= logDir + df2TextInsertionLogPath + eveFiles[currFile] + textLogExtension;
-		FILE *pInEveFile					= NULL;
-		FILE *pOutEveFile					= NULL;
-		FILE *pPointerLogFile				= NULL;
-		FILE *pTextInsertLogFile			= NULL;
+		GFoundAddresses.clear();
+
+		fprintf(stdout, "Processing %s\n", eveFiles[currFile].c_str());
+
+		const string eveFileName					= df2EveFilesPath	+ eveFiles[currFile] + eveExtension;
+		const string translatedFileName				= df2TranslatedPath + eveFiles[currFile] + eveExtension;
+		const string pointerLogFileName				= logDir + df2PointerLogPath + eveFiles[currFile] + pointerLogExtension;
+		const string textInsertLogFileName			= logDir + df2TextInsertionLogPath + eveFiles[currFile] + textLogExtension;
+		const string possiblePointersLogFileName	= logDir + df2PossiblePointersLogPath + eveFiles[currFile] + possiblePointersLogExtension;
+		FILE *pInEveFile							= NULL;
+		FILE *pOutEveFile							= NULL;
+		FILE *pPointerLogFile						= NULL;
+		FILE *pTextInsertLogFile					= NULL;
+		FILE *pPossiblePointersLogFile				= NULL;
 		
 		fopen_s(&pInEveFile,			eveFileName.c_str(), "rb");
 		fopen_s(&pOutEveFile,			translatedFileName.c_str(), "wb");
 		fopen_s(&pPointerLogFile,		pointerLogFileName.c_str(), "w");
 		fopen_s(&pTextInsertLogFile,	textInsertLogFileName.c_str(), "w");
-		
+		fopen_s(&pPossiblePointersLogFile, possiblePointersLogFileName.c_str(), "w");
+
 		assert(pInEveFile);
 		assert(pOutEveFile);
+		assert(pPointerLogFile);
+		assert(pTextInsertLogFile);
+		assert(pPossiblePointersLogFile);
 
 		bool bStringStarted1	= false;
 		bool bStringStarted2	= false;
@@ -1333,7 +1473,7 @@ void InsertEnglishText()
 			}			
 		}
 
-		//Save log file
+		//Save pointer log file
 		fprintf(pPointerLogFile, "Little Endian           Big Endian		NewValue						Full\n");
 		for(size_t i = 0; i < logInfo.size(); ++i)
 		{
@@ -1349,15 +1489,15 @@ void InsertEnglishText()
 				++currInfo.pointerStart;
 			}
 			fprintf(pPointerLogFile, "%.2X %.2X\n", currInfo.secondByte, currInfo.firstByte);
+
+			FindPotentialDuplicatePointers(currInfo, fileBytes, logInfo, pPossiblePointersLogFile);
 		}
 		
 		//write out translated file
-		int counter = 0;
 		for( BytesList::const_iterator newBytesIter = fileBytes.begin(); newBytesIter != fileBytes.end(); ++newBytesIter)
 		{
 			fputc( (char)*newBytesIter, pOutEveFile);
-			++counter;
-		}
+		}		
 
 		fclose(pInEngFile);
 		fclose(pInEveFile);
@@ -1367,7 +1507,7 @@ void InsertEnglishText()
 	}//for(eve files)
 }
 
-int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
+void main()
 {
 #if _DEBUG
 	_CrtSetDbgFlag( _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG) | _CRTDBG_LEAK_CHECK_DF );
@@ -1377,5 +1517,5 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 //	DumpJapaneseText();
 	InsertEnglishText();
 
-	return 0;
+	return;
 }
