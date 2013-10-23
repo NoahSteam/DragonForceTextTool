@@ -335,9 +335,9 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 	//Type10 = C1 03 00 00 06 PP PP				//Only in FIELD_xx files
 	//Type11 = ss 06 PP PP						//ss = 0, in FIELD_XX can be 94, C0 
 	//Type12 = 02 06 PP PP						//Only in SPEECH files
-
-	//TODO: 2B 10 00 00 PP PP
-	//TODO: 2F 10 xx 00 00 88 PP
+	//Type13 = 2F 10 xx 00 00 88 PP
+	//Type14 = 00 1E PP PP 
+	//TODO:  = 2B 10 00 00 PP PP		
 
 	int byteOffset = 0;
 	PointerInfo newPointer;
@@ -455,6 +455,7 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 
 		//			00 01 02
 		//Type11 =  ss 06 PP PP
+		//Type14 =  00 1E PP PP 
 		if(zero6)
 		{
 			BytesList::iterator peek = inStream;
@@ -462,6 +463,21 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 
 			//00->01
 			INCR_PEEK();
+
+			if( *peek == (char)0x1E )
+			{
+				//01->02
+				INCR_PEEK();
+
+				//found the pointer
+				newPointer.pointerStart = pointerStart;
+				newPointer.pointer		= peek;
+				newPointer.offset		= byteOffset + peekBytes;
+				outPointers.push_back(newPointer);
+				return true;
+			}
+
+			//Type11
 			if( *peek != (char)0x06 )
 			{
 				INCR_STREAM();
@@ -784,9 +800,10 @@ failTwoE:
 		}
 
 		//			00 01 02 03 04 05 06 07 08 09 10 11 12
-		//Type3 =	2F 10 00 00 00 xx 00 xx 06 PP PP 06 PP PP                                                             
-		//Type4 =	2F 10 00 00 00 xx 00 06 PP PP 07 PP PP  				
-		if(twoF && *inStream >= 0x00 && *inStream <= 0x09)
+		//Type3  =	2F 10 xx 00 00 87 00 xx 06 PP PP 06 PP PP                                                             
+		//Type4  =	2F 10 xx 00 00 87 00 06 PP PP 07 PP PP
+		//Type13 =  2F 10 xx 00 00 SS PP PP where SS is 88, C6
+		if(twoF)// && *inStream >= 0x00 && *inStream <= 0xFF)//.. 0x09)
 		{
 			BytesList::iterator peek = inStream;
 			int peekBytes = 0;
@@ -803,7 +820,23 @@ failTwoE:
 			
 			//04->05
 			INCR_PEEK();
-			if(*peek != (char)0x87)
+
+			//Type13
+			if( *peek == (char)0x88 || *peek == (char)0xC6)
+			{
+				//05->06
+				INCR_PEEK();
+
+				newPointer.pointerStart = pointerStart;
+				newPointer.pointer		= peek;
+				newPointer.offset		= peekBytes + byteOffset;
+				outPointers.push_back(newPointer);
+
+				return true;
+			}
+			
+			//05
+			if( *peek != (char)0x87 )
 				goto twoFFail;
 
 			//05->06
@@ -890,7 +923,7 @@ twoFFail:
 		//Type1 =	29 10 xx 00 00 PP PP xx xx 06 PP PP
 		//Type5 =	LL 10 xx 00 25 00 PP PP			//LL (29, 2A, 2B) nn between 01 and 09		
 		//02
-		if( bFirstPointerFound && !twoF && (*inStream >= 0x00 && *inStream <= 0xFF) )//0x09) )
+		if( bFirstPointerFound && !twoF )// && (*inStream >= 0x00 && *inStream <= 0xFF) )//0x09) )
 		{
 			//02->03
 			INCR_STREAM();
@@ -1479,6 +1512,11 @@ void InsertEnglishText()
 		{
 			OrigAddressInfo &currInfo = logInfo[i];
 			
+			if( currInfo.newLoc >= fileBytes.size() )
+			{
+				fprintf(pPointerLogFile, "WARNING: Address is outside of file ");
+			}
+
 			fprintf(pPointerLogFile, "%.2X %.2X                   %.2X %.2X			%.2X %.2X (@%.4X)	 			",
 				currInfo.secondByte, currInfo.firstByte, currInfo.firstByte, currInfo.secondByte, currInfo.newFirstByte, currInfo.newSecondByte, currInfo.newLoc);
 
