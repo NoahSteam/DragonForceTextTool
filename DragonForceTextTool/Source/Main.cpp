@@ -331,7 +331,7 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 	//Type6  = BA xx xx 00 07 PP PP				//Only in SPEECH files
 	//Type7  = 86 B6 01 01 01 06 PP PP 07 PP PP 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP //Only in SPEECH files
 	//Type8  = 2E 10 00 00 00 PP PP
-	//Type9  = AF xx 07 PP PP					
+	//Type9  = AF xx 07 PP PP 88 07 PP PP TODO after 88					
 	//Type10 = C1 03 00 00 06 PP PP				//Only in FIELD_xx files
 	//Type11 = ss 06 PP PP						//ss = 0, in FIELD_XX can be 94, C0 
 	//Type12 = 02 06 PP PP						//Only in SPEECH files
