@@ -327,16 +327,17 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 	//Type2  = 29 10 00 00 ?? 00 ?? 00 07 PP PP
 	//Type3  = 2F 10 00 00 00 xx 00 xx 06 PP PP 06 PP PP
 	//Type4  = 2F 10 00 00 00 xx 00 06 PP PP 07 PP PP 
-	//Type5  = LL 10 xx 00 25 00 PP PP			//LL (29, 2A, 2B) nn between 01 and 09
+	//Type5  = LL 10 xx 00 25 00 PP PP 06 PP	//LL (29, 2A, 2B) nn between 01 and 09
 	//Type6  = BA xx xx 00 07 PP PP				//Only in SPEECH files
 	//Type7  = 86 B6 01 01 01 06 PP PP 07 PP PP 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP //Only in SPEECH files
 	//Type8  = 2E 10 00 00 00 PP PP
-	//Type9  = AF xx 07 PP PP 88 07 PP PP TODO after 88					
+	//Type9  = AF xx 07 PP PP 88 07 PP PP
 	//Type10 = C1 03 00 00 06 PP PP				//Only in FIELD_xx files
 	//Type11 = ss 06 PP PP						//ss = 0, in FIELD_XX can be 94, C0 
 	//Type12 = 02 06 PP PP						//Only in SPEECH files
 	//Type13 = 2F 10 xx 00 00 88 PP
-	//Type14 = 00 1E PP PP 
+	//Type14 = 00 1E PP PP						//No longer used
+	//Type15 = LL 10 xx 00 00 PP PP 06 PP PP
 	//TODO:  = 2B 10 00 00 PP PP		
 
 	int byteOffset = 0;
@@ -349,6 +350,7 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 		bool twoA		= false;
 		bool twoB		= false;
 		bool twoE		= false;
+		bool two9		= false;
 		bool speechBA	= false;
 		bool speech86	= false;
 		bool speechAF	= false;
@@ -382,6 +384,10 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 
 		switch(c)
 		{
+			case (char)0x29:
+				two9 = true;
+				break;
+
 			case (char)0x2F:
 				twoF = true;
 				break;
@@ -464,7 +470,7 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 			//00->01
 			INCR_PEEK();
 
-			if( *peek == (char)0x1E )
+			if( 0 )//*peek == (char)0x1E )
 			{
 				//01->02
 				INCR_PEEK();
@@ -539,8 +545,8 @@ failFieldC1:
 			}
 		}
 
-		//		  00 01 02 03
-		//Type9 = AF xx 07 PP PP 
+		//		  00 01 02 03 04 05 06 07
+		//Type9 = AF xx 07 PP PP 86 07 PP PP 
 		if(speechAF)
 		{
 			BytesList::iterator peek = inStream;
@@ -565,6 +571,27 @@ failFieldC1:
 			newPointer.pointer		= peek;
 			newPointer.offset		= byteOffset + peekBytes;
 			outPointers.push_back(newPointer);
+			peekBytes = 0;
+
+			//03->05
+			INCR_PEEK();
+			INCR_PEEK();
+
+			if( *peek != (char)0x86 )
+				return true;
+
+			//05->06
+			INCR_PEEK();
+			if( *peek != (char)0x07 )
+				return true;
+
+			//06->07
+			INCR_PEEK();
+			newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= peekBytes - 1;
+			outPointers.push_back(newPointer);
+
 			return true;
 
 		}
@@ -920,10 +947,12 @@ twoFFail:
 		
 		//If this is a Type1 pointer
 		//			00 01 02 03 04 05 06 07 08 09 10 11 12
-		//Type1 =	29 10 xx 00 00 PP PP xx xx 06 PP PP
-		//Type5 =	LL 10 xx 00 25 00 PP PP			//LL (29, 2A, 2B) nn between 01 and 09		
+		//Type1  =	29 10 xx 00 00 PP PP xx xx 06 PP PP
+		//Type5  =	LL 10 xx 00 25 00 PP PP	06 PP PP		//LL (29, 2A, 2B) nn between 01 and 09
+		//Type15 =  LL 10 xx 00 00 PP PP 06 PP PP
+		//Type
 		//02
-		if( bFirstPointerFound && !twoF )// && (*inStream >= 0x00 && *inStream <= 0xFF) )//0x09) )
+		if( bFirstPointerFound && (two9 || twoA || twoB) )// && (*inStream >= 0x00 && *inStream <= 0xFF) )//0x09) )
 		{
 			//02->03
 			INCR_STREAM();
@@ -950,6 +979,21 @@ twoFFail:
 					newPointer.pointer		= peek;
 					newPointer.offset		= byteOffset + peekBytes;
 					outPointers.push_back(newPointer);
+					peekBytes = 0;
+					
+					INCR_PEEK(); //06->07
+					INCR_PEEK(); //07->08
+					if( *peek != (char)0x06 )
+						return true;
+
+					//08->09
+					INCR_PEEK(); 
+
+					newPointer.pointerStart = pointerStart;
+					newPointer.pointer		= peek;
+					newPointer.offset		= peekBytes - 1;
+					outPointers.push_back(newPointer);
+
 					return true;
 					
 type5Fail:
@@ -971,8 +1015,23 @@ type5Fail:
 
 			BytesList::iterator peek = inStream;
 			int peekBytes = 0;
+			
 			INCR_PEEK(); //5->6
 			INCR_PEEK(); //6->7
+
+			//Type15
+			if( *peek == (char)0x06 )
+			{
+				INCR_PEEK(); //7-?8
+				
+				newPointer.pointerStart = pointerStart;
+				newPointer.pointer		= peek;
+				newPointer.offset		= peekBytes - 1; //-1 because the fixup does a +1 to skip past second byte
+				outPointers.push_back(newPointer);
+
+				return true;
+			}
+
 			INCR_PEEK(); //7->8
 			INCR_PEEK(); //8->9
 			if(*peek == 0x06)
@@ -1111,6 +1170,27 @@ void FindPotentialDuplicatePointers(const OrigAddressInfo &pointerInfo, const By
 		}
 		//***Done checking if in middle of a string***
 
+		//		 00 01 02 03 04
+		//Ignore 15 00 88 bb bb
+		if( *bytesIter == (char)0x15 )
+		{
+			BytesList::const_iterator peek = bytesIter;
+			++peek;
+
+			if( *peek == 0)
+			{
+				++peek;
+				if( *peek == (char)0x88 )
+				{
+					INCR_BYTE(); //00->01
+					INCR_BYTE(); //01->02
+					INCR_BYTE(); //02->03
+					INCR_BYTE(); //03->04
+					continue;
+				}
+			}
+		}
+
 		//First byte found
 		if( *bytesIter == (char)pointerInfo.secondByte )
 		{
@@ -1126,9 +1206,14 @@ void FindPotentialDuplicatePointers(const OrigAddressInfo &pointerInfo, const By
 			{
 				//Make sure this dup hasn't already been found
 				bool bAlreadyFound = false;
+				const int currPointerAddress = currByte-1;
 				for(size_t otherPointerIndex = 0; otherPointerIndex < otherPointers.size(); ++otherPointerIndex)
 				{
-					if( otherPointers[otherPointerIndex].newLoc == currByte-1 )
+					int diffBetweenLocations = otherPointers[otherPointerIndex].newLoc - currPointerAddress;
+					if(diffBetweenLocations < 0)
+						diffBetweenLocations *= -1;
+
+					if( diffBetweenLocations < 2 )
 					{
 						bAlreadyFound = true;
 						break;
@@ -1512,8 +1597,9 @@ void InsertEnglishText()
 		{
 			OrigAddressInfo &currInfo = logInfo[i];
 			
-			if( currInfo.newLoc >= fileBytes.size() )
+			if( ((currInfo.newFirstByte << 8) | (currInfo.newSecondByte & 0xff)) >= fileBytes.size() )
 			{
+				fprintf(stdout, "WARNING: Address is outside of file: %.2X %.2X ", currInfo.firstByte, currInfo.secondByte );
 				fprintf(pPointerLogFile, "WARNING: Address is outside of file ");
 			}
 
