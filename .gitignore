@@ -6,6 +6,8 @@
 .project
 .metadata
 bin/
+EveLog/
+EveTranslated/
 tmp/
 *.tmp
 *.bak
