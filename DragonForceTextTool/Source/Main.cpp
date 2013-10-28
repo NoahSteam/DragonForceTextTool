@@ -2117,6 +2117,45 @@ void InsertEnglishText()
 	}//for(eve files)
 }
 
+void ConvertSaveFromSSFToYabuse()
+{
+	FILE *pYabauseFile = NULL;
+	FILE *pSSFFile = NULL;
+
+	fopen_s(&pSSFFile,		"DF2_DATA_01.bin", "rb");
+	fopen_s(&pYabauseFile,	"bkram.bin", "r+b");	
+
+	assert(pSSFFile);
+	assert(pYabauseFile);
+
+	/*
+	fseek(pYabauseFile, 256, SEEK_SET);
+
+	char yabauseHeader2[32] = { 0xFF, 0x80, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x44, 0xFF, 0x46, 0xFF, 0x32, 0xFF, 0x5F,
+								0xFF, 0x44, 0xFF, 0x41, 0xFF, 0x54, 0xFF, 0x41, 0xFF, 0x5F, 0xFF, 0x30, 0xFF, 0x31, 0xFF, 0x00 };
+	fwrite(yabauseHeader2, sizeof(yabauseHeader2), 1, pYabauseFile);
+	
+	*/
+	fseek(pYabauseFile, 0x450, SEEK_SET);
+	fseek(pSSFFile,		0x52, SEEK_SET);
+
+	int ssfByte = 0;
+	int count = 0;
+	while( ssfByte != EOF )
+	{
+		ssfByte = fgetc(pSSFFile);
+		if(ssfByte == EOF)
+			break;
+
+		++count;
+		FPUTC_VERIFIED( 0xFF, pYabauseFile);
+		FPUTC_VERIFIED( ssfByte, pYabauseFile);
+	}
+
+	fclose(pSSFFile);
+	fclose(pYabauseFile);
+}
+
 void main()
 {
 #if _DEBUG
@@ -2125,7 +2164,8 @@ void main()
 #endif
 
 //	DumpJapaneseText();
-	InsertEnglishText();
+//	InsertEnglishText();
+	ConvertSaveFromSSFToYabuse();
 
 	return;
 }
