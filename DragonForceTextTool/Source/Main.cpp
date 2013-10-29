@@ -348,6 +348,11 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 	//Type19 = 2F 14 10 04 00 00 00 06 PP PP 06 PP PP	(Dungeon)
 	//Type20 = 29 14 10 02 00 00 00 PP PP 				(Dungeon)	
 	//Type21 = B7 03 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP
+	//Type22 = 2F 10 01 00 00 xx 06 PP PP  (Speech)  
+	//Type23 = 2F 10 01 00 00 06 PP PP (Speech)
+	//Type24 = 15 00 92 86 94 06 PP PP (START_01)
+	//Type25 = 15 00 81 86 8E 14 80 06 PP PP (START_02)
+	//Type26 = 15 00 92 86 81 8E 14 80 06 PP PP (START_05)
 	//TODO:  = 2B 10 00 00 PP PP		
 
 	int byteOffset = 0;
@@ -700,8 +705,11 @@ b5Fail:
 			return true;
 		}
 
-		//		   00 01 02 03
+		//		   00 01 02 03 04 05 06 07 08 09
 		//Type14 = 15 00 06 PP PP
+		//Type24 = 15 00 92 86 94 06 PP PP			(START_01)
+		//Type25 = 15 00 81 86 8E 14 80 06 PP PP	(START_02)
+		//Type26 = 15 00 92 86 81 8E 14 80 06 PP PP (START_05)
 		if(_150006)
 		{
 			BytesList::iterator peek = inStream;
@@ -719,6 +727,119 @@ b5Fail:
 			INCR_PEEK();
 			if( *peek != (char)0x06 )
 			{
+				//Type24,25,26
+				if( bStartFile )
+				{
+					if( *peek == (char)0x92 )
+					{
+						//02->03
+						INCR_PEEK();
+						if( *peek != (char)0x86 )
+							goto failStart15;
+
+						//03->04
+						INCR_PEEK();
+						if( *peek != (char)0x94 ) //Type24
+						{
+							if(*peek != (char)0x81) //Type26
+								goto failStart15;
+						
+							//04->05
+							INCR_PEEK();
+							if( *peek != (char)0x8E )
+								goto failStart15;
+							
+							//05->06
+							INCR_PEEK();
+							if( *peek != (char)0x14 )
+								goto failStart15;
+
+							//06->07
+							INCR_PEEK();
+							if( *peek != (char)0x80 )
+								goto failStart15;
+
+							//07->08
+							INCR_PEEK();
+							if( *peek != (char)0x06 )
+								goto failStart15;
+
+							//08->09		
+							INCR_PEEK();
+
+							//found the pointer
+							newPointer.pointerStart = pointerStart;
+							newPointer.pointer		= peek;
+							newPointer.offset		= byteOffset + peekBytes;
+							newPointer.pointerType	= "Type26";
+							outPointers.push_back(newPointer);
+							return true;
+					
+							goto failStart15;
+						}
+
+						 //Type24
+
+						//04->05
+						INCR_PEEK();
+						if( *peek != (char)0x06 )
+							goto failStart15;
+
+						//05->06
+						INCR_PEEK();
+
+						//found the pointer
+						newPointer.pointerStart = pointerStart;
+						newPointer.pointer		= peek;
+						newPointer.offset		= byteOffset + peekBytes;
+						newPointer.pointerType	= "Type24";
+						outPointers.push_back(newPointer);
+						return true;						
+						
+					}//if( *peek == 0x92
+					else if( *peek == (char)0x81 )
+					{
+						//		   00 01 02 03 04 05 06 07 08
+						//Type25 = 15 00 81 86 8E 14 80 06 PP PP	(START_05)
+						
+						//02->03
+						INCR_PEEK();
+						if( *peek != (char)0x86)
+							goto failStart15;
+
+						//03->04
+						INCR_PEEK();
+						if( *peek != (char)0x8E )
+							goto failStart15;
+
+						//04->05
+						INCR_PEEK();
+						if( *peek != (char)0x14 )
+							goto failStart15;
+
+						//05->06
+						INCR_PEEK();
+						if( *peek != (char)0x80 )
+							goto failStart15;
+
+						//06->07
+						INCR_PEEK();
+						if( *peek != (char)0x06 )
+							goto failStart15;
+
+						INCR_PEEK();
+						
+						//found the pointer
+						newPointer.pointerStart = pointerStart;
+						newPointer.pointer		= peek;
+						newPointer.offset		= byteOffset + peekBytes;
+						newPointer.pointerType	= "Type25";
+						outPointers.push_back(newPointer);
+						return true;
+					}
+				}
+
+failStart15:
 				INCR_STREAM();
 				continue;
 			}
@@ -1224,10 +1345,12 @@ failTwoE:
 		//Type4  =  2F 10 00 00 00 87 00 06 PP PP 07 PP PP 
 		//Type13 =  2F 10 xx 00 00 SS PP PP where SS is 88, C6
 		//Type16 =  2F 10 02 00 00 xx 80 07 pp pp  (found in Start so far)
+		//Type22 =  2F 10 01 00 00 xx 06 PP PP  (Speech) 
 		if(twoF)
 		{
 			BytesList::iterator peek = inStream;
 			int peekBytes = 0;
+			char secondByte = *peek;
 			
 			//02->03
 			INCR_PEEK();
@@ -1279,6 +1402,7 @@ failTwoE:
 					//07->08
 					INCR_PEEK();
 
+					//found pointer
 					newPointer.pointerStart = pointerStart;
 					newPointer.pointer		= peek;
 					newPointer.offset		= peekBytes + byteOffset;
@@ -1287,6 +1411,50 @@ failTwoE:
 					return true;
 
 type16Fail:
+					peek = peekOrig;
+					peekBytes = peekBytesOrig;
+				}
+
+				//			00 01 02 03 04 05 06 07
+				//Type22 =  2F 10 01 00 00 xx 06 PP PP  (Speech) 
+				//Type23 =  2F 10 01 00 00 06 PP PP (Speech)
+				else if(bSpeechFile && secondByte == (char)0x01)
+				{
+					BytesList::iterator peekOrig = peek;
+					int peekBytesOrig = peekBytes;
+
+					if( *peek == (char)0x06 )
+					{
+						//05->06
+						INCR_PEEK();
+
+						//found pointer
+						newPointer.pointerStart = pointerStart;
+						newPointer.pointer		= peek;
+						newPointer.offset		= peekBytes + byteOffset;
+						newPointer.pointerType	= "Type23";
+						outPointers.push_back(newPointer);
+
+						return true;
+					}
+
+					//05->06
+					INCR_PEEK();
+					if( *peek != (char)0x06 )
+						goto type22Fail;
+
+					//06->07
+					INCR_PEEK();
+
+					//found pointer
+					newPointer.pointerStart = pointerStart;
+					newPointer.pointer		= peek;
+					newPointer.offset		= peekBytes + byteOffset;
+					newPointer.pointerType	= "Type22";
+					outPointers.push_back(newPointer);
+					return true;
+
+type22Fail:
 					peek = peekOrig;
 					peekBytes = peekBytesOrig;
 				}
@@ -2164,8 +2332,8 @@ void main()
 #endif
 
 //	DumpJapaneseText();
-//	InsertEnglishText();
-	ConvertSaveFromSSFToYabuse();
+	InsertEnglishText();
+//	ConvertSaveFromSSFToYabuse();
 
 	return;
 }
