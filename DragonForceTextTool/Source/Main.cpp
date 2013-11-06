@@ -329,31 +329,40 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 #define INCR_PEEK() ++peek; ++peekBytes; if(peek == endStream) return false; 
 
 	//Pointers come in one of the following formats
-	//Type1  = 29 10 xx 00 00 PP PP xx xx 06 PP PP
-	//Type2  = 29 10 00 00 ?? 00 ?? 00 07 PP PP
-	//Type3  = 2F 10 00 00 00 87 00 xx 06 PP PP kk PP PP //kk is 06 or 07	
-	//Type4  = 2F 10 00 00 00 87 00 06 PP PP 07 PP PP 
-	//Type5  = LL 10 xx 00 25 00 PP PP 06 PP	//LL (29, 2A, 2B) nn between 01 and 09
-	//Type6  = BA xx xx 00 07 PP PP				//Only in SPEECH files
-	//Type7  = 86 B6 01 01 01 06 PP PP 07 PP PP 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP //Only in SPEECH files	
-	//Type8  = 2E 10 00 00 00 PP PP
-	//Type9  = AF xx 07 PP PP 88 07 PP PP		//No longer used
-	//Type10 = C1 03 00 00 06 PP PP				//Only in FIELD_xx files
-	//Type11 = ss 06 PP PP						//ss = 0, in FIELD_XX can be 94, C0 
-	//Type12 = 02 06 PP PP						//Only in SPEECH files
-	//Type13 = 2F 10 xx 00 00 88 PP
-	//Type14 = 15 00 06 PP PP					
-	//Type15 = LL 10 xx 00 00 PP PP 06 PP PP
-	//Type18 = B5 xx 00 06 PP PP //Dungeon files
-	//Type19 = 2F 14 10 04 00 00 00 06 PP PP 06 PP PP	(Dungeon)
-	//Type20 = 29 14 10 02 00 00 00 PP PP 				(Dungeon)	
-	//Type21 = B7 03 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP
-	//Type22 = 2F 10 01 00 00 xx 06 PP PP  (Speech)  
-	//Type23 = 2F 10 01 00 00 06 PP PP (Speech)
-	//Type24 = 15 00 92 86 94 06 PP PP (START_01)
-	//Type25 = 15 00 81 86 8E 14 80 06 PP PP (START_02)
-	//Type26 = 15 00 92 86 81 8E 14 80 06 PP PP (START_05)
-	//TODO:  = 2B 10 00 00 PP PP		
+	//Type1   = 29 10 xx 00 00 PP PP xx xx 06 PP PP
+	//Type2   = 29 10 xx 00 00 PP PP 80 07 PP PP
+	//Type3   = 2F 10 00 00 00 87 00 xx 06 PP PP kk PP PP //kk is 06 or 07	
+	//Type4   = 2F 10 00 00 00 87 00 06 PP PP 07 PP PP 
+	//Type4b  = 2F 10 xx 00 00 06 PP PP 06 PP PP
+	//Type5   = LL 10 xx 00 25 00 PP PP 06 PP	//LL (29, 2A, 2B) nn between 01 and 09
+	//Type6   = BA xx xx 00 07 PP PP				//Only in SPEECH files
+	//Type7   = 86 B6 01 01 01 06 PP PP 07 PP PP 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP //Only in SPEECH files	
+	//Type8   = 2E 10 00 00 00 PP PP
+	//Type8b  = 2E 10 01 00 00 4E 00 07 PP PP
+	//Type9   = AF xx 07 PP PP nn 07 PP PP		//nn = 86 or 88
+	//Type10  = C1 03 00 00 06 PP PP				//Only in FIELD_xx files
+	//Type11  = ss 06 PP PP						//ss = 0, in FIELD_XX can be 94, C0, 1E
+	//Type12  = 02 06 PP PP						//Only in SPEECH files
+	//Type13  = 2F 10 xx 00 00 88 PP
+	//Type14  = 15 00 06 PP PP 06 PP PP 
+	//Type15  = LL 10 xx 00 00 PP PP 06 PP PP
+	//Type16  = 2F 10 02 00 00 xx 80 07 pp pp  (found in Start so far)
+	//Type17  = 29 10 xx 00 00 PP PP 07 PP PP
+	//Type18  = B5 xx 00 06 PP PP //Dungeon files
+	//Type19  = 2F 14 10 04 00 00 00 06 PP PP 06 PP PP	(Dungeon)
+	//Type20  = 29 14 10 02 00 00 00 PP PP 				(Dungeon)	
+	//Type21  = B7 03 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP
+	//Type22  = 2F 10 01 00 00 xx 06 PP PP  (Speech)  
+	//Type23 =  2F 10 01 00 00 06 PP PP 06 PP PP (Speech || Start)
+	//Type24  = 15 00 92 86 94 06 PP PP (START_01)
+	//Type25  = 15 00 81 86 8E 14 80 06 PP PP (START_02)
+	//Type26  = 15 00 92 86 81 8E 14 80 06 PP PP (START_05)
+	//Type27  = 29 10 00 00 00 PP PP B6 01 02 01 06 PP PP 06 PP PP (Dungeon and Speech) 
+	//Type27b = 29 10 00 00 00 PP PP 9F 03 00 06 PP PP
+	//Type28  = 29 10 01 00 00 PP PP 07 PP PP
+	//Type29  = 15 00 xx xx 06 PP PP
+	//Type30  = 15 00 nn 06 PP PP  //nn is 92 or BF
+	//TODO:   = 2B 10 00 00 PP PP		
 
 	int byteOffset = 0;
 	PointerInfo newPointer;
@@ -385,19 +394,19 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 		if( !(
 				c == (char)0x29 || 
 				c == (char)0x2F || 
-				c == (char)0x2A || 
+				c == (char)0x2A ||
 				c == (char)0x2B ||
 				c == (char)0x15 ||
-		//		c == (char)0xCA ||
-				(c == (char)0xB7 && bDungeonFile) ||
+				(c == (char)0xCA && bFieldXXFile) ||
+				(c == (char)0xB7 && (bDungeonFile || bSpeechFile)) ||
 				(c == (char)0xB5 && bDungeonFile) ||
 				(c == (char)0x00 && (bSpeechFile || bFieldXXFile) ) ||
-				(c == (char)0x2E && (bSpeechFile || bDungeonFile) ) || 
+				(c == (char)0x2E && (bSpeechFile || bDungeonFile || bStartFile) ) || 
 				(c == (char)0x02 && (bSpeechFile  || bDungeonFile)) ||
 				(c == (char)0xAF && (bSpeechFile  || bDungeonFile)) ||
 				(c == (char)0xBA && bSpeechFile) ||
 				(c == (char)0x86 && (bSpeechFile  || bDungeonFile)) ||
-				( (c == (char)0x94 || c == (char)0xC0 ) && bFieldXXFile ) || 
+				( (c == (char)0x94 || c == (char)0xC0 || c == (char)0x1E) && bFieldXXFile ) || 
 				(c == (char)0xC1 && bFieldXXFile)
 			))
 		{
@@ -466,8 +475,40 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 			case (char)0x00:
 			case (char)0x94:
 			case (char)0xC0:
+			case (char)0x1E:
 				zero6 = true;
 				break;
+		}
+
+		//Non pointer needs to be skipped
+		//CA 46 00 06 (Only in FIELD_06)
+		if(ca)
+		{
+			BytesList::iterator peek = inStream;
+			int peekBytes = 0;
+
+			INCR_PEEK();
+			if( *peek != (char)0x46 )
+				goto notCA46;
+
+			INCR_PEEK();
+			if( *peek != 0 )
+				goto notCA46;
+
+			INCR_PEEK();
+			if( *peek != (char)0x06 )
+				goto notCA46;
+
+			INCR_PEEK();
+			inStream = peek;
+			byteOffset += peekBytes;
+			continue;
+
+notCA46:
+			{
+				INCR_STREAM();
+				continue;
+			}
 		}
 
 		//		   00 01 02 03 04 05 06 07 08 08 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
@@ -706,10 +747,12 @@ b5Fail:
 		}
 
 		//		   00 01 02 03 04 05 06 07 08 09
-		//Type14 = 15 00 06 PP PP
-		//Type24 = 15 00 92 86 94 06 PP PP			(START_01)
-		//Type25 = 15 00 81 86 8E 14 80 06 PP PP	(START_02)
-		//Type26 = 15 00 92 86 81 8E 14 80 06 PP PP (START_05)
+		//Type14 = 15 00 06 PP PP 06 PP PP
+		//Type24 = 15 00 92 xx 94 06 PP PP			(START_01)
+		//Type25 = 15 00 81 xx 8E 14 80 06 PP PP	(START_02)
+		//Type26 = 15 00 92 xx 81 8E 14 80 06 PP PP (START_05)
+		//Type29 = 15 00 xx xx 06 PP PP
+		//Type30 = 15 00 nn 06 PP PP  //nn is 92 or BF
 		if(_150006)
 		{
 			BytesList::iterator peek = inStream;
@@ -728,17 +771,44 @@ b5Fail:
 			if( *peek != (char)0x06 )
 			{
 				//Type24,25,26
-				if( bStartFile )
+				if( bStartFile || bSpeechFile || bDungeonFile)
 				{
-					if( *peek == (char)0x92 )
+					if( *peek == (char)0x92 || *peek == (char)0xBF )
 					{
 						//02->03
 						INCR_PEEK();
-						if( *peek != (char)0x86 )
-							goto failStart15;
+						if( *peek == (char)0x06 )
+						{							
+							INCR_PEEK();
+
+							//found the pointer
+							newPointer.pointerStart = pointerStart;
+							newPointer.pointer		= peek;
+							newPointer.offset		= byteOffset + peekBytes;
+							newPointer.pointerType	= "Type30";
+							outPointers.push_back(newPointer);
+							return true;
+						}
+					//	if( *peek != (char)0x86 )
+					//		goto failStart15;
 
 						//03->04
 						INCR_PEEK();
+						
+						//Type29
+						if( *peek == (char)0x06 )
+						{
+							INCR_PEEK();
+
+							//found the pointer
+							newPointer.pointerStart = pointerStart;
+							newPointer.pointer		= peek;
+							newPointer.offset		= byteOffset + peekBytes;
+							newPointer.pointerType	= "Type29";
+							outPointers.push_back(newPointer);
+							return true;
+						}
+
 						if( *peek != (char)0x94 ) //Type24
 						{
 							if(*peek != (char)0x81) //Type26
@@ -853,11 +923,31 @@ failStart15:
 			newPointer.offset		= byteOffset + peekBytes;
 			newPointer.pointerType	= "Type14";
 			outPointers.push_back(newPointer);
+			peekBytes = 0;
+
+			//03->04
+			INCR_PEEK();
+
+			//04->05
+			INCR_PEEK();
+			if( *peek == (char)0x06 )				
+			{
+				//05->06
+				INCR_PEEK();
+
+				//found the pointer
+				newPointer.pointerStart = pointerStart;
+				newPointer.pointer		= peek;
+				newPointer.offset		= peekBytes - 1;
+				newPointer.pointerType	= "Type14e";
+				outPointers.push_back(newPointer);
+			}
+
 			return true;
 		}
 
 		//			00 01 02
-		//Type11 =  ss 06 PP PP //ss = 0, in FIELD_XX can be 94, C0 
+		//Type11 =  ss 06 PP PP //ss = 0, in FIELD_XX can be 94, C0, 1E
 		if(zero6)
 		{
 			BytesList::iterator peek = inStream;
@@ -931,7 +1021,7 @@ failFieldC1:
 		}
 
 		//		  00 01 02 03 04 05 06 07
-		//Type9 = AF xx 07 PP PP 86 07 PP PP 
+		//Type9 = AF xx 07 PP PP nn 07 PP PP //nn is 88 or 86
 		if(speechAF)
 		{
 			BytesList::iterator peek = inStream;
@@ -963,7 +1053,8 @@ failFieldC1:
 			INCR_PEEK();
 			INCR_PEEK();
 
-			if( *peek != (char)0x86 )
+			int typeB = *peek == (char)0x86;
+			if( !(*peek == (char)0x86 || *peek == (char)0x88) )
 				return true;
 
 			//05->06
@@ -976,7 +1067,7 @@ failFieldC1:
 			newPointer.pointerStart = pointerStart;
 			newPointer.pointer		= peek;
 			newPointer.offset		= peekBytes - 1;
-			newPointer.pointerType	= "Type9e";
+			newPointer.pointerType	= typeB ? "Type9b" : "Type9e";
 			outPointers.push_back(newPointer);
 
 			return true;
@@ -1297,21 +1388,58 @@ _2f1410Fail:
 		//Second byte is not that of a pointer, so just continue
 		if( *inStream != (char)0x10 )
 		{
-			INCR_STREAM();
 			continue;
 		}
 
 		//01->02
 		INCR_STREAM();		
 
-		//	      00 01 02 03 04 05 
-		//Type8 = 2E 10 00 00 00 PP PP
+		//	       00 01 02 03 04 05 06 07 08
+		//Type8  = 2E 10 00 00 00 PP PP
+		//Type8b = 2E 10 01 00 00 4E 00 07 PP PP
 		if(twoE)
 		{
 			BytesList::iterator peek = inStream;
 			int peekBytes = 0;
 
-			if(*peek != 0)
+			//02
+			if( *peek == (char)0x01 )
+			{
+				//02->03
+				INCR_PEEK();
+				if( *peek != 0)
+					goto failTwoE;
+
+				//03->04
+				INCR_PEEK();
+				if( *peek != 0 )
+					goto failTwoE;
+
+				//04->05
+				INCR_PEEK();
+				if( *peek != (char)0x4E )
+					goto failTwoE;
+
+				//05->06
+				INCR_PEEK();
+				if( *peek != 0 )
+					goto failTwoE;
+
+				//06->07
+				INCR_PEEK();
+				if( *peek != (char)0x07 )
+					goto failTwoE;
+
+				//07->08
+				INCR_PEEK();
+				newPointer.pointerStart = pointerStart;
+				newPointer.pointer		= peek;
+				newPointer.offset		= byteOffset + peekBytes;
+				newPointer.pointerType	= "Type8b";
+				outPointers.push_back(newPointer);
+				return true;
+			}
+			else if( *peek != 0 )
 				goto failTwoE;
 
 			//02->03
@@ -1319,7 +1447,7 @@ _2f1410Fail:
 			if(*peek != 0)
 				goto failTwoE;
 
-			//02->04
+			//03->04
 			INCR_PEEK();
 			if(*peek != 0)
 				goto failTwoE;
@@ -1335,7 +1463,6 @@ _2f1410Fail:
 
 failTwoE:
 			{
-				INCR_STREAM();
 				continue;
 			}
 		}
@@ -1346,6 +1473,7 @@ failTwoE:
 		//Type13 =  2F 10 xx 00 00 SS PP PP where SS is 88, C6
 		//Type16 =  2F 10 02 00 00 xx 80 07 pp pp  (found in Start so far)
 		//Type22 =  2F 10 01 00 00 xx 06 PP PP  (Speech) 
+		//Type23 =  2F 10 01 00 00 06 PP PP 06 PP PP(Speech)
 		if(twoF)
 		{
 			BytesList::iterator peek = inStream;
@@ -1415,10 +1543,11 @@ type16Fail:
 					peekBytes = peekBytesOrig;
 				}
 
-				//			00 01 02 03 04 05 06 07
+				//			00 01 02 03 04 05 06 07 08 09
 				//Type22 =  2F 10 01 00 00 xx 06 PP PP  (Speech) 
-				//Type23 =  2F 10 01 00 00 06 PP PP (Speech)
-				else if(bSpeechFile && secondByte == (char)0x01)
+				//Type23 =  2F 10 01 00 00 06 PP PP 06 PP PP(Speech)
+				//else if(bSpeechFile && secondByte == (char)0x01)
+				if(bDungeonFile || bSpeechFile || bStartFile)
 				{
 					BytesList::iterator peekOrig = peek;
 					int peekBytesOrig = peekBytes;
@@ -1434,6 +1563,25 @@ type16Fail:
 						newPointer.offset		= peekBytes + byteOffset;
 						newPointer.pointerType	= "Type23";
 						outPointers.push_back(newPointer);
+						peekBytes = 0;
+
+						//06->07
+						INCR_PEEK();
+
+						//07->08
+						INCR_PEEK();
+						if( *peek == (char)0x06 )
+						{
+							//08->09
+							INCR_PEEK();
+						
+							//found pointer
+							newPointer.pointerStart = pointerStart;
+							newPointer.pointer		= peek;
+							newPointer.offset		= peekBytes - 1;
+							newPointer.pointerType	= "Type23e";
+							outPointers.push_back(newPointer);
+						}
 
 						return true;
 					}
@@ -1550,25 +1698,28 @@ twoFFail:
 		//If this is a Type1 pointer
 		//			00 01 02 03 04 05 06 07 08 09 10 11 12 13 14
 		//Type1  =	29 10 xx 00 00 PP PP xx xx 06 PP PP
-		//Type17 =  Type1 +				 80 07 PP PP
+		//Type2  =  Type1 +				 80 07 PP PP
 		//Type5  =	LL 10 xx 00 25 00 PP PP	06 PP PP		//LL (29, 2A, 2B) nn between 01 and 09
-		//Type15 =  LL 10 xx 00 00 PP PP 06 PP PP
+		//Type15 =  LL 10 xx 00 00 PP PP 06 PP PP xx 06 PP PP 
+		//Type17 =  29 10 xx 00 00 PP PP 07 PP PP
+		//Type27 =  29 10 00 00 00 PP PP B6 01 02 01 06 PP PP 06 PP PP (Dungeon and Speech)
 		//Type
 		//02
 		if( bFirstPointerFound && (two9 || twoA || twoB) )// && (*inStream >= 0x00 && *inStream <= 0xFF) )//0x09) )
 		{
+			BytesList::iterator peek = inStream;
+			int peekBytes = 0;
+
 			//02->03
-			INCR_STREAM();
-			if(*inStream != 0)
+			INCR_PEEK();
+			if(*peek != 0)
 				continue;
 
 			//03->04
-			INCR_STREAM();			
-			if( *inStream != 0)
+			INCR_PEEK();			
+			if( *peek != 0)
 			{
 				//Perhaps this is a Type5
-				BytesList::iterator peek = inStream;
-				int peekBytes = 0;
 				if( *peek == (char)0x25 )
 				{
 					//04->05
@@ -1605,27 +1756,24 @@ type5Fail:
 					{}
 				}
 
-				INCR_STREAM();
 				continue;
 			}
 
 			//04->05
-			INCR_STREAM();
+			INCR_PEEK();
 
 			//found the pointer
 			newPointer.pointerStart = pointerStart;
-			newPointer.pointer		= inStream;
-			newPointer.offset		= byteOffset;
+			newPointer.pointer		= peek;
+			newPointer.offset		= byteOffset + peekBytes;
 			newPointer.pointerType	= "Type1";
 			outPointers.push_back(newPointer);
-
-			BytesList::iterator peek = inStream;
-			int peekBytes = 0;
+			peekBytes = 0;
 			
 			INCR_PEEK(); //5->6
 			INCR_PEEK(); //6->7
 			
-			//Type16
+			//Type2
 			if( *peek == (char)0x80 )
 			{
 				BytesList::iterator origPeek = peek;
@@ -1639,7 +1787,7 @@ type5Fail:
 					newPointer.pointerStart = pointerStart;
 					newPointer.pointer		= peek;
 					newPointer.offset		= peekBytes - 1; //-1 because the fixup does a +1 to skip past second byte
-					newPointer.pointerType	= "Type17";
+					newPointer.pointerType	= "Type2";
 					outPointers.push_back(newPointer);
 
 					return true;
@@ -1649,8 +1797,109 @@ type5Fail:
 				peek = origPeek;
 				peekBytes--;
 			}
+			//Type27
+			else if( *peek == (char)0xB6 )
+			{
+				BytesList::iterator origPeek = peek;
+				int origPeekBytes = peekBytes;
+
+				//			00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15
+				//Type27 =  29 10 00 00 00 PP PP B6 01 02 01 06 PP PP 06 PP PP (Dungeon and Speech)
+				
+				//07->08
+				INCR_PEEK();
+				if( *peek != (char)0x01 )
+					goto type27Fail;
+
+				//08->09
+				INCR_PEEK();
+				if( *peek != (char)0x02 )
+					goto type27Fail;
+
+				//09->10
+				INCR_PEEK();
+				if( *peek != (char)0x01 )
+					goto type27Fail;
+
+				//10->11
+				INCR_PEEK();
+				if( *peek != (char)0x06 )
+					goto type27Fail;
+
+				//11->12
+				INCR_PEEK();
+
+				//found a pointer
+				newPointer.pointerStart = pointerStart;
+				newPointer.pointer		= peek;
+				newPointer.offset		= peekBytes - 1; //-1 because the fixup does a +1 to skip past second byte
+				newPointer.pointerType	= "Type27";
+				outPointers.push_back(newPointer);
+				peekBytes = 0;
+				
+				INCR_PEEK(); //12->13
+				INCR_PEEK(); //13->14
+				if( *peek != (char)0x06 )
+					return true;
+
+				//14->15
+				INCR_PEEK();
+
+				//found a pointer
+				newPointer.pointerStart = pointerStart;
+				newPointer.pointer		= peek;
+				newPointer.offset		= peekBytes - 1; //-1 because the fixup does a +1 to skip past second byte
+				newPointer.pointerType	= "Type27e";
+				outPointers.push_back(newPointer);
+				return true;
+
+type27Fail:
+				{
+					peek = origPeek;
+					peekBytes = origPeekBytes;
+				}
+
+			}
+
+			//			00 01 02 03 04 05 06 07 08 09 10 11 12
+			//Type27b = 29 10 00 00 00 PP PP 9F xx xx 06 PP PP
+			else if( *peek == (char)0x9F )
+			{
+				BytesList::iterator origPeek = peek;
+				int origPeekBytes = peekBytes;
+
+				//07->08
+				INCR_PEEK();
+
+				//08->09
+				INCR_PEEK();
+
+				//09->10
+				INCR_PEEK();
+				if( *peek != (char)0x06 )
+					goto type27bFail;
+
+				//10->11
+				INCR_PEEK();
+
+				//found a pointer
+				newPointer.pointerStart = pointerStart;
+				newPointer.pointer		= peek;
+				newPointer.offset		= peekBytes - 1; //-1 because the fixup does a +1 to skip past second byte
+				newPointer.pointerType	= "Type27b";
+				outPointers.push_back(newPointer);
+				return true;
+
+type27bFail:
+				{
+					peek = origPeek;
+					peekBytes = origPeekBytes;
+				}
+				
+			}
 			
-			//Type15
+			//			00 01 02 03 04 05 06 07 08 09 10 11 12
+			//Type15 =  LL 10 xx 00 00 PP PP 06 PP PP xx 06 PP PP 
 			if( *peek == (char)0x06 )
 			{
 				INCR_PEEK(); //7->8
@@ -1660,9 +1909,39 @@ type5Fail:
 				newPointer.offset		= peekBytes - 1; //-1 because the fixup does a +1 to skip past second byte
 				newPointer.pointerType	= "Type15";
 				outPointers.push_back(newPointer);
+				peekBytes = 0;
+
+				INCR_PEEK(); //8->9
+				INCR_PEEK(); //9->10
+				INCR_PEEK(); //10->11
+
+				if( *peek == (char)0x06 )
+				{
+					INCR_PEEK();
+					newPointer.pointerStart = pointerStart;
+					newPointer.pointer		= peek;
+					newPointer.offset		= peekBytes - 1; //-1 because the fixup does a +1 to skip past second byte
+					newPointer.pointerType	= "Type15e";
+					outPointers.push_back(newPointer);
+				}
 
 				return true;
 			}
+			
+			//Type17
+			if( *peek == (char)0x07 )
+			{
+				INCR_PEEK(); //7->8
+				
+				newPointer.pointerStart = pointerStart;
+				newPointer.pointer		= peek;
+				newPointer.offset		= peekBytes - 1; //-1 because the fixup does a +1 to skip past second byte
+				newPointer.pointerType	= "Type17";
+				outPointers.push_back(newPointer);
+
+				return true;
+			}
+			
 
 			//Type1E
 		//	00 01 02 03 04 05 06 07 08 09
@@ -1686,38 +1965,13 @@ type5Fail:
 
 			return true;
 		}
-		INCR_STREAM();
+//		INCR_STREAM();
 
 		if( *inStream != 0x00 )
 		{
 			continue;
 		}
 
-		/*
-		//Look 7 bytes ahead to see if this is a Type2 pointer
-		BytesList::iterator peekAheadIterator = inStream;
-		c = *( ++(++(++(++(++peekAheadIterator)))) );
-		if( !bFirstPointerFound && c == (char)0x07 )
-		{
-			bFirstPointerFound = true;
-			newPointer.pointerStart = pointerStart;
-			newPointer.pointer		= ++peekAheadIterator;
-			newPointer.offset		= 6 + byteOffset;
-			newPointer.pointerType	= "Type2";
-			outPointers.push_back(newPointer);
-			return true;
-		} */
-/*
-		INCR_STREAM();
-		if( *inStream != 0 )
-			continue;
-
-		//We got ourselves a Type1 iterator
-		outPointer = ++inStream;
-		++inOutCurrByte
-
-		return true;
-*/
 		continue;
 	}
 
