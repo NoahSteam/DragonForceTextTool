@@ -343,6 +343,8 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 	//Type10  = C1 03 00 00 06 PP PP				//Only in FIELD_xx files
 	//Type11  = ss 06 PP PP						//ss = 0, in FIELD_XX can be 94, C0, 1E
 	//Type12  = 02 06 PP PP						//Only in SPEECH files
+	//Type12b = 02 xx 06 PP PP
+	//Type12c = 02 xx xx 06 PP PP
 	//Type13  = 2F 10 xx 00 00 88 PP
 	//Type14  = 15 00 06 PP PP 06 PP PP 
 	//Type15  = LL 10 xx 00 00 PP PP 06 PP PP
@@ -350,10 +352,10 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 	//Type17  = 29 10 xx 00 00 PP PP 07 PP PP
 	//Type18  = B5 xx 00 06 PP PP //Dungeon files
 	//Type19  = 2F 14 10 04 00 00 00 06 PP PP 06 PP PP	(Dungeon)
-	//Type20  = 29 14 10 02 00 00 00 PP PP 				(Dungeon)	
+	//Type20  = 29 14 10 02 00 00 00 PP PP 				(Dungeon
 	//Type21  = B7 03 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP 07 PP PP 06 PP PP 06 PP PP
 	//Type22  = 2F 10 01 00 00 xx 06 PP PP  (Speech)  
-	//Type23 =  2F 10 01 00 00 06 PP PP 06 PP PP (Speech || Start)
+	//Type23  = 2F 10 01 00 00 06 PP PP 06 PP PP (Speech || Start)	
 	//Type24  = 15 00 92 86 94 06 PP PP (START_01)
 	//Type25  = 15 00 81 86 8E 14 80 06 PP PP (START_02)
 	//Type26  = 15 00 92 86 81 8E 14 80 06 PP PP (START_05)
@@ -362,6 +364,7 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 	//Type28  = 29 10 01 00 00 PP PP 07 PP PP
 	//Type29  = 15 00 xx xx 06 PP PP
 	//Type30  = 15 00 nn 06 PP PP  //nn is 92 or BF
+	//Type31  = 2F 10 xx 00 00 xx xx xx 00 xx 06 PP PP 06 PP PP
 	//TODO:   = 2B 10 00 00 PP PP		
 
 	int byteOffset = 0;
@@ -719,8 +722,10 @@ b5Fail:
 		}
 
 		//Only in SPEECH files
-		//		   00 01 02
-		//Type12 = 02 06 PP PP
+		//		    00 01 02 03 04
+		//Type12  = 02 06 PP PP
+		//Type12b = 02 xx 06 PP PP
+		//Type12b = 02 xx 86 06 PP PP
 		if(two6)
 		{
 			BytesList::iterator peek = inStream;
@@ -730,6 +735,47 @@ b5Fail:
 			INCR_PEEK();
 			if( *peek != (char)0x06 )
 			{
+				//Type12b
+
+				//01->02
+				INCR_PEEK();
+			
+				//Type12b
+				if( *peek == (char)0x06 )
+				{
+					//02->03
+					INCR_PEEK();
+			
+					//found the pointer
+					newPointer.pointerStart = pointerStart;
+					newPointer.pointer		= peek;
+					newPointer.offset		= byteOffset + peekBytes;
+					newPointer.pointerType	= "Type12b";
+					outPointers.push_back(newPointer);
+					return true;
+				}
+
+				//Type12c
+				//02->03
+				if( *peek == (char)0x86 )
+				{
+					INCR_PEEK();
+			
+					if( *peek == (char)0x06 )
+					{
+						//03->04
+						INCR_PEEK();
+				
+						//found the pointer
+						newPointer.pointerStart = pointerStart;
+						newPointer.pointer		= peek;
+						newPointer.offset		= byteOffset + peekBytes;
+						newPointer.pointerType	= "Type12c";
+						outPointers.push_back(newPointer);
+						return true;
+					}
+				}
+
 				INCR_STREAM();
 				continue;
 			}
@@ -1256,8 +1302,9 @@ failSpeech86:
 			}
 		}
 
-		//			00 01 02 03 04 05 06 07 08 09 10 11
+		//			00 01 02 03 04 05 06 07 08 09 10 11 12 13
 		//Type19 =  2F 14 10 04 00 00 00 06 PP PP 06 PP PP	(Dungeon)
+		//Type19b = 2F 10 25 00 00 81 90 03 00 80 06 6B 00 06 55 01 )	
 		//Type20 =  29 14 10 02 00 00 00 PP PP 			(Dungeon)	
 		if( (twoF || two9) && bDungeonFile)
 		{
@@ -1468,12 +1515,13 @@ failTwoE:
 		}
 
 		//			00 01 02 03 04 05 06 07 08 09 10 11 12
-		//Type3  =  2F 10 00 00 00 87 00 xx 06 PP PP kk PP PP //kk is 06 or 07	
+		//Type3  =  2F 10 00 00 00 87 00 xx 06 PP PP kk PP PP //kk is 06 or 07
 		//Type4  =  2F 10 00 00 00 87 00 06 PP PP 07 PP PP 
 		//Type13 =  2F 10 xx 00 00 SS PP PP where SS is 88, C6
 		//Type16 =  2F 10 02 00 00 xx 80 07 pp pp  (found in Start so far)
-		//Type22 =  2F 10 01 00 00 xx 06 PP PP  (Speech) 
+		//Type22 =  2F 10 01 00 00 xx 06 PP PP  (Speech)
 		//Type23 =  2F 10 01 00 00 06 PP PP 06 PP PP(Speech)
+		//Type31  = 2F 10 xx 00 00 xx xx xx 00 xx 06 PP PP 06 PP PP
 		if(twoF)
 		{
 			BytesList::iterator peek = inStream;
@@ -1543,9 +1591,10 @@ type16Fail:
 					peekBytes = peekBytesOrig;
 				}
 
-				//			00 01 02 03 04 05 06 07 08 09
+				//			00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15
 				//Type22 =  2F 10 01 00 00 xx 06 PP PP  (Speech) 
 				//Type23 =  2F 10 01 00 00 06 PP PP 06 PP PP(Speech)
+				//Type31  = 2F 10 xx 00 00 xx xx xx 00 xx 06 PP PP 06 PP PP
 				//else if(bSpeechFile && secondByte == (char)0x01)
 				if(bDungeonFile || bSpeechFile || bStartFile)
 				{
@@ -1589,19 +1638,72 @@ type16Fail:
 					//05->06
 					INCR_PEEK();
 					if( *peek != (char)0x06 )
-						goto type22Fail;
+					{
+						//			00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15
+						//Type31  = 2F 10 xx 00 00 xx xx xx 00 xx 06 PP PP 06 PP PP
 
-					//06->07
-					INCR_PEEK();
+						//06->07
+						INCR_PEEK();
 
-					//found pointer
-					newPointer.pointerStart = pointerStart;
-					newPointer.pointer		= peek;
-					newPointer.offset		= peekBytes + byteOffset;
-					newPointer.pointerType	= "Type22";
-					outPointers.push_back(newPointer);
-					return true;
+						//07->08
+						INCR_PEEK();
+						if( *peek != (char)0 )
+							goto type22Fail;
 
+						//08->09
+						INCR_PEEK();
+
+						//09->10
+						INCR_PEEK();
+						if( *peek != (char)0x06 )
+							goto type22Fail;
+
+						//10->11
+						INCR_PEEK();
+					
+						//found pointer
+						newPointer.pointerStart = pointerStart;
+						newPointer.pointer		= peek;
+						newPointer.offset		= peekBytes + byteOffset;
+						newPointer.pointerType	= "Type31";
+						outPointers.push_back(newPointer);
+						peekBytes = 0;
+
+						//11->12
+						INCR_PEEK();
+
+						//12->13
+						INCR_PEEK();
+
+						if( *peek != (char)0x06 )
+							return true;
+
+						//13->14
+						INCR_PEEK();
+
+						//found pointer
+						newPointer.pointerStart = pointerStart;
+						newPointer.pointer		= peek;
+						newPointer.offset		= peekBytes - 1;
+						newPointer.pointerType	= "Type31b";
+						outPointers.push_back(newPointer);
+
+						return true;
+					}
+
+					if( bSpeechFile )
+					{
+						//06->07
+						INCR_PEEK();
+
+						//found pointer
+						newPointer.pointerStart = pointerStart;
+						newPointer.pointer		= peek;
+						newPointer.offset		= peekBytes + byteOffset;
+						newPointer.pointerType	= "Type22";
+						outPointers.push_back(newPointer);
+						return true;
+					}
 type22Fail:
 					peek = peekOrig;
 					peekBytes = peekBytesOrig;
@@ -2370,15 +2472,18 @@ void InsertEnglishText()
 			int wordStartIndex = -1;
 			list<char>::iterator wordStartInsertionPoint;
 
-			char tmp[1024];
-			int tmpCount = 0;
+			char		tmp[1024];
+			int			tmpCount = 0;
+			const int	maxPrint = 36 + 36 + 35;
+			int			maxPrintForLine = 36;
+
 			memset(tmp, 0, sizeof(tmp));
 			for(size_t i = 0; i < strLen; ++i)
 			{
-				if( totalPrinted == 36*3 )
+				if( totalPrinted == maxPrint )
 					break;
 
-				assert(totalPrinted < 36*3);
+				assert(totalPrinted < maxPrint);
 
 				const char currLetter = inEnglishStrBuffer[i];
 
@@ -2387,32 +2492,40 @@ void InsertEnglishText()
 					continue;
 
 				//insert our new string
-				insertionPoint = fileBytes.insert( insertionPoint, currLetter);
-				tmp[tmpCount++] = currLetter;
-
-				//save off start of the word
-				if(currLetter != ' ')
+				if( !(currLetter == ' ' && (stringsPrinted + 1 > maxPrintForLine)) )
 				{
-					if(wordStartIndex == -1)
+					insertionPoint = fileBytes.insert( insertionPoint, currLetter);
+					tmp[tmpCount++] = currLetter;
+				
+					//save off start of the word
+					if(currLetter != ' ')
 					{
-						wordStartIndex = (int)i;
-						wordStartInsertionPoint = insertionPoint;
+						if(wordStartIndex == -1)
+						{
+							wordStartIndex = (int)i;
+							wordStartInsertionPoint = insertionPoint;
+						}
 					}
+					else
+						wordStartIndex = -1;
+
+					insertionPoint++;
+					newStringInfo.numBytes++;
+					totalPrinted++;
+
+					if( totalPrinted == maxPrint )
+						break;
 				}
 				else
 					wordStartIndex = -1;
 
-				insertionPoint++;
-				newStringInfo.numBytes++;
-				totalPrinted++;
-
-				if( totalPrinted == 36*3 )
-					break;
-
-				if(++stringsPrinted >= 36)
+				if(++stringsPrinted > maxPrintForLine)
 				{
 					if(++numLines == 3)
 						break;
+
+					if(numLines == 2)
+						maxPrintForLine = 35;
 
 					stringsPrinted = 1;
 
@@ -2420,7 +2533,9 @@ void InsertEnglishText()
 					if( wordStartIndex > -1 )
 					{
 						fileBytes.insert(wordStartInsertionPoint, 0x0D);
-						tmp[tmpCount++] = 0x0D;
+						memcpy(tmp + wordStartIndex + 1, tmp + wordStartIndex, 36);
+						tmp[wordStartIndex] = 0x0D;
+						tmpCount++;
 						stringsPrinted += (int)i - wordStartIndex;
 						assert(i - wordStartIndex >= 0);
 					}
