@@ -24,6 +24,7 @@ const int startText1	= 0x85;
 const int startText1_b	= 0xBE;
 const int startText2	= 0xA0;
 const int startText2_b	= 0x88;
+const int startText2_c  = 0x81;
 const int endText1		= 0x15;
 const int endText2		= 0;
 
@@ -210,14 +211,24 @@ void DumpJapaneseText()
 
 				//See if we are at the start of a string
 				if(!bStringStarted2 && (currByte == startText1 || currByte == startText1_b) )
+				{
 					bStringStarted1 = true;
+				}
 
 				//See if this is the second start flag
-				else if(bStringStarted1 && !bStringStarted2 && (currByte == startText2) )
+				else if(bStringStarted1 && !bStringStarted2 && (currByte == startText2 || currByte == startText2_b || currByte == startText2_c) )
 				{
 					//The string will start at the next byte
 					bStringStarted2 = true;
-					continue;
+
+					if( !(currByte == startText2_b || currByte == startText2_c) )
+						continue;
+
+					if(currByte == startText2_b)
+					{
+						int k = 0;
+						++k;
+					}
 				}
 
 				//If we thought a string was going to start but it didn't at this byte, the prev byte wasn't a start flag, so reset flags
@@ -2136,7 +2147,7 @@ void FindPotentialDuplicatePointers(const OrigAddressInfo &pointerInfo, const By
 			bStringStarted1 = true;
 		}
 		//See if this is the second start flag
-		else if(bStringStarted1 && !bStringStarted2 && (byteValue == (int)IndentChar) )
+		else if(bStringStarted1 && !bStringStarted2 && (byteValue == (int)IndentChar || byteValue == (int)'(' ) )
 		{
 			bStringStarted2 = true;
 
@@ -2379,19 +2390,32 @@ void InsertEnglishText()
 				bStringStarted1 = true;
 			}
 			//See if this is the second start flag
-			else if(bStringStarted1 && !bStringStarted2 && (currByte == startText2) )
+			else if(bStringStarted1 && !bStringStarted2 && (currByte == startText2 || currByte == startText2_b || currByte == startText2_c) )
 			{
 				currStringInfo.numBytes = 0;
 
 				//The string will start at the next byte
 				bStringStarted2 = true;
-				fileBytes.push_back(IndentChar);
+
+				bool bSpecialCase = (currByte == startText2_b) || (currByte == startText2_c);
+				if(!bSpecialCase)
+					fileBytes.push_back(IndentChar);				
 
 				assert(stringInsertionPoints.size() == origStringsInfo.size());
 
 				//Keep track of where this string used to be so we can insert our translated text into it
 				StringInsertionLocation locInfo;
-				locInfo.address			= byteCount;
+				
+				if(bSpecialCase)
+				{
+					currStringInfo.numBytes = 1;				//This byte counts as being part of the string
+					locInfo.address			= byteCount-1;		//Insertion should start before this byte, meaning right after 85					
+				}
+				else
+				{
+					locInfo.address			= byteCount;
+				}
+
 				locInfo.insertionPoint	= --fileBytes.end();
 				stringInsertionPoints.push_back( locInfo );
 				continue;
@@ -2458,16 +2482,20 @@ void InsertEnglishText()
 
 			++count;
 
-			//insertion itertator starts at the A0 in 85A0, so we want one past that
+			//insertion itertator
 			list<char>::iterator insertionPoint = stringInsertionPoints[insertPoint].insertionPoint;
-			insertionPoint++;
+
+			//insertion iterator starts at the A0 in 85A0, so we want one past that if this is not a special case string
+			bool bSpecialCase = *(insertionPoint) != (char)IndentChar;
+			if(!bSpecialCase)
+				insertionPoint++;
 
 			newStringInfo.numBytes = 0;
 			newStringInfo.address = stringInsertionPoints[insertPoint].address;
 
 			//Insert the translated string
-			int stringsPrinted = 1; //already have an indent
-			int totalPrinted = 1;
+			int stringsPrinted = bSpecialCase ? 0 : 1; //already have an indent
+			int totalPrinted = bSpecialCase ? 0 : 1;
 			int numLines = 0;
 			int wordStartIndex = -1;
 			list<char>::iterator wordStartInsertionPoint;
