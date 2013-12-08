@@ -25,6 +25,10 @@ const int startText1_b	= 0xBE;
 const int startText2	= 0xA0;
 const int startText2_b	= 0x88;
 const int startText2_c  = 0x81;
+const int startText2_d  = 0x20;
+const int startText2_e  = 0xDE;
+const int startText2_f  = 0x5A;
+const int startText2_g  = 0xA2;
 const int endText1		= 0x15;
 const int endText2		= 0;
 
@@ -175,6 +179,8 @@ void DumpJapaneseText()
 	vector<string> eveFiles;
 	GetFilesInDir(df2EveFilesPath.c_str(), "EVE", eveFiles);
 
+	int ss = 0;
+
 	//Go through all eve files
 	const string eveExtension(".EVE");
 	const string japDumpExtension(".txt");
@@ -191,6 +197,11 @@ void DumpJapaneseText()
 		assert(pInFile);
 		assert(pOutFile);
 
+		if(eveFileName.find("FIELD_") == string::npos)
+			bFieldXXFile = false;
+		else
+			bFieldXXFile = true;
+
 		if(pInFile)
 		{
 			int currByte = 0;
@@ -200,6 +211,8 @@ void DumpJapaneseText()
 
 			int lineCount = 0;
 			int byteCount = -1;
+			int startTextByteIndex = 0;
+
 			while(currByte != EOF)
 			{
 				int prevByte = currByte;
@@ -212,22 +225,20 @@ void DumpJapaneseText()
 				//See if we are at the start of a string
 				if(!bStringStarted2 && (currByte == startText1 || currByte == startText1_b) )
 				{
+					if(startTextByteIndex == -1 && currByte == startText1_b)
+						startTextByteIndex = byteCount;
 					bStringStarted1 = true;
 				}
 
 				//See if this is the second start flag
-				else if(bStringStarted1 && !bStringStarted2 && (currByte == startText2 || currByte == startText2_b || currByte == startText2_c) )
+				else if(bStringStarted1 && !bStringStarted2 && (currByte == startText2 || currByte == startText2_b || currByte == startText2_c || (currByte == startText2_d && bFieldXXFile) || currByte == startText2_e || currByte == startText2_f || currByte == startText2_g) )
 				{
 					//The string will start at the next byte
 					bStringStarted2 = true;
 
-					if( !(currByte == startText2_b || currByte == startText2_c) )
-						continue;
-
-					if(currByte == startText2_b)
+					if( !(currByte == startText2_b || currByte == startText2_c || currByte == startText2_d || currByte == startText2_e || currByte == startText2_f || currByte == startText2_g) )
 					{
-						int k = 0;
-						++k;
+						continue;
 					}
 				}
 
@@ -246,6 +257,7 @@ void DumpJapaneseText()
 					}
 					else if(currByte == endText2)// && bStringEndStarted)
 					{
+						startTextByteIndex = -1;
 						bStringStarted1 = bStringStarted2 = bStringEndStarted = false;
 
 	#ifdef STOP_AT_LINE
@@ -253,6 +265,7 @@ void DumpJapaneseText()
 	#else
 						//Create a comma seperated file so it can easily go into excel
 				//		FPUTC_VERIFIED(',',  pOutFile);
+
 						FPUTC_VERIFIED('\n', pOutFile);
 	#endif
 						++lineCount;
@@ -323,7 +336,23 @@ void DumpJapaneseText()
 						}//else this is a special character or 2byte kanjii
 					}//else this byte is part of a string
 				}//if(bStringStarted1 && bStringStarted2)
-				
+#if FIND_MISSING_STRINGS
+				else
+				{
+					if( startTextByteIndex > -1 && prevByte == endText1 && currByte == endText2 )
+					{
+						byteCount = startTextByteIndex;
+						fseek(pInFile, byteCount, SEEK_SET);
+
+						FGETC_VERIFIED(currByte, pInFile);
+						assert(currByte == startText1_b);
+
+						bStringStarted1 = bStringStarted2 = true;
+						fprintf(pOutFile, "New: ");
+					}
+				}
+#endif
+
 			}//while(currByte != eof)
 
 			fclose(pInFile);
@@ -331,6 +360,8 @@ void DumpJapaneseText()
 
 		}//if(pInFile)
 	}//for
+
+	ss = ss+1;
 }
 
 //Finds next pointer in a stream of bytes from an .eve file
@@ -2390,14 +2421,14 @@ void InsertEnglishText()
 				bStringStarted1 = true;
 			}
 			//See if this is the second start flag
-			else if(bStringStarted1 && !bStringStarted2 && (currByte == startText2 || currByte == startText2_b || currByte == startText2_c) )
+			else if(bStringStarted1 && !bStringStarted2 && (currByte == startText2 || currByte == startText2_b || currByte == startText2_c || (currByte == startText2_d && bFieldXXFile) || currByte == startText2_e || currByte == startText2_f || currByte == startText2_g) )
 			{
 				currStringInfo.numBytes = 0;
 
 				//The string will start at the next byte
 				bStringStarted2 = true;
 
-				bool bSpecialCase = (currByte == startText2_b) || (currByte == startText2_c);
+				bool bSpecialCase = (currByte == startText2_b) || (currByte == startText2_c || currByte == startText2_d || currByte == startText2_e || currByte == startText2_f || currByte == startText2_g);
 				if(!bSpecialCase)
 					fileBytes.push_back(IndentChar);				
 
