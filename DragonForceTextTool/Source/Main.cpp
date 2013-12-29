@@ -404,7 +404,7 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 	//Type27  = 29 10 00 00 00 PP PP B6 01 02 01 06 PP PP 06 PP PP (Dungeon and Speech) 
 	//Type27b = 29 10 00 00 00 PP PP 9F 03 00 06 PP PP
 	//Type28  = 29 10 01 00 00 PP PP 07 PP PP
-	//Type29  = 15 00 xx xx 06 PP PP
+	//Type29  = 15 00 xx xx 06 PP PP (Speech)
 	//Type30  = 15 00 nn 06 PP PP  //nn is 92 or BF
 	//Type31  = 2F 10 xx 00 00 xx xx xx 00 xx 06 PP PP 06 PP PP
 	//TODO:   = 2B 10 00 00 PP PP		
@@ -839,7 +839,7 @@ b5Fail:
 		//Type24 = 15 00 92 xx 94 06 PP PP			(START_01)
 		//Type25 = 15 00 81 xx 8E 14 80 06 PP PP	(START_02)
 		//Type26 = 15 00 92 xx 81 8E 14 80 06 PP PP (START_05)
-		//Type29 = 15 00 xx xx 06 PP PP
+		//Type29 = 15 00 xx xx 06 PP PP (SPEECH)
 		//Type30 = 15 00 nn 06 PP PP  //nn is 92 or BF
 		if(_150006)
 		{
@@ -884,7 +884,7 @@ b5Fail:
 						INCR_PEEK();
 						
 						//Type29
-						if( *peek == (char)0x06 )
+						if( bSpeechFile && *peek == (char)0x06 )
 						{
 							INCR_PEEK();
 
@@ -2122,14 +2122,14 @@ type27bFail:
 	return false;
 }
 
-int GetPointerOffset(const OSIVector &newStringsInfo, const OSIVector &origStringsInfo, int currByte)
+short GetPointerOffset(const OSIVector &newStringsInfo, const OSIVector &origStringsInfo, unsigned short currByte)
 {
-	int offset = 0;
+	short offset = 0;
 	for(size_t i = 0; i < newStringsInfo.size(); ++i)
 	{
 		const OriginalStringInfo &newStringInfo = newStringsInfo[i];
 
-		if(newStringInfo.address < currByte)
+		if((unsigned short)newStringInfo.address < currByte)
 		{
 			const OriginalStringInfo &origStringInfo = origStringsInfo[i];
 
@@ -2430,7 +2430,7 @@ void InsertEnglishText()
 
 				bool bSpecialCase = (currByte == startText2_b) || (currByte == startText2_c || currByte == startText2_d || currByte == startText2_e || currByte == startText2_f || currByte == startText2_g);
 				if(!bSpecialCase)
-					fileBytes.push_back(IndentChar);				
+					fileBytes.push_back(IndentChar);
 
 				assert(stringInsertionPoints.size() == origStringsInfo.size());
 
@@ -2516,10 +2516,9 @@ void InsertEnglishText()
 			//insertion itertator
 			list<char>::iterator insertionPoint = stringInsertionPoints[insertPoint].insertionPoint;
 
-			//insertion iterator starts at the A0 in 85A0, so we want one past that if this is not a special case string
+			//insertion iterator starts at the A0 in 85A0 and 85 in special case
 			bool bSpecialCase = *(insertionPoint) != (char)IndentChar;
-			if(!bSpecialCase)
-				insertionPoint++;
+			insertionPoint++;
 
 			newStringInfo.numBytes = 0;
 			newStringInfo.address = stringInsertionPoints[insertPoint].address;
@@ -2537,6 +2536,7 @@ void InsertEnglishText()
 			int			maxPrintForLine = 36;
 
 			memset(tmp, 0, sizeof(tmp));
+			bool bAutoWrapping = false;
 			for(size_t i = 0; i < strLen; ++i)
 			{
 				if( totalPrinted == maxPrint )
@@ -2547,7 +2547,7 @@ void InsertEnglishText()
 				const char currLetter = inEnglishStrBuffer[i];
 
 				//discard new lines and what not
-				if(currLetter < 0x20)
+				if(currLetter < 0x20 || (currLetter == ' ' && (stringsPrinted == 0 && !bAutoWrapping)) )
 					continue;
 
 				//insert our new string
@@ -2578,6 +2578,8 @@ void InsertEnglishText()
 				else
 					wordStartIndex = -1;
 
+				bAutoWrapping = false;
+
 				if(++stringsPrinted > maxPrintForLine)
 				{
 					if(++numLines == 3)
@@ -2586,27 +2588,48 @@ void InsertEnglishText()
 					if(numLines == 2)
 						maxPrintForLine = 35;
 
-					stringsPrinted = 1;
+					stringsPrinted = 0;
 
-					//insert new line
-					if( wordStartIndex > -1 )
+					//If the 37th character is a space, just remove the space and let the game autowrap
+					if( wordStartIndex > -1 && tmp[wordStartIndex] == ' ' && (i - wordStartIndex) == 0 )
 					{
-						fileBytes.insert(wordStartInsertionPoint, 0x0D);
-						memcpy(tmp + wordStartIndex + 1, tmp + wordStartIndex, 36);
-						tmp[wordStartIndex] = 0x0D;
-						tmpCount++;
-						stringsPrinted += (int)i - wordStartIndex;
-						assert(i - wordStartIndex >= 0);
-					}
-					else					
-					{
-						insertionPoint = fileBytes.insert( insertionPoint, 0x0D);
-						insertionPoint++;
-						tmp[tmpCount++] = 0x0D;
-					}
+						bAutoWrapping = true;
+						/*
+						//go back and delete the space
+						list<char>::iterator reverseIter = wordStartInsertionPoint;
+						reverseIter--;
+						fileBytes.erase(reverseIter);
 
-					newStringInfo.numBytes++;
-					totalPrinted++;
+						//fix up our temp array
+						memcpy(tmp + wordStartIndex, tmp + wordStartIndex + 1, 36);
+						tmpCount--;
+
+						//remove space count
+						newStringInfo.numBytes--;
+						totalPrinted--;	*/					
+					}
+					else
+					{
+						//insert new line
+						if( wordStartIndex > -1 )
+						{
+							fileBytes.insert(wordStartInsertionPoint, 0x0D);
+							memcpy(tmp + wordStartIndex + 1, tmp + wordStartIndex, 36);
+							tmp[wordStartIndex] = 0x0D;
+							tmpCount++;
+							stringsPrinted += 1 + ((int)i - wordStartIndex);
+							assert(i - wordStartIndex >= 0);
+						}
+						else					
+						{
+							insertionPoint = fileBytes.insert( insertionPoint, 0x0D);
+							insertionPoint++;
+							tmp[tmpCount++] = 0x0D;
+						}
+
+						newStringInfo.numBytes++;
+						totalPrinted++;
+					}
 				}
 			}
 
@@ -2628,12 +2651,20 @@ void InsertEnglishText()
 		//store original info for LogFile
 		vector<OrigAddressInfo> logInfo;
 
+		int db = 1;
 		for( BytesList::iterator bytesIter = fileBytes.begin(); bytesIter != fileBytes.end(); ++bytesIter, ++currByte)
 		{
 			PointerVector outPointers;
 
 			if( GetNextPointer(bytesIter, fileBytes.end(), outPointers) == false)
 				break;
+
+			if(db == 66)
+			{
+				int k = 0;
+				++k;
+			}
+			++db;
 
 			//Bytes will change in the loop below, so store off original data first
 			vector<int> origBytes;
@@ -2658,9 +2689,17 @@ void InsertEnglishText()
 				//Little endian byte order for pointers
 				char &secondByte = *bytesIter; ++bytesIter; ++currByte;
 				char &firstByte  = *bytesIter;
-				int address      = (firstByte << 8) | (secondByte & 0xff);
+				unsigned short address      = (firstByte << 8) | (secondByte & 0xff);
 
-				int offset = GetPointerOffset(newStringsInfo, origStringsInfo, address);
+				short offset = GetPointerOffset(newStringsInfo, origStringsInfo, address);
+
+				int overflowCheck = address;
+				if(address + offset > 65536)
+				{
+					fprintf(stdout, "WARNING: Address is out of 16 byte range: %.4X %.4X ", address, offset );
+					fprintf(pPointerLogFile, "WARNING: Address is out of 16 byte range: %.4X %.4X ", address, offset );
+				}
+
 				address += offset;
 
 				char orgFirstByte	= firstByte;
