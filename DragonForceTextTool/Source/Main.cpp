@@ -13,6 +13,8 @@ using std::string;
 using std::vector;
 using std::list;
 
+#define FSEEK_SUCCESS 0
+
 const int BUG_ME_TEXT_LENGTH = 7;
 const char BugMeText[BUG_ME_TEXT_LENGTH] = {'B', 'u', 'g', ' ', 'M', 'e', 0};
 
@@ -31,6 +33,9 @@ const int startText2_f  = 0x5A;
 const int startText2_g  = 0xA2;
 const int endText1		= 0x15;
 const int endText2		= 0;
+
+const string df2BinFilesPath(			"DF2Files\\Bin\\");
+const string df2BinJapDumpPath(			"DF2Files\\BinJapaneseText\\");
 
 const string df2EveFilesPath(			"DF2Files\\Eve\\");
 const string df2EveJapDumpPath(			"DF2Files\\EveJapaneseText\\");
@@ -2791,6 +2796,299 @@ void ConvertSaveFromSSFToYabuse()
 	fclose(pYabauseFile);
 }
 
+/*////////////////////////////////////////////////
+					BIN Files					
+From FaustWolf:
+
+Pointers in these files are all four bytes long, and are absolute (this is in contrast to the relative pointers we were working with in the story files). 
+A pointer in these files looks like one of the following:
+
+06 06 XX XX
+06 07 XX XX
+
+Since the file is loaded to address 0x06060000 in RAM, the pointers work like this:
+
+06 06 XX XX points somewhere in the range 0x0000 ~ 0xFFFF in the file itself.
+06 07 XX XX points somewhere in the range 0x10000 ~ 0x1FFFF in the file itself.
+
+I.e., if a pointer reads 06 06 DC FC, it's pointing to the address 0xDCFC within the file. If the pointer reads 06 07 DC FC, it's pointing to address 0x1DCFC in the file.
+////////////////////////////////////////////////*/
+
+enum EBinFileType
+{
+	kBIN_SPE,
+	kBIN_TA,
+	kBIN_NAI,
+	kBIN_COUNT
+};
+
+struct BinAddress
+{
+	unsigned int textStart;
+	unsigned int textEnd;
+	unsigned int pointerStart;
+	unsigned int pointerEnd;
+};
+
+BinAddress GBinAddresses[kBIN_COUNT] = 
+{
+	{0x4220,	0xB630,		0x19E10, 0x1A884},	//SPE
+	{0x17A9C,	0x19D64,	0x26BF4, 0x270A4},	//TA
+	{0xC548,	0x13888,	0x195AC, 0x19FE0}	//NAI
+};
+
+const int binStartPointer		= 0x06;
+const int binStartPointer2_a	= 0x06;
+const int binStartPointer2_b	= 0x07;
+EBinFileType GBinFileType		= kBIN_SPE;
+
+bool Bin_GetNextPointer(FILE *pInFile, unsigned int currFileLoc, unsigned int &outFileLoc, unsigned int &pointer)
+{
+	if( fseek(pInFile, currFileLoc, SEEK_SET) != FSEEK_SUCCESS )
+	{
+		return false;
+	}
+
+	int currByte = 0;
+	bool bFoundPointerStart = false;
+	while(currByte != EOF)
+	{
+		currByte = fgetc(pInFile);
+		if( currByte == EOF )
+		{
+			return false;
+		}
+
+		if( bFoundPointerStart )
+		{
+			if( !(currByte == binStartPointer2_a || currByte == binStartPointer2_b) )
+			{
+				bFoundPointerStart = false;
+				continue;
+			}
+
+			outFileLoc = static_cast<unsigned int> ( ftell(pInFile) ) - 2;
+			
+			return true;
+		}
+
+		if( currByte == binStartPointer )
+		{
+			bFoundPointerStart = true;
+			continue;
+		}
+	}
+	return false;
+}
+
+bool Bin_GetTextAddress(FILE *pInFile, unsigned int &inOutFileLoc, unsigned int &outTextPointer)
+{
+	if( fseek(pInFile, inOutFileLoc, SEEK_SET) != FSEEK_SUCCESS )
+	{
+		return false;
+	}
+
+	//Get type (0x0606 or 0607)
+	//Big endian byte order for pointers
+	unsigned int firstByte	= fgetc(pInFile); if( firstByte == EOF ) return false;
+	unsigned int secondByte = fgetc(pInFile); if( secondByte == EOF ) return false;
+	unsigned short type		= (firstByte << 8) | (secondByte & 0xff);
+	
+	//Pointer to text	
+	firstByte				= fgetc(pInFile); if( firstByte == EOF ) return false;
+	secondByte				= fgetc(pInFile); if( secondByte == EOF ) return false;	
+	unsigned short textAddr = (firstByte << 8) | (secondByte & 0xff);
+
+	outTextPointer = static_cast<unsigned int>(textAddr);
+	
+	if(type == (unsigned short)0x0607)
+	{
+		outTextPointer += 0x10000;
+	}
+
+	inOutFileLoc += 4;
+
+
+	return true;
+}
+
+void Bin_GetTextString(FILE *pInFile, FILE *pOutFile, unsigned int textLoc)
+{
+	int currByte = 0;
+
+	if( fseek(pInFile, textLoc, SEEK_SET) != FSEEK_SUCCESS )
+	{
+		return;
+	}
+
+	bool bExpectGeneralName = false;
+	bool bFoundStart = false;
+
+	while(currByte != EOF)
+	{
+		currByte = fgetc(pInFile);
+		
+		if( currByte == endText1 )
+		{
+			break;
+		}
+
+		if( bFoundStart && currByte == 0 )
+		{
+			break;
+		}
+
+		//special character like a new line or general's name
+		if(currByte < 0x40 || bExpectGeneralName )
+		{
+			if( currByte > 0x1F )
+			{
+				/*
+				if( (GBinFileType == kBIN_SPE && ( (currByte >= 0x30 && currByte <= 0x32) || (bExpectGeneralName && currByte == 0x26) ) ) ||
+					(GBinFileType == kBIN_TA && ( currByte == 0x25 || (currByte == 0x73 && bExpectGeneralName)) )
+					)
+				{
+					//Do nothing
+				}
+				else
+				*/
+				{
+					bFoundStart = true;
+					FPUTC_VERIFIED(currByte, pOutFile)
+				}
+			}
+
+			/*
+			if( GBinFileType == kBIN_SPE )
+			{
+				if( currByte >= 0x30 && currByte <= 0x32 )
+				{
+					bExpectGeneralName = true;
+				}
+
+				if( bExpectGeneralName && currByte == 0x26 )
+				{
+					fwrite("[N] ", 4, 1, pOutFile);
+					bExpectGeneralName	= false;
+					bFoundStart			= true;
+				}			
+			}
+			else if( GBinFileType == kBIN_TA )
+			{				
+				if( currByte == 0x25 )
+				{
+					bExpectGeneralName = true;
+				}
+
+				if( bExpectGeneralName && currByte == 0x73 )
+				{
+					fwrite("[N] ", 4, 1, pOutFile);
+					bExpectGeneralName	= false;
+					bFoundStart			= true;
+				}
+			}*/
+			
+		}
+		//two byte kanji character
+		else
+		{
+			bExpectGeneralName	= false;
+			bFoundStart			= true;
+
+			//japanese dump
+			FPUTC_VERIFIED(currByte, pOutFile); //write first byte
+			FGETC_VERIFIED(currByte, pInFile);  //grab second byte
+			
+			//Account for already translated text
+			if( currByte != 0x0D )
+			{
+				FPUTC_VERIFIED(currByte, pOutFile); //write second byte
+			}
+		}
+	}
+
+	FPUTC_VERIFIED('\n', pOutFile);
+}
+
+void DumpBinJapaneseText()
+{
+	//Grab all .bin flies
+	vector<string> binFiles;
+	GetFilesInDir(df2BinFilesPath.c_str(), "BIN", binFiles);
+
+	//Go through all bin files
+	const string binExtension(".BIN");
+	const string japDumpExtension(".txt");
+	for(size_t currFile = 0; currFile < binFiles.size(); ++currFile)
+	{
+		const string binFileName		= df2BinFilesPath	+ binFiles[currFile] + binExtension;
+		const string japDumpFileName	= df2BinJapDumpPath + binFiles[currFile] + japDumpExtension;
+		FILE *pInFile					= NULL;
+		FILE *pOutFile					= NULL;
+		
+		fopen_s(&pInFile,  binFileName.c_str(), "rb");
+		fopen_s(&pOutFile, japDumpFileName.c_str(), "w");
+		
+		assert(pInFile);
+		assert(pOutFile);
+
+		if(binFileName.find("SPE_") != string::npos)
+			GBinFileType = kBIN_SPE;
+		else if(binFileName.find("TA_") != string::npos)
+			GBinFileType = kBIN_TA;
+		else if(binFileName.find("NAI_") != string::npos)
+			GBinFileType = kBIN_NAI;
+		else
+		{
+			assert(1 == 0);
+		}
+
+		unsigned int currPointerLoc = GBinAddresses[GBinFileType].pointerStart;
+		unsigned int textAddress	= 0;
+		int lineCount = 0;
+		if(pInFile)
+		{
+			while( 1 )
+			{		
+				//Get location of the text string
+				if( !Bin_GetTextAddress(pInFile, currPointerLoc, textAddress) )
+				{
+					break;
+				}
+
+				if( textAddress <= GBinAddresses[GBinFileType].textEnd )
+				{
+					Bin_GetTextString(pInFile, pOutFile, textAddress);					
+					++lineCount;
+				}
+				else
+				{
+					lineCount = lineCount;
+				}
+
+				//Find location in the file where the next pointer starts
+				if( !Bin_GetNextPointer(pInFile, currPointerLoc, currPointerLoc, textAddress) )
+				{
+					break;
+				}
+
+				if( currPointerLoc > GBinAddresses[GBinFileType].pointerEnd )
+				{
+					break;
+				}
+
+				if(lineCount == 570 && GBinFileType == kBIN_SPE)
+				{
+					lineCount = 570;
+				}
+			}
+		}
+
+		fclose(pInFile);
+		fclose(pOutFile);
+	}
+}
+
 void main()
 {
 #if _DEBUG
@@ -2798,9 +3096,12 @@ void main()
 	//	_CrtSetBreakAlloc(404);
 #endif
 
+	//EVE file functions
 //	DumpJapaneseText();
-	InsertEnglishText();
-//	ConvertSaveFromSSFToYabuse();
+//	InsertEnglishText();
+
+	//BIN files (SPE_MAIN, TA_MAIN, NAI_MAIN)
+	DumpBinJapaneseText();
 
 	return;
 }
