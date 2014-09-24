@@ -35,7 +35,9 @@ const int endText1		= 0x15;
 const int endText2		= 0;
 
 const string df2BinFilesPath(			"DF2Files\\Bin\\");
+const string df3BinEngPath(				"DF2Files\\BinEnglishText\\");
 const string df2BinJapDumpPath(			"DF2Files\\BinJapaneseText\\");
+const string df2BinPatchPath(			"DF2Files\\BinPatched\\");
 
 const string df2EveFilesPath(			"DF2Files\\Eve\\");
 const string df2EveJapDumpPath(			"DF2Files\\EveJapaneseText\\");
@@ -2828,19 +2830,20 @@ struct BinAddress
 	unsigned int textEnd;
 	unsigned int pointerStart;
 	unsigned int pointerEnd;
+	unsigned int postPointerStart;
 };
 
 BinAddress GBinAddresses[kBIN_COUNT] = 
 {
-	{0x4220,	0xB630,		0x19E10, 0x1A884},	//SPE
-	{0x17A9C,	0x19D64,	0x26BF4, 0x270A4},	//TA
-	{0xC548,	0x13888,	0x195AC, 0x19FE0}	//NAI
+//	textStart	textEnd		ptrStart	ptrEnd		postPtr
+	{0x4220,	0xB630,		0x19E10,	0x1A884,	0x1A888},	//SPE
+	{0x17A9C,	0x19D64,	0x26BF4,	0x270A4,	0x270A4},	//TA
+	{0xC548,	0x13888,	0x195AC,	0x19E80,	0x19E84}	//NAI
 };
 
 const int binStartPointer		= 0x06;
 const int binStartPointer2_a	= 0x06;
 const int binStartPointer2_b	= 0x07;
-EBinFileType GBinFileType		= kBIN_SPE;
 
 bool Bin_GetNextPointer(FILE *pInFile, unsigned int currFileLoc, unsigned int &outFileLoc, unsigned int &pointer)
 {
@@ -2923,6 +2926,7 @@ void Bin_GetTextString(FILE *pInFile, FILE *pOutFile, unsigned int textLoc)
 
 	bool bExpectGeneralName = false;
 	bool bFoundStart = false;
+	bool bZeroFound = false;
 
 	while(currByte != EOF)
 	{
@@ -2931,6 +2935,15 @@ void Bin_GetTextString(FILE *pInFile, FILE *pOutFile, unsigned int textLoc)
 		if( currByte == endText1 )
 		{
 			break;
+		}
+
+		if( bZeroFound && currByte == 0x09 )
+		{
+			break;
+		}
+		else if( currByte == 0 )
+		{
+			bZeroFound = true;
 		}
 
 		if( bFoundStart && currByte == 0 )
@@ -2943,51 +2956,9 @@ void Bin_GetTextString(FILE *pInFile, FILE *pOutFile, unsigned int textLoc)
 		{
 			if( currByte > 0x1F )
 			{
-				/*
-				if( (GBinFileType == kBIN_SPE && ( (currByte >= 0x30 && currByte <= 0x32) || (bExpectGeneralName && currByte == 0x26) ) ) ||
-					(GBinFileType == kBIN_TA && ( currByte == 0x25 || (currByte == 0x73 && bExpectGeneralName)) )
-					)
-				{
-					//Do nothing
-				}
-				else
-				*/
-				{
-					bFoundStart = true;
-					FPUTC_VERIFIED(currByte, pOutFile)
-				}
-			}
-
-			/*
-			if( GBinFileType == kBIN_SPE )
-			{
-				if( currByte >= 0x30 && currByte <= 0x32 )
-				{
-					bExpectGeneralName = true;
-				}
-
-				if( bExpectGeneralName && currByte == 0x26 )
-				{
-					fwrite("[N] ", 4, 1, pOutFile);
-					bExpectGeneralName	= false;
-					bFoundStart			= true;
-				}			
-			}
-			else if( GBinFileType == kBIN_TA )
-			{				
-				if( currByte == 0x25 )
-				{
-					bExpectGeneralName = true;
-				}
-
-				if( bExpectGeneralName && currByte == 0x73 )
-				{
-					fwrite("[N] ", 4, 1, pOutFile);
-					bExpectGeneralName	= false;
-					bFoundStart			= true;
-				}
-			}*/
-			
+				bFoundStart = true;
+				FPUTC_VERIFIED(currByte, pOutFile);			
+			}			
 		}
 		//two byte kanji character
 		else
@@ -3031,19 +3002,20 @@ void DumpBinJapaneseText()
 		
 		assert(pInFile);
 		assert(pOutFile);
-
+		
+		EBinFileType binFileType = kBIN_SPE;
 		if(binFileName.find("SPE_") != string::npos)
-			GBinFileType = kBIN_SPE;
+			binFileType = kBIN_SPE;
 		else if(binFileName.find("TA_") != string::npos)
-			GBinFileType = kBIN_TA;
+			binFileType = kBIN_TA;
 		else if(binFileName.find("NAI_") != string::npos)
-			GBinFileType = kBIN_NAI;
+			binFileType = kBIN_NAI;
 		else
 		{
 			assert(1 == 0);
 		}
 
-		unsigned int currPointerLoc = GBinAddresses[GBinFileType].pointerStart;
+		unsigned int currPointerLoc = GBinAddresses[binFileType].pointerStart;
 		unsigned int textAddress	= 0;
 		int lineCount = 0;
 		if(pInFile)
@@ -3056,7 +3028,7 @@ void DumpBinJapaneseText()
 					break;
 				}
 
-				if( textAddress <= GBinAddresses[GBinFileType].textEnd )
+				if( textAddress <= GBinAddresses[binFileType].textEnd )
 				{
 					Bin_GetTextString(pInFile, pOutFile, textAddress);					
 					++lineCount;
@@ -3072,12 +3044,12 @@ void DumpBinJapaneseText()
 					break;
 				}
 
-				if( currPointerLoc > GBinAddresses[GBinFileType].pointerEnd )
+				if( currPointerLoc > GBinAddresses[binFileType].pointerEnd )
 				{
 					break;
 				}
 
-				if(lineCount == 570 && GBinFileType == kBIN_SPE)
+				if(lineCount == 570 && binFileType == kBIN_SPE)
 				{
 					lineCount = 570;
 				}
@@ -3086,6 +3058,342 @@ void DumpBinJapaneseText()
 
 		fclose(pInFile);
 		fclose(pOutFile);
+	}
+}
+
+//-Just write translated text into the file starting at the beginning of the text block.
+//-Make sure to pad so that strings begin at multiple of 4
+//-Keep track of locations for where strings are being written
+//-Write these locations into the pointer table
+
+bool WordWrap( const char *pString, size_t strLen, std::string &outString)
+{
+   //Insert the translated string
+	int stringsPrinted	= 0; //already have an indent
+	int totalPrinted	= 0;
+	int numLines		= 0;
+	int wordStartIndex	= -1;
+
+	char		tmp[1024];
+	int			tmpCount = 0;
+	const int	maxPrint = 36 + 36 + 35;
+	int			maxPrintForLine = 36;
+
+	memset(tmp, 0, sizeof(tmp));
+	bool bAutoWrapping = false;
+	for(size_t i = 0; i < strLen; ++i)
+	{
+		if( totalPrinted == maxPrint )
+		{			
+			outString = tmp;
+			return false;
+		}
+
+		assert(totalPrinted < maxPrint);
+
+		const char currLetter = pString[i];
+
+		//discard new lines and what not
+		if(currLetter < 0x20 || (currLetter == ' ' && (stringsPrinted == 0 && !bAutoWrapping)) )
+			continue;
+
+		//insert our new string
+		if( !(currLetter == ' ' && (stringsPrinted + 1 > maxPrintForLine)) )
+		{
+			tmp[tmpCount++] = currLetter;
+		
+			//save off start of the word
+			if(currLetter != ' ')
+			{
+				if(wordStartIndex == -1)
+				{
+					wordStartIndex = tmpCount-1; //(int)i
+				}
+			}
+			else
+				wordStartIndex = -1;
+
+			totalPrinted++;
+
+			if( totalPrinted == maxPrint )
+			{
+				outString = tmp;
+				return false;
+			}
+		}
+		else
+			wordStartIndex = -1;
+
+		bAutoWrapping = false;
+
+		if(++stringsPrinted > maxPrintForLine)
+		{
+			if(++numLines == 3)
+				break;
+
+			if(numLines == 2)
+				maxPrintForLine = 35;
+
+			stringsPrinted = 0;
+
+			//If the 37th character is a space, just remove the space and let the game autowrap
+			if( wordStartIndex > -1 && tmp[wordStartIndex] == ' ' && (i - wordStartIndex) == 0 )
+			{
+				bAutoWrapping = true;			
+			}
+			else
+			{
+				//insert new line
+				if( wordStartIndex > -1 )
+				{
+					memcpy(tmp + wordStartIndex + 1, tmp + wordStartIndex, maxPrintForLine);
+					tmp[wordStartIndex] = 0x0D;
+					tmpCount++;
+					stringsPrinted += tmpCount - wordStartIndex;//((int)i - wordStartIndex);
+					assert(tmpCount - wordStartIndex >= 0);//assert(i - wordStartIndex >= 0);
+				}
+				else					
+				{
+					tmp[tmpCount++] = 0x0D;
+				}
+
+				totalPrinted++;
+			}
+		}
+	}
+
+	outString = tmp;
+
+	return true;
+}
+
+bool SplitStringIntoLines(const char *pString, std::string& outString)
+{
+	size_t len = strlen(pString);
+	if( len < 37 )
+	{
+		outString = pString;
+		return true;
+	}
+
+	return WordWrap(pString, len, outString);
+}
+
+void CopyTranslatedTextIntoBin(FILE *pInEngFile, FILE *pOutBinFile, FILE *pLogFile, const BinAddress& addresses, std::vector<int> &textAddresses )
+{	
+	//Buffer into which translated text is read into
+	char engStrBuffer[1024];
+	char *inEnglishStrBuffer = engStrBuffer;
+	bool bOutOfSpace = false;
+	int lineCount = 0;
+
+	while( 1 )
+	{
+		//Read in translated text
+		char *retValue = fgets(inEnglishStrBuffer, 1024, pInEngFile);
+		if( feof(pInEngFile) )
+		{
+			break;
+		}
+		inEnglishStrBuffer = strtok(inEnglishStrBuffer, "\n\r\v");
+		int strLen = (int)strlen(inEnglishStrBuffer);
+
+		std::string splitString;
+		if( !SplitStringIntoLines(inEnglishStrBuffer, splitString) )
+		{
+			fprintf(pLogFile, "Text doesn't fit: (%i Characters) %s", strlen(inEnglishStrBuffer), inEnglishStrBuffer);
+		}
+
+		//Store location of the text
+		int textLocation = ftell(pOutBinFile);
+		textAddresses.push_back( textLocation );
+		
+		if( bOutOfSpace )
+		{
+			continue;
+		}
+
+		//Check for out of space error
+		if( textLocation + strLen + 2 > addresses.textEnd )
+		{
+			fprintf(pLogFile, "Ran out of space for line(%i @ 0x%08x): %s \n", lineCount, textLocation, inEnglishStrBuffer);
+			bOutOfSpace = true;
+			continue;
+		}
+
+		//Write translated text
+		fwrite(splitString.c_str(), splitString.length()*sizeof(char), 1, pOutBinFile);
+		fputc(0x15, pOutBinFile);
+		fputc(0, pOutBinFile);
+
+		//Insert padding
+		int nextStringAddress = textLocation + strLen + 2 + 1; //0x15 0x00 ss
+		int paddingNeeded = 4 - (nextStringAddress) % 4;
+		switch(paddingNeeded)
+		{
+			case 1:
+			{
+				putc(0,		pOutBinFile);
+			}break;
+
+			case 2:
+			{
+				putc(0,		pOutBinFile);
+				putc(0x09,	pOutBinFile);
+			}break;
+
+			case 3:
+			{
+				putc(0,		pOutBinFile);
+				putc(0,		pOutBinFile);
+				putc(0x09,	pOutBinFile);
+			}break;
+		}
+
+		++lineCount;
+	}
+}
+
+void WriteBinTextPointers(FILE *pOutBinFile, std::vector<int> &textAddresses)
+{
+	for(size_t i = 0; i < textAddresses.size(); ++i)
+	{
+		int address = textAddresses[i];
+		char byte0	= (address & 0xff0000) > 0 ? 0x07 : 0x06;
+		char byte1	= (address >> 8) & 0xff;
+		char byte2  = address & 0xff;
+
+		fputc(0x06,  pOutBinFile);
+		fputc(byte0, pOutBinFile);
+		fputc(byte1, pOutBinFile);
+		fputc(byte2, pOutBinFile);
+	}
+}
+
+void CopyBinBeginning(FILE *pInBinFile, FILE *pOutBinFile, const BinAddress &addresses)
+{
+	char *pDynamicBuffer = new char[addresses.textStart];
+	fread(pDynamicBuffer, sizeof(char)*addresses.textStart, 1, pInBinFile);
+	fwrite(pDynamicBuffer, sizeof(char)*addresses.textStart, 1, pOutBinFile);
+	delete[] pDynamicBuffer;
+}
+
+void CopyBinBetweenTextAndPointers(FILE *pInBinFile, FILE *pOutBinFile, const BinAddress &addresses)
+{
+	int dataSize			= addresses.pointerStart - addresses.textEnd;
+	char *pDynamicBuffer	= new char[dataSize];
+
+	//Go to end of text area
+	fseek(pInBinFile,  addresses.textEnd, SEEK_SET);
+	fseek(pOutBinFile, addresses.textEnd, SEEK_SET);
+
+	//copy data between text and pointers
+	fread(pDynamicBuffer, dataSize, 1, pInBinFile);
+	fwrite(pDynamicBuffer, dataSize, 1, pOutBinFile);
+
+	//Free resources
+	delete[] pDynamicBuffer;		
+}
+
+void CopyBinAfterPointers(FILE *pInBinFile, FILE *pOutBinFile, const BinAddress &addresses)
+{
+	if( addresses.postPointerStart == 0 )
+	{
+		return;
+	}
+
+	//Figure out file size
+	fseek(pInBinFile, 0, SEEK_END);
+	int fileSize = ftell(pInBinFile);
+
+	//Allocate buffer
+	int dataSize = fileSize - addresses.postPointerStart;
+	char *pDynamicBuffer = new char[dataSize];
+	
+	//Read data
+	fseek(pInBinFile, addresses.postPointerStart, SEEK_SET);
+	fread(pDynamicBuffer, dataSize, 1, pInBinFile);
+
+	//Write it out
+	fseek(pOutBinFile, addresses.postPointerStart, SEEK_SET);
+	fwrite(pDynamicBuffer, dataSize, 1, pOutBinFile);
+
+	//Free resources
+	delete[] pDynamicBuffer;
+}
+
+void InsertEnglishTextIntoBin()
+{
+	//Grab all .bin flies
+	vector<string> binFiles;
+	GetFilesInDir(df2BinFilesPath.c_str(), "BIN", binFiles);
+
+	//Go through all bin files
+	const string binExtension(".BIN");
+	const string engExtension(".txt");
+
+	std::vector<int> textAddresses;
+	for(size_t currFile = 0; currFile < binFiles.size(); ++currFile)
+	{
+		//Open file with translated text, if it doesn't exist, then skip translating the bin file
+		const string engFileName		= df3BinEngPath + binFiles[currFile] + engExtension;
+		FILE *pInEngFile				= NULL;
+		fopen_s(&pInEngFile, engFileName.c_str(), "rb");
+		if(!pInEngFile)
+		{
+			continue;
+		}
+
+		fprintf(stdout, "Processing %s\n", binFiles[currFile].c_str());
+
+		const string binFileName					= df2BinFilesPath + binFiles[currFile] + binExtension;
+		const string translatedFileName				= df2BinPatchPath + binFiles[currFile] + binExtension;
+		const string errorFileName					= df2BinPatchPath + binFiles[currFile] + std::string("_Log") + engExtension;
+
+		FILE *pInBinFile							= NULL;
+		FILE *pOutBinFile							= NULL;
+		FILE *pLogFile								= NULL;
+
+		fopen_s(&pInBinFile,	binFileName.c_str(), "rb");
+		fopen_s(&pOutBinFile,	translatedFileName.c_str(), "wb");
+		fopen_s(&pLogFile,		errorFileName.c_str(), "w");
+		
+		assert(pInBinFile);
+		assert(pOutBinFile);
+
+		EBinFileType binFileType = kBIN_SPE;
+		if(binFileName.find("SPE_") != string::npos)
+			binFileType = kBIN_SPE;
+		else if(binFileName.find("TA_") != string::npos)
+			binFileType = kBIN_TA;
+		else if(binFileName.find("NAI_") != string::npos)
+			binFileType = kBIN_NAI;
+		else
+		{
+			assert(1 == 0);
+		}
+
+		//Clear old data
+		textAddresses.clear();
+
+		//Copy the beginning of the file to the output file
+		CopyBinBeginning(pInBinFile, pOutBinFile, GBinAddresses[binFileType]);
+
+		//Copy translated text over
+		CopyTranslatedTextIntoBin(pInEngFile, pOutBinFile, pLogFile, GBinAddresses[binFileType], textAddresses);
+		
+		//Copy stuff between text and pointers
+		CopyBinBetweenTextAndPointers(pInBinFile, pOutBinFile, GBinAddresses[binFileType]);
+
+		//Write out addresses of the translated text
+		WriteBinTextPointers(pOutBinFile, textAddresses);
+
+		//Copy over data that appears after pointers
+		CopyBinAfterPointers(pInBinFile, pOutBinFile, GBinAddresses[binFileType]);
+
+		fclose(pInEngFile);
+		fclose(pInBinFile);
+		fclose(pOutBinFile);
 	}
 }
 
@@ -3101,7 +3409,8 @@ void main()
 //	InsertEnglishText();
 
 	//BIN files (SPE_MAIN, TA_MAIN, NAI_MAIN)
-	DumpBinJapaneseText();
+//	DumpBinJapaneseText();
+	InsertEnglishTextIntoBin();
 
 	return;
 }
