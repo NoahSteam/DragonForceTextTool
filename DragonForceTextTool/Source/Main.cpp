@@ -2838,7 +2838,7 @@ BinAddress GBinAddresses[kBIN_COUNT] =
 //	textStart	textEnd		ptrStart	ptrEnd		postPtr
 	{0x4220,	0xB630,		0x19E10,	0x1A884,	0x1A888},	//SPE
 	{0x17A9C,	0x19D64,	0x26BF4,	0x270A4,	0x270A4},	//TA
-	{0xC548,	0x13888,	0x195AC,	0x19E80,	0x19E84}	//NAI
+	{0xC548,	0x13888,	0x195AC,	0x19F78,	0x19F7C}	//NAI
 };
 
 const int binStartPointer		= 0x06;
@@ -3189,17 +3189,20 @@ void CopyTranslatedTextIntoBin(FILE *pInEngFile, FILE *pOutBinFile, FILE *pLogFi
 
 	while( 1 )
 	{
+		inEnglishStrBuffer = engStrBuffer;
+
 		//Read in translated text
 		char *retValue = fgets(inEnglishStrBuffer, 1024, pInEngFile);
 		if( feof(pInEngFile) )
 		{
 			break;
 		}
-		inEnglishStrBuffer = strtok(inEnglishStrBuffer, "\n\r\v");
-		int strLen = (int)strlen(inEnglishStrBuffer);
 
-		std::string splitString;
-		if( !SplitStringIntoLines(inEnglishStrBuffer, splitString) )
+		inEnglishStrBuffer = strtok(inEnglishStrBuffer, "\n\r\v");
+		int strLen = inEnglishStrBuffer ? (int)strlen(inEnglishStrBuffer) : 0;
+
+		std::string splitString("");
+		if( inEnglishStrBuffer && !SplitStringIntoLines(inEnglishStrBuffer, splitString) )
 		{
 			fprintf(pLogFile, "Text doesn't fit: (%i Characters) %s", strlen(inEnglishStrBuffer), inEnglishStrBuffer);
 		}
@@ -3214,7 +3217,7 @@ void CopyTranslatedTextIntoBin(FILE *pInEngFile, FILE *pOutBinFile, FILE *pLogFi
 		}
 
 		//Check for out of space error
-		if( textLocation + strLen + 2 > addresses.textEnd )
+		if( textLocation + strLen + 2 > (INT)addresses.textEnd )
 		{
 			fprintf(pLogFile, "Ran out of space for line(%i @ 0x%08x): %s \n", lineCount, textLocation, inEnglishStrBuffer);
 			bOutOfSpace = true;
@@ -3222,13 +3225,17 @@ void CopyTranslatedTextIntoBin(FILE *pInEngFile, FILE *pOutBinFile, FILE *pLogFi
 		}
 
 		//Write translated text
-		fwrite(splitString.c_str(), splitString.length()*sizeof(char), 1, pOutBinFile);
+		const size_t splitStringLength = splitString.length();
+		if( splitStringLength )
+		{
+			fwrite(splitString.c_str(), splitString.length()*sizeof(char), 1, pOutBinFile);
+		}
 		fputc(0x15, pOutBinFile);
 		fputc(0, pOutBinFile);
 
 		//Insert padding
 		int nextStringAddress = textLocation + strLen + 2 + 1; //0x15 0x00 ss
-		int paddingNeeded = 4 - (nextStringAddress) % 4;
+		int paddingNeeded = splitStringLength ? 4 - (nextStringAddress) % 4 : 4;
 		switch(paddingNeeded)
 		{
 			case 1:
@@ -3254,20 +3261,49 @@ void CopyTranslatedTextIntoBin(FILE *pInEngFile, FILE *pOutBinFile, FILE *pLogFi
 	}
 }
 
-void WriteBinTextPointers(FILE *pOutBinFile, std::vector<int> &textAddresses)
+void WriteBinTextPointers(FILE *pInBinFile, FILE *pOutBinFile, std::vector<int> &textAddresses, const BinAddress &addresses, EBinFileType binType)
 {
+	unsigned int pointerBufferSize = addresses.postPointerStart - addresses.pointerStart;
+	char *pBuffer = new char[pointerBufferSize];
+	memset(pBuffer, 0, pointerBufferSize);
+
+	//Copy over existing pointers into buffer
+	//Overwrite this buffer with new pointers
+	//We need to do this copy because TA_MAIN needs to preserve data between pointers
+	fseek(pInBinFile, addresses.pointerStart, SEEK_SET);
+	fread(pBuffer, pointerBufferSize, 1, pInBinFile);
+
+	unsigned int bufferIndex = 0;
 	for(size_t i = 0; i < textAddresses.size(); ++i)
 	{
 		int address = textAddresses[i];
 		char byte0	= (address & 0xff0000) > 0 ? 0x07 : 0x06;
 		char byte1	= (address >> 8) & 0xff;
 		char byte2  = address & 0xff;
+		
+		assert( bufferIndex <= pointerBufferSize );
 
+		pBuffer[bufferIndex++] = 0x06;
+		pBuffer[bufferIndex++] = byte0;
+		pBuffer[bufferIndex++] = byte1;
+		pBuffer[bufferIndex++] = byte2;
+		
+		if( binType == kBIN_TA && bufferIndex < 0x268)
+		{
+			bufferIndex += 4;
+		}
+		/*
 		fputc(0x06,  pOutBinFile);
 		fputc(byte0, pOutBinFile);
 		fputc(byte1, pOutBinFile);
 		fputc(byte2, pOutBinFile);
+		*/
 	}
+
+	fseek(pOutBinFile, addresses.pointerStart, SEEK_SET);
+	fwrite(pBuffer, pointerBufferSize, 1, pOutBinFile);
+
+	delete[] pBuffer;
 }
 
 void CopyBinBeginning(FILE *pInBinFile, FILE *pOutBinFile, const BinAddress &addresses)
@@ -3386,7 +3422,7 @@ void InsertEnglishTextIntoBin()
 		CopyBinBetweenTextAndPointers(pInBinFile, pOutBinFile, GBinAddresses[binFileType]);
 
 		//Write out addresses of the translated text
-		WriteBinTextPointers(pOutBinFile, textAddresses);
+		WriteBinTextPointers(pInBinFile, pOutBinFile, textAddresses, GBinAddresses[binFileType], binFileType);
 
 		//Copy over data that appears after pointers
 		CopyBinAfterPointers(pInBinFile, pOutBinFile, GBinAddresses[binFileType]);
