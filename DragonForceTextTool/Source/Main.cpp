@@ -389,8 +389,10 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 	//Type8   = 2E 10 00 00 00 PP PP
 	//Type8b  = 2E 10 01 00 00 4E 00 07 PP PP
 	//Type9   = AF xx 07 PP PP nn 07 PP PP		//nn = 86 or 88
-	//Type10  = C1 03 00 00 06 PP PP				//Only in FIELD_xx files
-	//Type11  = ss 06 PP PP						//ss = 0, in FIELD_XX can be 94, C0, 1E
+	//Type10  = C1 03 00 00 06 PP PP			//Only in FIELD_xx files
+	//Type11  = ss 06 PP PP						//ss = 0, in FIELD_XX can be 94, C0, 1E	
+	//Type11b = 92 06 PP PP
+	//Type11c = 94 06 PP PP						//Only in SPEECH files (Type captures 3 at once, this one is exclusively for SPEECh files
 	//Type12  = 02 06 PP PP						//Only in SPEECH files
 	//Type12b = 02 xx 06 PP PP
 	//Type12c = 02 xx xx 06 PP PP
@@ -437,6 +439,8 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 		bool ca			= false;
 		bool b5			= false;
 		bool b7			= false;
+		bool ninetyTwo	= false;
+		bool ninetyFour	= false;
 
 		newPointer.offset	= 0;
 		pointerStart		= inStream;
@@ -459,6 +463,8 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 				(c == (char)0xBA && bSpeechFile) ||
 				(c == (char)0x86 && (bSpeechFile  || bDungeonFile)) ||
 				( (c == (char)0x94 || c == (char)0xC0 || c == (char)0x1E) && bFieldXXFile ) || 
+				(c == (char)0x92 ) ||
+				(c == (char)0x94 && bSpeechFile ) ||
 				(c == (char)0xC1 && bFieldXXFile)
 			))
 		{
@@ -523,12 +529,27 @@ bool GetNextPointer(BytesList::iterator &inStream, BytesList::const_iterator &en
 			case (char)0xB7:
 				b7 = true;
 				break;
+				
+			case (char)0x94:
+			{
+				if( bSpeechFile )
+				{
+					ninetyFour = true;
+				}
+				else
+				{
+					zero6 = true;
+				}
+			}break;
 
 			case (char)0x00:
-			case (char)0x94:
 			case (char)0xC0:
 			case (char)0x1E:
 				zero6 = true;
+				break;
+			
+			case (char)0x92:
+				ninetyTwo = true;
 				break;
 		}
 
@@ -1066,6 +1087,63 @@ failStart15:
 			newPointer.pointer		= peek;
 			newPointer.offset		= byteOffset + peekBytes;
 			newPointer.pointerType	= "Type11";
+			outPointers.push_back(newPointer);
+			return true;
+		}
+
+		//			00 01 02
+		//Type11b = 91 06 PP PP
+		if(ninetyTwo)
+		{
+			BytesList::iterator peek = inStream;
+			int peekBytes = 0;
+
+			//00->01
+			INCR_PEEK();
+
+			//Type11
+			if( *peek != (char)0x06 )
+			{
+				INCR_STREAM();
+				continue;
+			}
+
+			//01->02
+			INCR_PEEK();
+
+			//found the pointer
+			newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= byteOffset + peekBytes;
+			newPointer.pointerType	= "Type11b";
+			outPointers.push_back(newPointer);
+			return true;
+		}
+
+		//Type11c = 94 06 PP PP						//Only in SPEECH files (Type captures 3 at once, this one is exclusively for SPEECh files
+		if(ninetyFour)
+		{
+			BytesList::iterator peek = inStream;
+			int peekBytes = 0;
+
+			//00->01
+			INCR_PEEK();
+
+			//Type11
+			if( *peek != (char)0x06 )
+			{
+				INCR_STREAM();
+				continue;
+			}
+
+			//01->02
+			INCR_PEEK();
+
+			//found the pointer
+			newPointer.pointerStart = pointerStart;
+			newPointer.pointer		= peek;
+			newPointer.offset		= byteOffset + peekBytes;
+			newPointer.pointerType	= "Type11c";
 			outPointers.push_back(newPointer);
 			return true;
 		}
@@ -2666,7 +2744,7 @@ void InsertEnglishText()
 			if( GetNextPointer(bytesIter, fileBytes.end(), outPointers) == false)
 				break;
 
-			if(db == 66)
+			if(db == 26)
 			{
 				int k = 0;
 				++k;
@@ -3094,7 +3172,7 @@ bool WordWrap( const char *pString, size_t strLen, std::string &outString)
 		const char currLetter = pString[i];
 
 		//discard new lines and what not
-		if(currLetter < 0x20 || (currLetter == ' ' && (stringsPrinted == 0 && !bAutoWrapping)) )
+		if(currLetter < 0x20 || (currLetter == ' ' && (numLines && stringsPrinted == 0 && !bAutoWrapping)) )
 			continue;
 
 		//insert our new string
@@ -3442,11 +3520,11 @@ void main()
 
 	//EVE file functions
 //	DumpJapaneseText();
-//	InsertEnglishText();
+	InsertEnglishText();
 
 	//BIN files (SPE_MAIN, TA_MAIN, NAI_MAIN)
 //	DumpBinJapaneseText();
-	InsertEnglishTextIntoBin();
+//	InsertEnglishTextIntoBin();
 
 	return;
 }
